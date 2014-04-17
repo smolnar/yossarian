@@ -1,11 +1,12 @@
 module Lastfm::Event
   module Parser
     def self.parse(data)
+      data   = JSON.parse(data, symbolize_names: true) unless data.is_a?(Hash)
       result = OpenStruct.new
 
       result.lastfm_uuid     = data[:id]
       result.title           = data[:title]
-      result.artists         = data[:artists][:artist]
+      result.artists         = Array.wrap(data[:artists][:artist])
       result.headliner       = data[:artists][:headliner]
       result.venue_name      = data[:venue][:name]
       result.venue_latitude  = data[:venue][:location][:'geo:point'][:'geo:lat']
@@ -13,8 +14,8 @@ module Lastfm::Event
       result.venue_city      = data[:venue][:location][:city]
       result.venue_country   = data[:venue][:location][:country]
       result.venue_street    = data[:venue][:location][:street]
-      result.starts_at       = Time.parse(data[:startDate])
-      result.ends_at         = Time.parse(data[:endDate])
+      result.starts_at       = Time.parse(data[:startDate]) if data[:startDate]
+      result.ends_at         = Time.parse(data[:endDate]) if data[:endDate]
       result.description     = data[:description]
       result.website         = data[:website]
       result.lastfm_url      = data[:url]

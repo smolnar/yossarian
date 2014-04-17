@@ -22,11 +22,11 @@ describe Lastfm::Events do
                 id: 1,
                 title: 'Coachella'
               }
-            ]
-          },
+            ],
 
-          :@attr => {
-            page: 1
+            :@attr => {
+              page: 1
+            }
           }
         }.to_json
       end
@@ -35,11 +35,11 @@ describe Lastfm::Events do
         {
           events: {
             event: [
-            ]
-          },
+            ],
 
-          :@attr => {
-            page: 2
+            :@attr => {
+              page: 2
+            }
           }
         }.to_json
       end

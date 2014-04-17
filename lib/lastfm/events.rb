@@ -9,29 +9,24 @@ module Lastfm
     end
 
     def factory
-      @factory ||= Yossarian::Factory
-    end
-
-    def parser
-      @parser ||= Lastfm::Events::Parser
+      @factory ||= Yossarian::EventFactory
     end
 
     def self.get(params = {})
-      params = { format: :json, page: 1 }.merge(params)
+      params = { page: 1 }.merge(params)
       query  = params.map { |key, value| "#{key}=#{value}" }.join('&')
-      url    = "#{Lastfm.config.events.url}&#{query}"
+      url    = "#{Lastfm.config.events.url}&format=json&#{query}"
 
       begin
         response = downloader.download(url)
-        data     = parser.parse(response)
-
-        events = data[:events][:event]
+        data     = JSON.parse(response, symbolize_names: true)
+        events   = data[:events][:event]
 
         events.each do |event|
           factory.create_from_lastfm(event)
         end
 
-        url.gsub!(/page=\d+/, "page=#{data[:@attr][:page] + 1}")
+        url.gsub!(/page=\d+/, "page=#{data[:events][:@attr][:page].to_i + 1}")
       end while events.any?
     end
   end
