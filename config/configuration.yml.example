@@ -1,0 +1,15 @@
+defaults:
+  lastfm:
+    base: 'http://ws.audioscrobbler.com/2.0/'
+    apikey: TODO
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+  lastfm:
+    apikey: 'test'
+
+production:
+  <<: *defaults
