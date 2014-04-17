@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140417101733) do
+ActiveRecord::Schema.define(version: 20140417223218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 20140417101733) do
     t.string   "lastfm_image_extralarge"
     t.string   "lastfm_image_mega"
     t.string   "tags",                                 array: true
-    t.string   "tracks",                               array: true
     t.string   "lastfm_summary"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -71,5 +70,25 @@ ActiveRecord::Schema.define(version: 20140417101733) do
   add_index "performances", ["artist_id"], name: "index_performances_on_artist_id", using: :btree
   add_index "performances", ["event_id", "headliner"], name: "index_performances_on_event_id_and_headliner", using: :btree
   add_index "performances", ["event_id"], name: "index_performances_on_event_id", using: :btree
+
+  create_table "recordings", force: true do |t|
+    t.integer  "track_id",   null: false
+    t.integer  "artist_id",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "recordings", ["artist_id"], name: "index_recordings_on_artist_id", using: :btree
+  add_index "recordings", ["track_id", "artist_id"], name: "index_recordings_on_track_id_and_artist_id", unique: true, using: :btree
+  add_index "recordings", ["track_id"], name: "index_recordings_on_track_id", using: :btree
+
+  create_table "tracks", force: true do |t|
+    t.string   "name",        null: false
+    t.string   "youtube_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tracks", ["name"], name: "index_tracks_on_name", unique: true, using: :btree
 
 end

@@ -10,7 +10,6 @@ class CreateArtists < ActiveRecord::Migration
       t.string :lastfm_image_extralarge
       t.string :lastfm_image_mega
       t.string :tags,                   array: true
-      t.string :tracks,                 array: true
       t.string :lastfm_summary
 
       t.timestamps

@@ -20,7 +20,7 @@ describe Artist do
     it 'creates artist with lastfm attributes' do
       artist = Artist.create_from_lastfm(data)
 
-      data.each do |key, value|
+      data.except(:tracks).each do |key, value|
         expect(artist.read_attribute(key)).to eql(value)
       end
 
