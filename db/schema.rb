@@ -35,8 +35,8 @@ ActiveRecord::Schema.define(version: 20140417101733) do
     t.string   "venue_street"
     t.string   "venue_postalcode"
     t.string   "venue_url"
-    t.datetime "starts_at",               null: false
-    t.datetime "ends_at",                 null: false
+    t.datetime "starts_at"
+    t.datetime "ends_at"
     t.string   "lastfm_image_small"
     t.string   "lastfm_image_medium"
     t.string   "lastfm_image_large"

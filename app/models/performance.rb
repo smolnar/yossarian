@@ -2,9 +2,5 @@ class Performance < ActiveRecord::Base
   belongs_to :artist
   belongs_to :event
 
-  validates :headliner, presence: true
-
-  before_save do
-    self.headliner ||= false
-  end
+  validates :headliner, inclusion: { in: [true, false] }
 end

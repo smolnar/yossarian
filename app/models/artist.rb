@@ -3,5 +3,5 @@ class Artist < ActiveRecord::Base
 
   has_many :performances
   has_many :events, through: :performances
-  has_many :headlined_events, -> { where(headliner: true) }, through: :performances, class_name: :Event
+  has_many :headlined_events, -> { where(performances: { headliner: true }) }, through: :performances, source: :event
 end

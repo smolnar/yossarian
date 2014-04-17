@@ -62,7 +62,18 @@ describe Event do
       end
 
       expect(data[:artists].sort).to eql(event.artists.pluck(:name).sort)
-      expect(data[:headliner]).to eql(events.headliners.first.name)
+      expect(data[:headliner]).to eql(event.headliners.first.name)
+    end
+
+    it 'disallows timestamps attributes' do
+      Timecop.freeze(Time.now) do
+        params = data.merge(created_at: 2.days.ago, updated_at: 1.day.ago)
+
+        event = Event.create_from_lastfm(params)
+
+        expect(event.created_at).to eql(Time.now)
+        expect(event.updated_at).to eql(Time.now)
+      end
     end
   end
 end
