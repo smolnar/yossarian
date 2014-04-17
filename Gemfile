@@ -33,9 +33,8 @@ group :development, :test do
   gem 'pry-debugger'
   gem 'hirb'
   gem 'spring'
-end
 
-group :testing do
+  # testings
   gem 'rspec-rails', '~> 2.14.2'
   gem 'fuubar'
   gem 'database_cleaner', '~> 1.2.0'
