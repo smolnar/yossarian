@@ -1,7 +1,7 @@
 class CreateEvents < ActiveRecord::Migration
   def change
     create_table :events do |t|
-      t.integer :lastfm_uuid
+      t.string  :lastfm_uuid
       t.string  :title,                  null: false
       t.string  :lastfm_url
       t.string  :website

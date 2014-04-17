@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20140417101733) do
   end
 
   create_table "events", force: true do |t|
-    t.integer  "lastfm_uuid"
+    t.string   "lastfm_uuid"
     t.string   "title",                   null: false
     t.string   "lastfm_url"
     t.string   "website"
