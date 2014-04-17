@@ -25,7 +25,8 @@ describe Lastfm::Events do
             ],
 
             :@attr => {
-              page: 1
+              page: 1,
+              totalPages: 2
             }
           }
         }.to_json
@@ -38,7 +39,8 @@ describe Lastfm::Events do
             ],
 
             :@attr => {
-              page: 2
+              page: 2,
+              totalPages: 2
             }
           }
         }.to_json

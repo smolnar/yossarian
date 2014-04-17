@@ -26,8 +26,11 @@ module Lastfm
           factory.create_from_lastfm(event)
         end
 
-        url.gsub!(/page=\d+/, "page=#{data[:events][:@attr][:page].to_i + 1}")
-      end while events.any?
+        page        = data[:events][:@attr][:page].to_i + 1
+        total_pages = data[:events][:@attr][:totalPages].to_i
+
+        url.gsub!(/page=\d+/, "page=#{page}")
+      end while page <= total_pages
     end
   end
 end
