@@ -12,7 +12,7 @@ module Lastfm
       @factory ||= Yossarian::EventFactory
     end
 
-    def self.get(params = {})
+    def get(params = {})
       params = { page: 1 }.merge(params)
       query  = params.map { |key, value| "#{key}=#{value}" }.join('&')
       url    = "#{Lastfm.config.events.url}&format=json&#{query}"

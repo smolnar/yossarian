@@ -14,8 +14,8 @@ module Yossarian
 
         begin
           ::Event.create_from_lastfm(attributes.to_h)
-        rescue ActiveRecord::RecordInvalid
-          puts "Invalid data for festival - #{attributes.title}"
+        rescue ActiveRecord::RecordInvalid => e
+          puts "#{attributes[:title]}: #{e.message}"
         end
       end
     end
