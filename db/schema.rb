@@ -17,7 +17,17 @@ ActiveRecord::Schema.define(version: 20140417101733) do
   enable_extension "plpgsql"
 
   create_table "artists", force: true do |t|
-    t.string   "name"
+    t.string   "name",                    null: false
+    t.string   "musicbrainz_uuid"
+    t.string   "lastfm_url"
+    t.string   "lastfm_image_small"
+    t.string   "lastfm_image_medium"
+    t.string   "lastfm_image_large"
+    t.string   "lastfm_image_extralarge"
+    t.string   "lastfm_image_mega"
+    t.string   "tags",                                 array: true
+    t.string   "tracks",                               array: true
+    t.string   "lastfm_summary"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -25,6 +35,7 @@ ActiveRecord::Schema.define(version: 20140417101733) do
   create_table "events", force: true do |t|
     t.string   "lastfm_uuid"
     t.string   "title",                                null: false
+    t.text     "lastfm_description"
     t.string   "lastfm_url",              limit: 1024
     t.string   "website",                 limit: 1024
     t.string   "venue_name"

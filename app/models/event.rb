@@ -1,4 +1,6 @@
 class Event < ActiveRecord::Base
+  include Validable
+
   validates :title,           presence: true
   validates :venue_longitude, presence: true
   validates :venue_latitude,  presence: true
@@ -13,12 +15,13 @@ class Event < ActiveRecord::Base
 
   def self.create_from_lastfm(data)
     data  = data.symbolize_keys
-    event = find_by(lastfm_uuid: data[:latfm_uuid])
-    event = find_or_initialize_by(title: data[:title]) unless event
+    event = find_by(lastfm_uuid: data[:lastfm_uuid]) || find_or_initialize_by(title: data[:title])
 
     attributes = (data.keys & columns.map { |c| c.name.to_sym }) - [:created_at, :updated_at]
 
-    event.update_attributes!(data.slice(*attributes))
+    event.attributes = data.slice(*attributes)
+
+    return unless event.save!
 
     data[:artists].each do |name|
       artist = Artist.find_or_create_by!(name: name)

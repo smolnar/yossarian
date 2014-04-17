@@ -3,6 +3,7 @@ class CreateEvents < ActiveRecord::Migration
     create_table :events do |t|
       t.string   :lastfm_uuid
       t.string   :title,                  null: false
+      t.text     :lastfm_description
       t.string   :lastfm_url,             limit: 1024
       t.string   :website,                limit: 1024
       t.string   :venue_name
