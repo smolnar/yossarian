@@ -8,22 +8,13 @@ describe Lastfm::Artist do
         'http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&api_key=test&format=json&artist=Bombay Bicycle Club'
       ]
 
-      downloader = double(:downloader)
-      factory    = double(:factory)
-
-      Lastfm::Artist.downloader = downloader
-      Lastfm::Artist.factory    = factory
-
-      downloader.stub(:download).with(urls.first) do
+      data = [
         {
           artist: {
             id: 1,
             name: 'Bombay Bicycle Club'
           }
-        }.to_json
-      end
-
-      downloader.stub(:download).with(urls.second) do
+        },
         {
           toptracks: {
             track: [
@@ -32,8 +23,22 @@ describe Lastfm::Artist do
               }
             ]
           }
-        }.to_json
-      end
+        }
+      ]
+
+      downloader = double(:downloader)
+      factory    = double(:factory)
+      parser     = double(:parser)
+
+      Lastfm::Artist.downloader = downloader
+      Lastfm::Artist.factory    = factory
+      Lastfm::Artist.parser     = parser
+
+      downloader.stub(:download).with(urls.first)  { data.first.to_json }
+      downloader.stub(:download).with(urls.second) { data.second.to_json }
+
+      parser.stub(:parse).with(data.first.to_json) { { id: 1, name: 'Bombay Bicycle Club' } }
+      parser.stub(:parse_tracks).with(data.second.to_json) { [{ name: 'Shuffle' }] }
 
       expect(factory).to receive(:create_from_lastfm).with(id: 1, name: 'Bombay Bicycle Club', tracks: [{ name: 'Shuffle' }])
 

@@ -1,13 +1,24 @@
 require 'spec_helper'
 
-describe Lastfm::Event::Parser do
+describe Lastfm::Events::Parser do
   subject { described_class }
 
   describe '.parse' do
     it 'parses event details' do
-      data = JSON.parse(fixture('lastfm/event.json').read, symbolize_names: true)
+      data = JSON.parse(fixture('lastfm/events.json').read, symbolize_names: true)
 
-      event = subject.parse(data)
+      metadata, events = subject.parse(data)
+
+      metadata = OpenStruct.new(metadata)
+
+      expect(metadata.page).to eql(1)
+      expect(metadata.per_page).to eql(100)
+      expect(metadata.total_pages).to eql(1)
+      expect(metadata.total).to eql(27)
+
+      expect(events.size).to eql(27)
+
+      event = OpenStruct.new(events.find { |e| e[:title] == 'GRAPE FESTIVAL 2014' })
 
       expect(event.title).to eql('GRAPE FESTIVAL 2014')
       expect(event.artists).to eql([

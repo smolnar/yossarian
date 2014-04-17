@@ -1,10 +1,10 @@
 module Yossarian
-  module EventFactory
+  module ArtistFactory
     def self.create_from_lastfm(data)
-      Worker.perform_async(data.to_json)
+      LastfmWorker.perform_async(data.to_json)
     end
 
-    class Worker
+    class LastfmWorker
       include Sidekiq::Worker
 
       sidekiq_options queue: :events, backtrace: true
@@ -12,11 +12,7 @@ module Yossarian
       def perform(data)
         attributes = JSON.parse(data, symbolize_names: true)
 
-        begin
-          ::Event.create_from_lastfm(attributes)
-        rescue ActiveRecord::RecordInvalid => e
-          puts "#{attributes[:title]}: #{e.message}"
-        end
+        Artist.create_from_lastfm(attributes)
       end
     end
   end

@@ -16,6 +16,8 @@ Lastfm.config do |config|
   end
 end
 
-require 'lastfm/event/parser'
+require 'lastfm/metadata/parser'
+require 'lastfm/events/parser'
 require 'lastfm/events'
+require 'lastfm/artist/parser'
 require 'lastfm/artist'
