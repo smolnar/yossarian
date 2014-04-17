@@ -3,6 +3,9 @@ defaults:
     base: 'http://ws.audioscrobbler.com/2.0/'
     apikey: TODO
 
+  sidekiq:
+    password: TODO
+
 development:
   <<: *defaults
 
