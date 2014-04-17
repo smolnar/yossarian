@@ -23,7 +23,6 @@ module Lastfm
       url      = "#{Lastfm.config.artist.tracks.url}&format=json&#{query}"
       response = downloader.download(url)
       data     = JSON.parse(response, symbolize_names: true)
-
       tracks   = data[:toptracks][:track]
 
       factory.create_from_lastfm(artist.merge(tracks: tracks))
