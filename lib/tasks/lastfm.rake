@@ -5,8 +5,8 @@ namespace :lastfm do
   end
 
   desc 'Get artists'
-  task artists: :events do
-    Artist.each do |artist|
+  task artists: :environment do
+    Artist.find_each do |artist|
       Lastfm::Artist.get(artist: artist.name)
     end
   end

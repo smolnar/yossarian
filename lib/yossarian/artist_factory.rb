@@ -7,7 +7,7 @@ module Yossarian
     class LastfmWorker
       include Sidekiq::Worker
 
-      sidekiq_options queue: :events, backtrace: true
+      sidekiq_options queue: :artists, backtrace: true
 
       def perform(data)
         attributes = JSON.parse(data, symbolize_names: true)
