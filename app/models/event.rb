@@ -21,7 +21,7 @@ class Event < ActiveRecord::Base
 
     event.attributes = data.slice(*attributes)
 
-    return unless event.save!
+    event.save!
 
     data[:artists].each do |name|
       artist = Artist.find_or_create_by!(name: name)

@@ -14,8 +14,7 @@ module Yossarian
 
         begin
           ::Event.create_from_lastfm(attributes)
-        rescue ActiveRecord::RecordInvalid => e
-          puts "#{attributes[:title]}: #{e.message}"
+        rescue ActiveRecord::RecordInvalid
         end
       end
     end
