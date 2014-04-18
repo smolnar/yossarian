@@ -9,8 +9,8 @@ class Event < ActiveRecord::Base
   has_many :artists, through: :performances
   has_many :headliners, -> { where(performances: { headliner: true }) }, through: :performances, source: :artist
 
-  has_many :recordings, through: :artists
-  has_many :tracks,     through: :recordings
+  has_many :recordings, -> { where.not(youtube_url: nil) }, through: :artists
+  has_many :tracks, through: :recordings
 
   mount_uploader :poster, PosterUploader
 

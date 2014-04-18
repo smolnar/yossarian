@@ -20,9 +20,7 @@ FactoryGirl.define do
     trait :with_artists do
       after :create do |event|
         3.times do
-          artist = create(:artist)
-
-          create :performance, artist: artist, event: event
+          create :performance, event: event
         end
       end
     end
