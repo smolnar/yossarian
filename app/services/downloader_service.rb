@@ -7,6 +7,7 @@ class DownloaderService
         file = Tempfile.new('downloader-service', encoding: 'ascii-8bit')
 
         file.write(response.body_str)
+        file.rewind
 
         return file
       end
