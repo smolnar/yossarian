@@ -2,7 +2,7 @@ class Recording < ActiveRecord::Base
   belongs_to :track
   belongs_to :artist
 
-  def create_from_youtube(attributes)
+  def self.create_from_youtube(attributes)
     artist = Artist.find_or_create_by!(name: attributes[:artist])
     track  = Track.find_or_create_by!(name: attributes[:track])
 

@@ -9,6 +9,9 @@ class Event < ActiveRecord::Base
   has_many :artists, through: :performances
   has_many :headliners, -> { where(performances: { headliner: true }) }, through: :performances, source: :artist
 
+  has_many :recordings, through: :artists
+  has_many :tracks,     through: :recordings
+
   before_validation :set_poster
 
   def self.create_from_lastfm(data)
