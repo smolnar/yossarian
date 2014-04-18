@@ -1,5 +1,5 @@
 class EventSerializer < ActiveModel::Serializer
-  attributes :title
+  attributes :id, :title
 
   has_many :recordings, embed: :ids, include: true
 end
