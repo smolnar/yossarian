@@ -1,6 +1,4 @@
 class Event < ActiveRecord::Base
-  include Validable
-
   validates :title,           presence: true
   validates :venue_longitude, presence: true
   validates :venue_latitude,  presence: true
