@@ -27,6 +27,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'squire'
 gem 'scout', github: 'smolnar/scout'
 
+# API Wrappers
+gem 'youtube_it'
+
 # for sidekiq/web
 gem 'sinatra', '>= 1.3.0', :require => nil
 
