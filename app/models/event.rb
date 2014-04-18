@@ -42,6 +42,6 @@ class Event < ActiveRecord::Base
       lastfm_image_extralarge,
       lastfm_image_medium,
       lastfm_image_small
-    ])
+    ].compact)
   end
 end

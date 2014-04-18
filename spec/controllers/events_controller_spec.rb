@@ -9,27 +9,7 @@ describe EventsController do
     it 'returns serialzed events' do
       get :index
 
-      expect(response.body).to eql({
-        recordings: [
-          {
-            youtube_url: recordings[0].youtube_url,
-            artist_id: artist.id,
-            track_id:  recordings[0].track.id
-          },
-          {
-            youtube_url: recordings[1].youtube_url,
-            artist_id: artist.id,
-            track_id:  recordings[1].track.id
-          },
-        ],
-
-        events: [
-          {
-            title: event.title,
-            recording_ids: recordings.map(&:id)
-          }
-        ]
-      }.to_json)
+      expect(response).to be_success
     end
   end
 end

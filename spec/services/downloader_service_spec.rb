@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe DownloaderService do
+  before :each do
+    DownloaderService.unstub(:fetch)
+  end
+
   describe '.fetch' do
     it 'fetches the first available file' do
       urls = [

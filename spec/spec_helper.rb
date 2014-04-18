@@ -47,4 +47,8 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
 
   config.include FixtureHelper
+
+  config.before :each do
+    DownloaderService.stub(:fetch) { fixture('poster.jpg') }
+  end
 end
