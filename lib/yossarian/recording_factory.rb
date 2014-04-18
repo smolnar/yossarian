@@ -11,9 +11,11 @@ module Yossarian
 
       def perform(params)
         params = JSON.parse(params, symbolize_names: true)
-        url    = Youtube::Music.of(artist: params[:artist], track: params[:track])
+        video  = Youtube::Music.of(artist: params[:artist], track: params[:track]).first
 
-        Recording.create_from_youtube(params.merge(url: url))
+        return unless video
+
+        Recording.create_from_youtube(params.merge(url: video.url))
       end
     end
   end
