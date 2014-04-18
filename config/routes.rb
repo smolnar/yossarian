@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  root 'events#index'
+  root 'static_pages#home'
 
-  resources :events, only: :index
+  namespace :api do
+    resources :events, only: :index
+  end
 
   require 'sidekiq/web'
 
