@@ -1,4 +1,4 @@
-# For more information see: http://emberjs.com/guides/routing/
+Yossarian.Router.map ->
+  @resource 'events', path: '/'
 
-Yossarian.Router.map ()->
-  # @resource('posts')
+Yossarian.Router.reopen location: 'history'

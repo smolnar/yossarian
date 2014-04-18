@@ -1,0 +1,4 @@
+ul
+  each event in controller.content
+    li
+      = event.title

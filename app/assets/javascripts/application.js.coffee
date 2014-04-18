@@ -1,7 +1,6 @@
 #= require jquery
 #= require jquery_ujs
-#= require turbolinks
-#= require_tree .
+#= require foundation
 
 #= require handlebars
 #= require ember
@@ -9,5 +8,6 @@
 #= require_self
 #= require yossarian
 
-# for more details see: http://emberjs.com/guides/application/
-window.Yossarian = Ember.Application.create()
+window.Yossarian = Ember.Application.create(rootElement: '#yossarian')
+
+$ -> $(document).foundation()
