@@ -15,5 +15,7 @@
 /log/*.log
 /tmp
 
+public/events
+
 database.yml
 configuration.yml

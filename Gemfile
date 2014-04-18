@@ -23,12 +23,28 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+# Uploaders
+gem 'rmagick', '2.13.2'
+gem 'carrierwave'
+
+# Serialization
+gem 'active_model_serializers'
+
 # Configuration
 gem 'squire'
 gem 'scout', github: 'smolnar/scout'
 
 # API Wrappers
 gem 'youtube_it'
+
+# Stylesheets
+gem 'foundation-rails'
+
+# Javascripts
+gem 'ember-rails'
+gem 'emblem-rails'
+gem 'ember-source', '1.6.0.beta.2'
+gem 'ember-data-source', '1.0.0.beta.7'
 
 # for sidekiq/web
 gem 'sinatra', '>= 1.3.0', :require => nil

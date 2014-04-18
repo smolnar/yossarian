@@ -12,6 +12,8 @@ class Event < ActiveRecord::Base
   has_many :recordings, through: :artists
   has_many :tracks,     through: :recordings
 
+  mount_uploader :poster, PosterUploader
+
   before_validation :set_poster
 
   def self.create_from_lastfm(data)
@@ -36,6 +38,10 @@ class Event < ActiveRecord::Base
   private
 
   def set_poster
-    self.poster ||= lastfm_image_extralarge
+    self.poster = DownloaderService.fetch([
+      lastfm_image_extralarge,
+      lastfm_image_medium,
+      lastfm_image_small
+    ])
   end
 end
