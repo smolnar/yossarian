@@ -98,6 +98,14 @@ GEM
       railties (>= 3.1)
     ember-source (1.6.0.beta.2)
       handlebars-source (~> 1.0)
+    ember_script (0.0.5)
+      ember_script-source (>= 0.0.2)
+      execjs
+      tilt
+    ember_script-rails (0.0.4)
+      ember_script (>= 0.0.4)
+      rails
+    ember_script-source (0.0.14)
     emblem-rails (0.2.1)
       barber-emblem (~> 0.1.1)
       ember-rails (>= 0.14.0)
@@ -301,6 +309,7 @@ DEPENDENCIES
   ember-data-source (= 1.0.0.beta.7)
   ember-rails
   ember-source (= 1.6.0.beta.2)
+  ember_script-rails
   emblem-rails
   factory_girl_rails
   foundation-rails

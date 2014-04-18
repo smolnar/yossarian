@@ -45,6 +45,7 @@ gem 'ember-rails'
 gem 'emblem-rails'
 gem 'ember-source', '1.6.0.beta.2'
 gem 'ember-data-source', '1.0.0.beta.7'
+gem 'ember_script-rails'
 
 # for sidekiq/web
 gem 'sinatra', '>= 1.3.0', :require => nil
