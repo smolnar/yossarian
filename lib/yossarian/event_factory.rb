@@ -1,10 +1,10 @@
 module Yossarian
   module EventFactory
     def self.create_from_lastfm(data)
-      Worker.perform_async(data.to_json)
+      LastfmWorker.perform_async(data.to_json)
     end
 
-    class Worker
+    class LastfmWorker
       include Sidekiq::Worker
 
       sidekiq_options queue: :events, backtrace: true
