@@ -72,8 +72,9 @@ ActiveRecord::Schema.define(version: 20140417223218) do
   add_index "performances", ["event_id"], name: "index_performances_on_event_id", using: :btree
 
   create_table "recordings", force: true do |t|
-    t.integer  "track_id",   null: false
-    t.integer  "artist_id",  null: false
+    t.integer  "track_id",    null: false
+    t.integer  "artist_id",   null: false
+    t.string   "youtube_url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -83,8 +84,7 @@ ActiveRecord::Schema.define(version: 20140417223218) do
   add_index "recordings", ["track_id"], name: "index_recordings_on_track_id", using: :btree
 
   create_table "tracks", force: true do |t|
-    t.string   "name",        null: false
-    t.string   "youtube_url"
+    t.string   "name",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

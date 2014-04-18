@@ -4,6 +4,8 @@ class CreateRecordings < ActiveRecord::Migration
       t.references :track,  index: true, null: false
       t.references :artist, index: true, null: false
 
+      t.string :youtube_url
+
       t.timestamps
     end
 
