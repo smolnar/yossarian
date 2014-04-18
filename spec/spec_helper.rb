@@ -43,5 +43,8 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
+  # FactoryGirl helpers
+  config.include FactoryGirl::Syntax::Methods
+
   config.include FixtureHelper
 end
