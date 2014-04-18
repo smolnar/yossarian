@@ -8,15 +8,13 @@ module Lastfm
       @downloader ||= Scout::Downloader
     end
 
-    def factory
-      @factory ||= Yossarian::ArtistFactory
-    end
-
     def parser
       @parser ||= Lastfm::Artist::Parser
     end
 
     def get(params = {})
+      raise ArgumentError.new("You need to provide 'factory'") unless factory
+
       query = params.map { |key, value| "#{key}=#{value}" }.join('&')
       url   = "#{Lastfm.config.artist.url}&format=json&#{query}"
 

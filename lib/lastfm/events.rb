@@ -8,15 +8,13 @@ module Lastfm
       @downloader ||= Scout::Downloader
     end
 
-    def factory
-      @factory ||= Yossarian::EventFactory
-    end
-
     def parser
       @parser ||= Lastfm::Events::Parser
     end
 
     def get(params = {})
+      raise ArgumentError.new("You need to provide 'factory'") unless factory
+
       params = { page: 1 }.merge(params)
       query  = params.map { |key, value| "#{key}=#{value}" }.join('&')
       url    = "#{Lastfm.config.events.url}&format=json&#{query}"
