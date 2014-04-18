@@ -3,7 +3,10 @@
 module Lastfm::Events
   module Parser
     def self.parse(data)
-      data     = JSON.parse(data, symbolize_names: true) unless data.is_a?(Hash)
+      data = JSON.parse(data, symbolize_names: true) unless data.is_a?(Hash)
+
+      return if data[:error]
+
       metadata = Lastfm::Metadata::Parser.parse(data[:events])
 
       events = data[:events][:event].map do |event|
@@ -21,7 +24,6 @@ module Lastfm::Events
         result[:venue_street]    = event[:venue][:location][:street]
         result[:starts_at]       = Time.parse(event[:startDate]) if event[:startDate]
         result[:ends_at]         = Time.parse(event[:endDate]) if event[:endDate]
-        result[:description]     = event[:description]
         result[:website]         = event[:website]
         result[:lastfm_url]      = event[:url]
 

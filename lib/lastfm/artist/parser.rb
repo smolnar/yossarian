@@ -5,11 +5,14 @@ module Lastfm::Artist
     def self.parse(data)
       data   = JSON.parse(data, symbolize_names: true)
       result = Hash.new
-      data   = data[:artist]
+
+      return if data[:error]
+
+      data = data[:artist]
 
       result[:name]             = data[:name]
       result[:lastfm_url]       = data[:url]
-      result[:tags]             = Array.wrap(data[:tags][:tag]).map { |tag| tag[:name] }
+      result[:tags]             = Array.wrap(data[:tags][:tag]).map { |tag| tag[:name] } if data[:tags].is_a?(Hash)
       result[:musicbrainz_uuid] = data[:mbid]
 
       data[:image].each do |image|
@@ -20,9 +23,15 @@ module Lastfm::Artist
     end
 
     def self.parse_tracks(data)
-      data = JSON.parse(data, symbolize_names: true)
+      begin
+        data = JSON.parse(data, symbolize_names: true)
+      rescue JSON::ParserError
+        return []
+      end
 
-      data[:toptracks][:track].map { |track| track[:name] }
+      return [] if data[:error]
+
+      Array.wrap(data[:toptracks][:track]).map { |track| track[:name] }
     end
   end
 end

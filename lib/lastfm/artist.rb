@@ -23,6 +23,8 @@ module Lastfm
       response = downloader.download(url)
       artist   = parser.parse(response)
 
+      return unless artist
+
       url      = "#{Lastfm.config.artist.tracks.url}&format=json&#{query}"
       response = downloader.download(url)
 

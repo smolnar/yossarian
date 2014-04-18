@@ -9,62 +9,72 @@ describe Lastfm::Events::Parser do
 
       metadata, events = subject.parse(data)
 
-      metadata = OpenStruct.new(metadata)
-
-      expect(metadata.page).to eql(1)
-      expect(metadata.per_page).to eql(100)
-      expect(metadata.total_pages).to eql(1)
-      expect(metadata.total).to eql(27)
+      expect(metadata[:page]).to eql(1)
+      expect(metadata[:per_page]).to eql(100)
+      expect(metadata[:total_pages]).to eql(1)
+      expect(metadata[:total]).to eql(27)
 
       expect(events.size).to eql(27)
 
-      event = OpenStruct.new(events.find { |e| e[:title] == 'GRAPE FESTIVAL 2014' })
+      event = events.find { |e| e[:title] == 'GRAPE FESTIVAL 2014' }
 
-      expect(event.title).to eql('GRAPE FESTIVAL 2014')
-      expect(event.artists).to eql([
-        "Editors",
-        "Klaxons",
-        "La Roux",
-        "Bombay Bicycle Club",
-        "Flux Pavilion",
-        "Palma Violets",
-        "Wilkinson",
-        "Diego",
-        "Skyline",
-        "Rangleklods",
-        "The Prostitutes",
-        "Vec",
-        "Lavagance",
-        "Le Payaco",
-        "Fiordmoss",
-        "Korben Dallas",
-        "Modré hory",
-        "Strapo",
-        "The Feud",
-        "No Distance Paradise",
-        "Boyband",
-        "Walter Schnitzelsson",
-        "Fallgrapp",
-        "Saténové Ruky",
-        "Papyllon",
-        "MALALATA",
-        "Tichonov",
-        "Martina Javor"
-      ])
-      expect(event.headliner).to eql('Editors')
-      expect(event.venue_name).to eql('Letisko')
-      expect(event.venue_latitude).to eql('48.625')
-      expect(event.venue_longitude).to eql('17.828611')
-      expect(event.venue_city).to eql('Piešťany')
-      expect(event.venue_country).to eql('Slovakia')
-      expect(event.starts_at).to eql(Time.new(2014, 8, 15, 13, 38, 1))
-      expect(event.ends_at).to eql(Time.new(2014, 8, 16, 13, 38, 1))
-      expect(event.lastfm_image_small).to eql('http://userserve-ak.last.fm/serve/34/36233633.jpg')
-      expect(event.lastfm_image_medium).to eql('http://userserve-ak.last.fm/serve/64/36233633.jpg')
-      expect(event.lastfm_image_large).to eql('http://userserve-ak.last.fm/serve/126/36233633.jpg')
-      expect(event.lastfm_image_extralarge).to eql('http://userserve-ak.last.fm/serve/252/36233633.jpg')
-      expect(event.lastfm_url).to eql('http://www.last.fm/festival/3705233+GRAPE+FESTIVAL+2014')
-      expect(event.website).to eql('http://www.grapefestival.sk/')
+      expect(event).to eql(
+        lastfm_uuid:            "3705233",
+        title:                  "GRAPE FESTIVAL 2014",
+        headliner:              "Editors",
+        venue_name:             "Letisko",
+        venue_latitude:         "48.625",
+        venue_longitude:        "17.828611",
+        venue_city:              "Piešťany",
+        venue_country:           "Slovakia",
+        venue_street:            "",
+        starts_at:               Time.parse('2014-08-15 13:38:01 +0200'),
+        ends_at:                 Time.parse('2014-08-16 13:38:01 +0200'),
+        website:                 "http://www.grapefestival.sk/",
+        lastfm_url:              "http://www.last.fm/festival/3705233+GRAPE+FESTIVAL+2014",
+        lastfm_image_small:      "http://userserve-ak.last.fm/serve/34/36233633.jpg",
+        lastfm_image_medium:     "http://userserve-ak.last.fm/serve/64/36233633.jpg",
+        lastfm_image_large:      "http://userserve-ak.last.fm/serve/126/36233633.jpg",
+        lastfm_image_extralarge: "http://userserve-ak.last.fm/serve/252/36233633.jpg",
+        artists: [
+          "Editors",
+          "Klaxons",
+          "La Roux",
+          "Bombay Bicycle Club",
+          "Flux Pavilion",
+          "Palma Violets",
+          "Wilkinson",
+          "Diego",
+          "Skyline",
+          "Rangleklods",
+          "The Prostitutes",
+          "Vec",
+          "Lavagance",
+          "Le Payaco",
+          "Fiordmoss",
+          "Korben Dallas",
+          "Modré hory",
+          "Strapo",
+          "The Feud",
+          "No Distance Paradise",
+          "Boyband",
+          "Walter Schnitzelsson",
+          "Fallgrapp",
+          "Saténové Ruky",
+          "Papyllon",
+          "MALALATA",
+          "Tichonov",
+          "Martina Javor"
+        ]
+      )
+    end
+
+    context 'with error' do
+      it 'ommits parsing events' do
+        data = { error: 6, message: 'The location you supplied could not be found' }.to_json
+
+        expect(subject.parse(data)).to be_nil
+      end
     end
   end
 end

@@ -7,17 +7,27 @@ describe Lastfm::Artist::Parser do
     it 'parses artist info' do
       data = fixture('lastfm/artist.json').read
 
-      artist = OpenStruct.new(subject.parse(data))
+      artist = subject.parse(data)
 
-      expect(artist.name).to eql('Bombay Bicycle Club')
-      expect(artist.musicbrainz_uuid).to eql('0ae49abe-d6af-44fa-8ab0-b9ace5690e6f')
-      expect(artist.lastfm_url).to eql('http://www.last.fm/music/Bombay+Bicycle+Club')
-      expect(artist.lastfm_image_small).to eql('http://userserve-ak.last.fm/serve/34/96722267.jpg')
-      expect(artist.lastfm_image_medium).to eql('http://userserve-ak.last.fm/serve/64/96722267.jpg')
-      expect(artist.lastfm_image_large).to eql('http://userserve-ak.last.fm/serve/126/96722267.jpg')
-      expect(artist.lastfm_image_extralarge).to eql('http://userserve-ak.last.fm/serve/252/96722267.jpg')
-      expect(artist.lastfm_image_mega).to eql('http://userserve-ak.last.fm/serve/500/96722267/Bombay+Bicycle+Club+BombayBicycleClubimage.jpg')
-      expect(artist.tags).to eql(['indie', 'british', 'indie rock', 'alternative', 'indie pop'])
+      expect(artist).to eql(
+        name:                    "Bombay Bicycle Club",
+        lastfm_url:              "http://www.last.fm/music/Bombay+Bicycle+Club",
+        musicbrainz_uuid:        "0ae49abe-d6af-44fa-8ab0-b9ace5690e6f",
+        lastfm_image_small:      "http://userserve-ak.last.fm/serve/34/96722267.jpg",
+        lastfm_image_medium:     "http://userserve-ak.last.fm/serve/64/96722267.jpg",
+        lastfm_image_large:      "http://userserve-ak.last.fm/serve/126/96722267.jpg",
+        lastfm_image_extralarge: "http://userserve-ak.last.fm/serve/252/96722267.jpg",
+        lastfm_image_mega:       "http://userserve-ak.last.fm/serve/500/96722267/Bombay+Bicycle+Club+BombayBicycleClubimage.jpg",
+        tags:                    ["indie", "british", "indie rock", "alternative", "indie pop"],
+      )
+    end
+
+    context 'with error' do
+      it 'ommit parsing information' do
+        data = { error: 6, message: 'The artist you supplied could not be found' }.to_json
+
+        expect(subject.parse(data)).to be_nil
+      end
     end
   end
 
@@ -29,6 +39,22 @@ describe Lastfm::Artist::Parser do
 
       expect(tracks.size).to eql(50)
       expect(tracks.first).to eql('Shuffle')
+    end
+
+    context 'with error' do
+      it 'returns empty array' do
+        data = { error: 6, message: 'the artist you supplied could not be found' }.to_json
+
+        expect(subject.parse_tracks(data)).to eql([])
+      end
+    end
+
+    context 'with parse error' do
+      it 'returns empty array' do
+        data = '""'
+
+        expect(subject.parse_tracks(data)).to eql([])
+      end
     end
   end
 end

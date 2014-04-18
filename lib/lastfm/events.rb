@@ -25,6 +25,8 @@ module Lastfm
         response         = downloader.download(url)
         metadata, events = parser.parse(response)
 
+        return unless events
+
         events.each do |event|
           factory.create_from_lastfm(event)
         end
