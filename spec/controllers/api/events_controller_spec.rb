@@ -7,7 +7,7 @@ describe API::EventsController do
     let!(:recordings) { 2.times.map { create :recording, artist: artist }}
 
     it 'returns serialzed events' do
-      get :index
+      get :index, format: :json
 
       expect(response).to be_success
 
