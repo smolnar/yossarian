@@ -1,6 +1,22 @@
 require 'spec_helper'
 
 describe Event do
+  it 'requires poster' do
+    DownloaderService.stub(:fetch) { nil }
+
+    event = build :event
+
+    expect(event).not_to be_valid
+    expect(event).to have(1).error_on(:poster)
+
+    DownloaderService.stub(:fetch) { fixture('poster.jpg') }
+
+    event = build :event
+
+    expect(event).to be_valid
+    expect(event.poster.file).not_to be_nil
+  end
+
   describe '.create_from_lastfm' do
     let(:data) {
       {

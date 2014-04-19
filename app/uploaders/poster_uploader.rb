@@ -4,7 +4,7 @@ class PosterUploader < CarrierWave::Uploader::Base
   storage :file
 
   def filename
-    "#{mounted_as}.png"
+    "#{mounted_as}.png" if file
   end
 
   def store_dir
