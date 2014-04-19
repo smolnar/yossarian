@@ -1,4 +1,7 @@
-ul
-  each event in controller.content
-    li
-      = event.title
+view Yossarian.MapView id='map'
+
+.row
+  ul.small-block-grid-4
+    each event in controller.content
+      li
+        img{bind-attr src=event.poster.poster.small.url}
