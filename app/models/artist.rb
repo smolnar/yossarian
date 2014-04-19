@@ -32,9 +32,11 @@ class Artist < ActiveRecord::Base
   private
 
   def set_image
-    self.image = DownloaderService.fetch([
+    image = DownloaderService.fetch([
       lastfm_image_mega,
       lastfm_image_extralarge
     ].compact)
+
+    self.image = image ? image : nil
   end
 end

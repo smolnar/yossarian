@@ -11,8 +11,8 @@
  * file per style scope.
  *
  *= require mapbox
+ *= require nivo
  *= require_tree .
  *= require_self
  *= require foundation_and_overrides
-
  */

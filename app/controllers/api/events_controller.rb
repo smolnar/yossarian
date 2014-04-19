@@ -4,7 +4,8 @@ module API
       @events = Event
         .includes(:artists, artists: [recordings: [:track]])
         .where.not(recordings: { youtube_url: nil })
-        .references(:recordings)
+        .where.not(artists: { lastfm_image_mega: '' })
+        .references(:recordings, :artists)
 
       respond_to do |format|
         format.json { render json: @events }
