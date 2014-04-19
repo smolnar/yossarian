@@ -1,6 +1,6 @@
 Yossarian.EventArtistsView = Ember.CollectionView.extend
-  tagName:    'ul'
-  content:    []
+  tagName: 'div'
+  content: []
 
   didInsertElement: ->
     $(document).ready =>

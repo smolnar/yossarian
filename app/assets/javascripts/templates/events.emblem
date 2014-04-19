@@ -12,9 +12,10 @@
 .row
   ul#events-list.medium-block-grid-3
     each event in content
-      li
+      view Yossarian.EventView contentBinding="event"
         collection Yossarian.EventArtistsView contentBinding="event.artists" tagName="div" class="event-slider"
           img{bind-attr src=image.image.large.url}
 
         .info
-          = event.title
+          .title
+            = event.title

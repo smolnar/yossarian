@@ -14,3 +14,4 @@ Yossarian.MapView = Ember.View.extend
   contentDidChange: (->
     @get('events').forEach (event) => @get('map').addEvent(event)
   ).observes('events.@each')
+
