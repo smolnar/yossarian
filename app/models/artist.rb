@@ -10,7 +10,7 @@ class Artist < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
-  after_save :set_image
+  before_save :set_image
 
   def self.create_from_lastfm(data)
     artist     = find_or_initialize_by(name: data[:name])
@@ -32,13 +32,9 @@ class Artist < ActiveRecord::Base
   private
 
   def set_image
-    return if self.image
-
-    image = DownloaderService.fetch([
+    self.image = DownloaderService.fetch([
       lastfm_image_mega,
       lastfm_image_extralarge
     ].compact)
-
-    self.image = image if image
   end
 end

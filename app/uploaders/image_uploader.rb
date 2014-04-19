@@ -3,8 +3,12 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   storage :file
 
+  def filename
+    "#{mounted_as}.png"
+  end
+
   def store_dir
-    "#{model.class.to_s.pluralize.underscore}/#{model.id}/#{mounted_as.to_s.pluralize}"
+    "#{model.class.to_s.pluralize.underscore}/#{model.id}"
   end
 
   process convert: :png
