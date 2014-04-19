@@ -14,7 +14,22 @@ body {
 }
 
 .hero {
+  background-size: cover;
   background-image: asset_url('hero.png');
+  background-position: fixed;
+  height: 700px;
+  padding: 150px 20px 0 20px;
+
+  h1 {
+    color: #fff;
+    font-weight: bold;
+    font-size: 46pt;
+
+    small {
+      color: #fff;
+      font-weight: normal;
+    }
+  }
 }
 
 #events-list {
