@@ -1,9 +1,12 @@
-view Yossarian.MapView id="map" centerBinding="location" eventsBinding="controller.content"
+view Yossarian.MapView id="map" map="smolnar.i17o7mbn" centerBinding="location" eventsBinding="controller.content"
 
 .panel
 .row
   ul#events-list.medium-block-grid-3
-    each event in controller.content
+    each event in content
       li
-        collection Yossarian.EventArtistsView contentBinding="event.artists" tagName="div"
-          img{bind-attr src=image.image.small.url}
+        collection Yossarian.EventArtistsView contentBinding="event.artists" tagName="div" class="event-slider"
+          img{bind-attr src=image.image.large.url}
+
+        .info
+          = event.title

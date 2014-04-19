@@ -5,7 +5,7 @@ Yossarian.MapView = Ember.View.extend
   didInsertElement: ->
     @_super()
 
-    @set('map', new Yossarian.Map(id: 'smolnar.i14e2n90', element: @$().attr('id')))
+    @set('map', new Yossarian.Map(id: @get('map'), element: @$().attr('id')))
 
   centerDidChange: (->
     @get('map').setCenter(@get('center'))
