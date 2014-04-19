@@ -1,7 +1,8 @@
-view Yossarian.MapView id='map'
+view Yossarian.MapView id="map" centerBinding="location" eventsBinding="controller.content"
 
+.panel
 .row
   ul.small-block-grid-4
     each event in controller.content
       li
-        img{bind-attr src=event.poster.poster.small.url}
+        img{bind-attr src=event.poster.poster.small.url} class="img-circle"

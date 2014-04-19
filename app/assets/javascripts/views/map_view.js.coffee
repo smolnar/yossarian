@@ -5,4 +5,12 @@ Yossarian.MapView = Ember.View.extend
   didInsertElement: ->
     @_super()
 
-    @set('map', new Yossarian.Map(id: 'smolnar.i13lcpd1', element: @$().attr('id')))
+    @set('map', new Yossarian.Map(id: 'smolnar.i14e2n90', element: @$().attr('id')))
+
+  centerDidChange: (->
+    @get('map').setCenter(@get('center'))
+  ).observes('center')
+
+  contentDidChange: (->
+    @get('events').forEach (event) => @get('map').addEvent(event)
+  ).observes('events.@each')
