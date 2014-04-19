@@ -16,6 +16,7 @@
 /tmp
 
 public/events
+public/artists
 
 database.yml
 configuration.yml
