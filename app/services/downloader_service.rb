@@ -1,6 +1,8 @@
 class DownloaderService
   def self.fetch(urls)
     urls.each do |url|
+      next unless url.present?
+
       response = Scout::Downloader.download(url, with_response: true)
 
       if response.response_code == 200
@@ -12,5 +14,7 @@ class DownloaderService
         return file
       end
     end
+
+    nil
   end
 end
