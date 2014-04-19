@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20140417223218) do
 
   create_table "artists", force: true do |t|
     t.string   "name",                    null: false
+    t.string   "image"
     t.string   "musicbrainz_uuid"
     t.string   "lastfm_url"
     t.string   "lastfm_image_small"

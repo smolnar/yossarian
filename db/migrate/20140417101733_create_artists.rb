@@ -2,6 +2,7 @@ class CreateArtists < ActiveRecord::Migration
   def change
     create_table :artists do |t|
       t.string :name,                   null: false
+      t.string :image
       t.string :musicbrainz_uuid
       t.string :lastfm_url
       t.string :lastfm_image_small

@@ -1,5 +1,5 @@
 class Artist < ActiveRecord::Base
-  validates :name, presence: true
+  validates :name,  presence: true
 
   has_many :performances
   has_many :events, through: :performances
@@ -7,6 +7,10 @@ class Artist < ActiveRecord::Base
 
   has_many :recordings
   has_many :tracks, through: :recordings
+
+  mount_uploader :image, ImageUploader
+
+  after_save :set_image
 
   def self.create_from_lastfm(data)
     artist     = find_or_initialize_by(name: data[:name])
@@ -23,5 +27,18 @@ class Artist < ActiveRecord::Base
     end
 
     artist
+  end
+
+  private
+
+  def set_image
+    return if self.image
+
+    image = DownloaderService.fetch([
+      lastfm_image_mega,
+      lastfm_image_extralarge
+    ].compact)
+
+    self.image = image if image
   end
 end
