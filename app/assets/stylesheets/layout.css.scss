@@ -49,15 +49,24 @@ body {
     padding: 10px;
     display: block;
     position: absolute;
-    top: 0px;
+    top: 0;
+    botom: -1px;
     opacity: 0.8;
     width: 100%;
     background-color: #eee;
     color: #000;
     z-index: 8;
 
+    height: 45px;
+    // TODO mixin
+    transition: height 200ms ease;
+
+    &.open {
+      height: 100%;
+    }
+
     .title {
-      font-size: 14pt;
+      font-size: 12pt;
     }
   }
 }
