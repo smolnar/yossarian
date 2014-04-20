@@ -8,6 +8,7 @@
         | Play more than 2 000 festivals with more than 4 000 artists.
 
 //view Yossarian.MapView id="map" map="smolnar.i17o7mbn" centerBinding="location" eventsBinding="controller.content"
+
 .panel
 .row
   ul#events-list.medium-block-grid-3

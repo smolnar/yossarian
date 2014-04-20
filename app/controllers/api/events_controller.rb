@@ -4,11 +4,12 @@ module API
       @events = Event
         .includes(:artists, artists: [recordings: [:track]])
         .where.not(recordings: { youtube_url: nil })
-        .where.not(artists: { lastfm_image_mega: '' })
+        .where.not(artists: { image: nil })
         .references(:recordings, :artists)
 
       respond_to do |format|
-        format.json { render json: @events }
+        # TODO (smolnar) sort in sql
+        format.json { render json: @events.sort_by { |e| e.artists.size }.reverse }
       end
     end
   end
