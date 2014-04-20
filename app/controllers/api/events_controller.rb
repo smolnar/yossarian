@@ -6,6 +6,7 @@ module API
         .where.not(recordings: { youtube_url: nil })
         .where.not(artists: { image: nil })
         .references(:recordings, :artists)
+        .limit(20)
 
       respond_to do |format|
         # TODO (smolnar) sort in sql
