@@ -38,6 +38,8 @@ class Event < ActiveRecord::Base
   private
 
   def set_poster
+    return if poster.file
+
     self.poster = DownloaderService.fetch([
       lastfm_image_extralarge,
       lastfm_image_medium,

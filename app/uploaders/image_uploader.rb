@@ -4,7 +4,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   storage :file
 
   def filename
-    "#{mounted_as}.png" if file
+    "#{mounted_as}.png" if original_filename
   end
 
   def store_dir
