@@ -10,13 +10,13 @@ module Lastfm::Artist
 
       data = data[:artist]
 
-      result[:name]             = data[:name]
-      result[:lastfm_url]       = data[:url]
-      result[:tags]             = Array.wrap(data[:tags][:tag]).map { |tag| tag[:name] } if data[:tags].is_a?(Hash)
-      result[:musicbrainz_uuid] = data[:mbid]
+      result[:name]             = data[:name].presence
+      result[:lastfm_url]       = data[:url].presence
+      result[:tags]             = Array.wrap(data[:tags][:tag]).map { |tag| tag[:name].presence } if data[:tags].is_a?(Hash)
+      result[:musicbrainz_uuid] = data[:mbid].presence
 
       data[:image].each do |image|
-        result[:"lastfm_image_#{image[:size]}"] = image[:'#text']
+        result[:"lastfm_image_#{image[:size]}"] = image[:'#text'].presence
       end
 
       result
@@ -31,7 +31,7 @@ module Lastfm::Artist
 
       return [] if data[:error]
 
-      Array.wrap(data[:toptracks][:track]).map { |track| track[:name] }
+      Array.wrap(data[:toptracks][:track]).map { |track| track[:name].presence }
     end
   end
 end

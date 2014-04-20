@@ -12,20 +12,20 @@ module Lastfm::Events
       events = data[:events][:event].map do |event|
         result = Hash.new
 
-        result[:lastfm_uuid]     = event[:id]
-        result[:title]           = event[:title]
-        result[:artists]         = Array.wrap(event[:artists][:artist])
-        result[:headliner]       = event[:artists][:headliner]
-        result[:venue_name]      = event[:venue][:name]
-        result[:venue_latitude]  = event[:venue][:location][:'geo:point'][:'geo:lat']
-        result[:venue_longitude] = event[:venue][:location][:'geo:point'][:'geo:long']
-        result[:venue_city]      = event[:venue][:location][:city]
-        result[:venue_country]   = event[:venue][:location][:country]
-        result[:venue_street]    = event[:venue][:location][:street]
+        result[:lastfm_uuid]     = event[:id].presence
+        result[:title]           = event[:title].presence
+        result[:artists]         = Array.wrap(event[:artists][:artist]).presence
+        result[:headliner]       = event[:artists][:headliner].presence
+        result[:venue_name]      = event[:venue][:name].presence
+        result[:venue_latitude]  = event[:venue][:location][:'geo:point'][:'geo:lat'].presence
+        result[:venue_longitude] = event[:venue][:location][:'geo:point'][:'geo:long'].presence
+        result[:venue_city]      = event[:venue][:location][:city].presence
+        result[:venue_country]   = event[:venue][:location][:country].presence
+        result[:venue_street]    = event[:venue][:location][:street].presence
         result[:starts_at]       = Time.parse(event[:startDate]) if event[:startDate]
         result[:ends_at]         = Time.parse(event[:endDate]) if event[:endDate]
-        result[:website]         = event[:website]
-        result[:lastfm_url]      = event[:url]
+        result[:website]         = event[:website].presence
+        result[:lastfm_url]      = event[:url].presence
 
         event[:image].each do |image|
           result[:"lastfm_image_#{image[:size]}"] = image[:'#text']
