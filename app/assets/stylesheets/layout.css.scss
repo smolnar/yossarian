@@ -46,7 +46,7 @@ body {
   }
 
   .info {
-    padding: 10px;
+    padding: 10px 40px;
     display: block;
     position: absolute;
     top: 0;
@@ -56,17 +56,32 @@ body {
     background-color: #eee;
     color: #000;
     z-index: 8;
+    overflow: hidden;
 
     height: 45px;
     // TODO mixin
-    transition: height 200ms ease;
+    transition: all 200ms ease;
 
     &.open {
+      opacity: 0.9;
       height: 100%;
     }
 
-    .title {
-      font-size: 12pt;
+    h3 {
+      overflow: hidden;
     }
   }
 }
+
+#player {
+  right: 0px;
+  bottom: 0px;
+  position: fixed;
+  width: 600px;
+  z-index: 999;
+
+  .controls {
+    background-color: #eee;
+  }
+}
+
