@@ -16,6 +16,15 @@ class Event < ActiveRecord::Base
 
   before_validation :set_poster
 
+  after_validation :reverse_geocode
+
+  reverse_geocoded_by :venue_latitude, :venue_longitude do |record, results|
+    if data = results.first
+      record.venue_city    = data.city unless record.venue_city.present?
+      record.venue_country = data.country unless record.venue_country.present?
+    end
+  end
+
   def self.create_from_lastfm(data)
     data  = data.symbolize_keys
     event = find_by(lastfm_uuid: data[:lastfm_uuid]) || find_or_initialize_by(title: data[:title])
