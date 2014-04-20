@@ -78,10 +78,17 @@ body {
   bottom: 0px;
   position: fixed;
   width: 600px;
+  height: 60px;
   z-index: 999;
 
   .controls {
     background-color: #eee;
+  }
+
+  .video {
+    position: absolute;
+    bottom: 60px;
+    right: 0px;
   }
 }
 

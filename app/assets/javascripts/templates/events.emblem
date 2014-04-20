@@ -35,22 +35,32 @@
                 img.artist-thumbnail.img-circle{bind-attr src=image.image.small.url}
           .row.text-center
             hr
-            .button.primary.small Play
+            .button.primary.small{action 'play' this} Play
 
 
-#player
-  .video
-    embed width=300 height=400 src="http://www.youtube.com/v/2NUKzaj1ZRw?version=3&f=videos&app=youtube_gdata&autohide=1&controls=0" type="application/x-shockwave-flash"
+if player.currentRecording
+  view Yossarian.PlayerView controllerBinding="player" id="player"
+    if playing
+      .video
+        view Yossarian.YoutubeVideoView url=currentRecording.youtubeUrl
 
-  .row.controls
-    .medium-6.columns
-      .muted Currently playing:
-      p Bombay Bicycle Club - Shuffle
+    .row.controls
+      .medium-6.columns
+        .muted Currently playing:
+        p
+          if playing
+            | #{currentRecording.artist.name} &ndash; #{currentRecording.track.name}
+          else
+            | Nothing
 
-    ul.row.medium-6.columns.button-group
-      li.button
-        i.fa.fa-step-backward
-      li.button
-        i.fa.fa-play
-      li.button
-        i.fa.fa-step-forward
+      ul.row.medium-6.columns.button-group
+        li.button{action 'backward' }
+          i.fa.fa-step-backward
+        if playing
+          li.button{action 'stop'}
+            i.fa.fa-stop
+        else
+          li.button{action 'play'}
+            i.fa.fa-play
+        li.button{action 'forward'}
+          i.fa.fa-step-forward
