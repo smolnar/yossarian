@@ -42,7 +42,7 @@ if player.currentRecording
   view Yossarian.PlayerView controllerBinding="player" id="player"
     if playing
       .video
-        view Yossarian.YoutubeVideoView url=currentRecording.youtubeUrl
+        view Yossarian.YoutubeVideoView url=currentRecording.youtubeUrl controllerBinding="this"
 
     .row.controls
       .medium-6.columns

@@ -17,12 +17,16 @@ Yossarian.YoutubeVideoView = Ember.View.extend
           controls: 0
       events:
         onReady: => @setUrl()
+        onStateChange: (event) => @stateChanged(event)
     )
 
     @set('player', player)
 
   setUrl: ->
     @get('player').loadVideoByUrl(mediaContentUrl: @get('url'), suggestedQuality: 'hd720')
+
+  stateChanged: (event) ->
+    @get('controller').send('forward') if event.data == YT.PlayerState.ENDED
 
   urlChanged: (->
     @setUrl()
