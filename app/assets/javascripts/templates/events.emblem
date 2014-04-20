@@ -12,11 +12,45 @@
 .panel
 .row
   ul#events-list.medium-block-grid-3
-    each event in content
-      view Yossarian.EventView contentBinding="event"
-        collection Yossarian.EventArtistsView contentBinding="event.artists" tagName="div" class="event-slider"
+    each content
+      view Yossarian.EventView contentBinding="this"
+        collection Yossarian.EventArtistsView contentBinding="artists" tagName="div" class="event-slider"
           img{bind-attr src=image.image.large.url}
 
         .info
-          .title
-            = event.title
+          h5.title
+            = title
+
+          .row
+            .medium-12.columns.text-center
+              hr
+              h6
+                | #{venue_name}, #{venue_city}, #{venue_country}
+              .small
+              | July 24th, 2014 &ndash; July 27, 2014
+              hr
+          .row
+            slice artists limit=3
+              .medium-4.columns
+                img.artist-thumbnail.img-circle{bind-attr src=image.image.small.url}
+          .row.text-center
+            hr
+            .button.primary.small Play
+
+
+#player
+  .video
+    embed width=300 height=400 src="http://www.youtube.com/v/2NUKzaj1ZRw?version=3&f=videos&app=youtube_gdata&autohide=1&controls=0" type="application/x-shockwave-flash"
+
+  .row.controls
+    .medium-6.columns
+      .muted Currently playing:
+      p Bombay Bicycle Club - Shuffle
+
+    ul.row.medium-6.columns.button-group
+      li.button
+        i.fa.fa-step-backward
+      li.button
+        i.fa.fa-play
+      li.button
+        i.fa.fa-step-forward
