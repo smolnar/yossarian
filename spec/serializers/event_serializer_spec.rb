@@ -10,7 +10,7 @@ describe EventSerializer do
   it 'serializes event' do
     serializer = EventSerializer.new(event)
 
-    expect(serializer.to_json).to eql({
+    expect(serializer.to_json).to be_json_as({
       artists: [
         {
           id: artists[0].id,
@@ -110,6 +110,6 @@ describe EventSerializer do
         ends_at: event.ends_at,
         artist_ids: artists.map(&:id).sort
       },
-    }.to_json)
+    })
   end
 end

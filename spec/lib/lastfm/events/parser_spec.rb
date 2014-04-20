@@ -27,7 +27,7 @@ describe Lastfm::Events::Parser do
         venue_longitude:        "17.828611",
         venue_city:              "Piešťany",
         venue_country:           "Slovakia",
-        venue_street:            "",
+        venue_street:            nil,
         starts_at:               Time.parse('2014-08-15 13:38:01 +0200'),
         ends_at:                 Time.parse('2014-08-16 13:38:01 +0200'),
         website:                 "http://www.grapefestival.sk/",

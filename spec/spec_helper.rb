@@ -4,7 +4,9 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 
+require 'rspec/json_matcher'
 require 'sidekiq/testing'
+
 Sidekiq::Testing.inline!
 
 # Requires supporting ruby files with custom matchers and macros, etc,
@@ -45,6 +47,9 @@ RSpec.configure do |config|
 
   # FactoryGirl helpers
   config.include FactoryGirl::Syntax::Methods
+
+  # JSON matchers
+  config.include RSpec::JsonMatcher
 
   config.include FixtureHelper
 

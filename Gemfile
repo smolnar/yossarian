@@ -36,9 +36,11 @@ gem 'scout', github: 'smolnar/scout'
 
 # API Wrappers
 gem 'youtube_it'
+gem 'geocoder'
 
 # Stylesheets
 gem 'foundation-rails'
+gem 'font-awesome-rails'
 
 # Javascripts
 gem 'ember-rails'
@@ -69,6 +71,7 @@ group :development, :test do
   gem 'poltergeist', '~> 1.5.0'
   gem 'guard-rspec'
   gem 'timecop'
+  gem 'rspec-json_matcher'
 end
 
 # Use ActiveModel has_secure_password
