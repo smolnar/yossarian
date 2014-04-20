@@ -17,6 +17,7 @@
 
 public/events
 public/artists
+public/uploads
 
 database.yml
 configuration.yml
