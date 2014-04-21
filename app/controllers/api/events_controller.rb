@@ -11,8 +11,7 @@ module API
         .limit(6)
 
       respond_to do |format|
-        # TODO (smolnar) sort in sql
-        format.json { render json: @events.sort_by { |e| e.artists.size }.reverse }
+        format.json { render json: @events }
       end
     end
   end
