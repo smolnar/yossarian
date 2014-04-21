@@ -5,7 +5,7 @@ module Youtube
       client   = YouTubeIt::Client.new
       response = client.videos_by(query: query, categories: [:music], order_by: :relevance)
 
-      videos = response.videos.find_all { |video| video.state[:name].to_sym == :published }
+      videos = response.videos
 
       videos.map { |video| Youtube::Video.new(video) }
     end
