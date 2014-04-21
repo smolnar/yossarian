@@ -37,6 +37,7 @@
             hr
             .button.primary.small{action 'play' this} Play
 
+  .button{action 'loadMore' } Load more
 
 if player.currentRecording
   view Yossarian.PlayerView controllerBinding="player" id="player"
