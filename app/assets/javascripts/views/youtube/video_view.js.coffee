@@ -5,8 +5,9 @@ Yossarian.YoutubeVideoView = Ember.View.extend
   height: 200
   width:  300
 
-  didInsertElement: ->
-    @renderPlayer()
+  didInsertElement: -> @renderPlayer()
+
+  setUrl: -> @get('player').loadVideoByUrl(@get('url'))
 
   renderPlayer: ->
     player = new YT.Player(@$().attr('id'),
@@ -22,12 +23,11 @@ Yossarian.YoutubeVideoView = Ember.View.extend
 
     @set('player', player)
 
-  setUrl: ->
-    @get('player').loadVideoByUrl(mediaContentUrl: @get('url'), suggestedQuality: 'hd720')
-
-  stateChanged: (event) ->
+  stateDidChange: (event) ->
+    @get('player').setPlaybackQuality('hd720')
+    @get('player').setVolume(100)
     @get('controller').send('forward') if event.data == YT.PlayerState.ENDED
 
-  urlChanged: (->
+  urlDidChange: (->
     @setUrl()
   ).observes('url')
