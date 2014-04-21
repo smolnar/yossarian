@@ -5,8 +5,10 @@ module API
         .includes(:artists, artists: [recordings: [:track]])
         .where.not(recordings: { youtube_url: nil })
         .where.not(artists: { image: nil })
+        .where.not(events: { id: Array.wrap(params[:except]) })
         .references(:recordings, :artists)
-        .limit(20)
+        .order(performances_count: :desc)
+        .limit(6)
 
       respond_to do |format|
         # TODO (smolnar) sort in sql
