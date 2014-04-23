@@ -6,12 +6,10 @@ describe API::EventsController do
     let!(:event) { create :event, :with_artists}
     let!(:recordings) { 2.times.map { create :recording, artist: artist }}
 
-    it 'returns serialzed events' do
+    it 'returns serialized events' do
       get :index, format: :json
 
       expect(response).to be_success
-
-      pending
     end
   end
 end
