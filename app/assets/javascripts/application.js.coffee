@@ -1,6 +1,5 @@
 #= require jquery
 #= require jquery_ujs
-#= require foundation
 #= require mapbox
 #= require nivo
 
@@ -11,5 +10,3 @@
 #= require yossarian
 
 window.Yossarian = Ember.Application.create(rootElement: '#yossarian')
-
-$ -> $(document).foundation()

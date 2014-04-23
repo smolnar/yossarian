@@ -6,9 +6,6 @@ gem 'rails', '4.1.0'
 # Use postgresql as the database for Active Record
 gem 'pg'
 
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.3'
-
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
@@ -39,8 +36,9 @@ gem 'youtube_it'
 gem 'geocoder'
 
 # Stylesheets
-gem 'foundation-rails'
-gem 'font-awesome-rails'
+gem 'sass-rails', '~> 4.0.3'
+gem 'bootstrap-sass', '~> 3.1.1'
+gem 'font-awesome-rails', '~> 4.0.3'
 
 # Javascripts
 gem 'ember-rails'
@@ -72,6 +70,10 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'timecop'
   gem 'rspec-json_matcher'
+
+  # Javascripts
+  gem 'konacha'
+  gem 'sinon-rails'
 end
 
 # Use ActiveModel has_secure_password
