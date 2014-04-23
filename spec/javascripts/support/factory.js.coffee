@@ -25,15 +25,18 @@ class window.Factory.EmberStoreDriver
   @store: null
 
   @create: (type, attributes) ->
-    EmberStoreDriver.store.push(type, attributes)
+    Ember.run =>
+      EmberStoreDriver.store.push(type, attributes)
 
   @find: (type, params) ->
-    EmberStoreDriver.store.all(name, params)
+    Ember.run =>
+      EmberStoreDriver.store.all(type, params)
 
   @save: (record) ->
-    record.save()
+    Ember.run =>
+      record.save()
 
-    record
+      record
 
   @associationFor: (parent, child, target) ->
     relation = Ember.Inflector.inflector.pluralize(target)
