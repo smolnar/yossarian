@@ -47,7 +47,7 @@ class Event < ActiveRecord::Base
   private
 
   def set_poster
-    return if poster.file
+    return if poster.file.try(:exists?)
 
     self.poster = DownloaderService.fetch([
       lastfm_image_extralarge,

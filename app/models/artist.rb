@@ -32,7 +32,7 @@ class Artist < ActiveRecord::Base
   private
 
   def set_image
-    return if image.file
+    return if image.file.try(:exists?)
 
     self.image = DownloaderService.fetch([
       lastfm_image_mega,

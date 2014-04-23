@@ -1,6 +1,6 @@
 class Performance < ActiveRecord::Base
-  belongs_to :artist, counter_cache: true
-  belongs_to :event
+  belongs_to :artist
+  belongs_to :event, counter_cache: true
 
   validates :headliner, inclusion: { in: [true, false] }
 end
