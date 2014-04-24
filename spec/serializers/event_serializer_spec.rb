@@ -10,7 +10,7 @@ describe EventSerializer do
   it 'serializes event' do
     serializer = EventSerializer.new(event)
 
-    expect(serializer.to_json).to be_json_as({
+    expect(serializer.to_json).to be_json_including({
       artists: [
         {
           id: artists[0].id,
@@ -106,8 +106,6 @@ describe EventSerializer do
         },
         venue_latitude: event.venue_latitude,
         venue_longitude: event.venue_longitude,
-        starts_at: event.starts_at,
-        ends_at: event.ends_at,
         artist_ids: artists.map(&:id).sort
       },
     })
