@@ -45,7 +45,7 @@ App.setupForTesting()
 App.injectTestHelpers()
 
 Ember.Test.adapter       = Ember.Test.MochaAdapter.create()
-Ember.ApplicationAdapter = DS.FixtureAdapter.create()
+Ember.ApplicationAdapter = Ember.Test.MochaAdapter.create()
 
 $.fx.off = true
 
@@ -65,16 +65,16 @@ beforeEach (done) ->
   window.Test = {}
 
   try
-    Ember.run(App, App.advanceReadiness)
+    # Ember.run(App, App.advanceReadiness)
   catch error
-    console.error("Error during example teardown: #{Ember.inspect(error)}")
+    console.error("Error during example setup: #{Ember.inspect(error)}")
 
   Ember.run -> done()
 
 afterEach ->
   # Reset App
   try
-    Ember.run -> App.reset()
+    # Ember.run -> App.reset()
   catch error
     console.error("Error during example teardown: #{Ember.inspect(error)}")
 
