@@ -17,28 +17,25 @@ Yossarian.PlayerController = Ember.Controller.extend
     @set('currentRecording', null)
   ).observes('artists.@each')
 
-  playerDidStop: (->
+  currentStateDidChange: (->
     @set('currentRecording', null) if @get('currentState') == @get('states.stopped')
-  ).property('currentState')
+  ).observes('currentState')
 
   play: ->
     @set('currentRecording', @get('recordings')[0])
     @send('play')
 
-  actions: {
+  actions:
     play: -> @set('currentState', @get('states.playing'))
     stop: -> @set('currentState', @get('states.stopped'))
     backward: ->
-      # TODO circle
-      index = @get('recordings').indexOf(@get('currentRecording'))
+      index     = @get('recordings').indexOf(@get('currentRecording'))
       recording = @get('recordings')[index - 1]
 
       @set('currentRecording', recording) if recording
 
     forward: ->
-      # TODO circle
-      index = @get('recordings').indexOf(@get('currentRecording'))
+      index     = @get('recordings').indexOf(@get('currentRecording'))
       recording = @get('recordings')[index + 1]
 
       @set('currentRecording', recording) if recording
-  }
