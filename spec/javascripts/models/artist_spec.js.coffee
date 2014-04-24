@@ -2,7 +2,7 @@
 
 describe 'Artist', ->
   it 'has name', ->
-    create 'artist', name: 'Bombay Bicycle Club'
+    Factory.create 'artist', name: 'Bombay Bicycle Club'
 
     artist = Factory.find('artist').toArray()[0]
 
