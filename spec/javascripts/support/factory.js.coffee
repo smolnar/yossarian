@@ -39,13 +39,13 @@ class window.Factory.EmberStoreDriver
       record
 
   @associationFor: (parent, child, target) ->
-    relation = Ember.Inflector.inflector.pluralize(target)
+    Ember.run =>
+      relation = Ember.Inflector.inflector.pluralize(target)
 
-    unless parent.get(relation)
-      throw new Error("Did you specify relation hasMany #{relation} in #{parent.constructor.toString()}?")
+      unless parent.get(relation)
+        throw new Error("Did you specify relation hasMany #{relation} in #{parent.constructor.toString()}?")
 
-    parent.get(relation).pushObject(child)
-
+      parent.get(relation).pushObject(child)
 
 class window.Factory.Builder
   @build: (type, attributes, traits) ->
