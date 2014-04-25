@@ -1,0 +1,26 @@
+// general
+
+@mixin color-variant($default-color, $action-color) {
+  color: $default-color;
+
+  &:active, &:focus, &:hover {
+    color: $action-color;
+  }
+}
+
+@mixin background-fill($color) {
+  background-color: $color;
+  fill: $color;
+}
+
+@mixin selection($background) {
+  ::selection {
+    background: $background;
+    text-shadow: none;
+  }
+
+  ::-moz-selection {
+    background: $background;
+    text-shadow: none;
+  }
+}

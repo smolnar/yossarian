@@ -1,67 +1,94 @@
-.container
-  //
-    .hero
-      .row
-        h1
-          | Listen to your festival
+header
+  h1
+    | Listen to your festival
+    small Play more than 2k festivals with more than 4k artists
+  .buttons
+    button.btn.btn-success.btn-lg Join
+    button.btn.btn-primary.btn-lg Play
 
-          br
-          small
-            | Play more than 2 000 festivals with more than 4 000 artists.
+nav.navbar.navbar-reverse role="navigation"
+  ul.nav.navbar-nav.navbar-left
+    li: a href="#" Genre
+    li: a href="#" Europe
 
-  //view Yossarian.MapView id="map" map="smolnar.i17o7mbn" centerBinding="location" eventsBinding="controller.content"
+  form.navbar-form.navbar-right role="search"
+    .form-group
+      .input-group
+        span.input-group-addon: i.fa.fa-search
+        input.form-control type="text" placeholder="Search"
 
-  ul#events-list.row
-    each content
-      view Yossarian.EventView contentBinding="this"
-        collection Yossarian.EventArtistsView contentBinding="artists" tagName="div" class="event-slider"
-          img{bind-attr src=image.image.large.url}
+  ul.nav.navbar-nav.navbar-center
+    li: a href="#": i.fa.fa-step-backward
+    li: a href="#": i.fa.fa-play
+    li: a href="#": i.fa.fa-step-forward
 
-        .info
-          h5.title
-            = title
 
-          .row
-            .medium-12.columns.text-center
+
+
+
+
+
+footer
+
+
+
+
+
+
+
+//
+  .container
+    ul#events-list.row
+      each content
+        view Yossarian.EventView contentBinding="this"
+          collection Yossarian.EventArtistsView contentBinding="artists" tagName="div" class="event-slider"
+            img{bind-attr src=image.image.large.url}
+
+          .info
+            h5.title
+              = title
+
+            .row
+              .medium-12.columns.text-center
+                hr
+                h6
+                  | #{venue_name}, #{venue_city}, #{venue_country}
+                .small
+                | July 24th, 2014 &ndash; July 27, 2014
+                hr
+            .row
+              slice artists limit=3
+                .medium-4.columns
+                  img.artist-thumbnail.img-circle{bind-attr src=image.image.small.url}
+            .row.text-center
               hr
-              h6
-                | #{venue_name}, #{venue_city}, #{venue_country}
-              .small
-              | July 24th, 2014 &ndash; July 27, 2014
-              hr
-          .row
-            slice artists limit=3
-              .medium-4.columns
-                img.artist-thumbnail.img-circle{bind-attr src=image.image.small.url}
-          .row.text-center
-            hr
-            .button.primary.small{action 'play' this} Play
+              .button.primary.small{action 'play' this} Play
 
-    .button{action 'loadMore' } Load more
+      .button{action 'loadMore' } Load more
 
-  if player.currentRecording
-    view Yossarian.PlayerView controllerBinding="player" id="player"
-      if playing
-        .video
-          view Yossarian.YoutubeVideoView url=currentRecording.youtubeUrl controllerBinding="this"
+    if player.currentRecording
+      view Yossarian.PlayerView controllerBinding="player" id="player"
+        if playing
+          .video
+            view Yossarian.YoutubeVideoView url=currentRecording.youtubeUrl controllerBinding="this"
 
-      .row.controls
-        .medium-6.columns
-          .muted Currently playing:
-          p
+        .row.controls
+          .medium-6.columns
+            .muted Currently playing:
+            p
+              if playing
+                | #{currentRecording.artist.name} &ndash; #{currentRecording.track.name}
+              else
+                | Nothing
+
+          ul.row.medium-6.columns.button-group
+            li.button{action 'backward' }
+              i.fa.fa-step-backward
             if playing
-              | #{currentRecording.artist.name} &ndash; #{currentRecording.track.name}
+              li.button{action 'stop'}
+                i.fa.fa-stop
             else
-              | Nothing
-
-        ul.row.medium-6.columns.button-group
-          li.button{action 'backward' }
-            i.fa.fa-step-backward
-          if playing
-            li.button{action 'stop'}
-              i.fa.fa-stop
-          else
-            li.button{action 'play'}
-              i.fa.fa-play
-          li.button{action 'forward'}
-            i.fa.fa-step-forward
+              li.button{action 'play'}
+                i.fa.fa-play
+            li.button{action 'forward'}
+              i.fa.fa-step-forward
