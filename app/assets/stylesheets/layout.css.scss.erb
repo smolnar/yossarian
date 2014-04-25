@@ -26,6 +26,10 @@ html {
   border-right: none;
 
   @media (max-width: $screen-xs-max) { padding: 0 15px }
+
+  &.affix {
+    @extend .navbar-fixed-top;
+  }
 }
 
 .navbar-center {
