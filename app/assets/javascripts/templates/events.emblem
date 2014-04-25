@@ -29,14 +29,14 @@ nav.navbar.navbar-reverse.visible-xs role="navigation" data-affix="true"
     li: a href="#": i.fa.fa-step-forward
 
 nav.navbar.navbar-reverse.visible-xs role="navigation"
-  form.navbar-form.navbar-right role="search"
+  form.navbar-form role="search"
     .form-group
       .input-group
         span.input-group-addon: i.fa.fa-search
         input.form-control type="text" placeholder="Search"
 
 nav.navbar.navbar-reverse.visible-xs role="navigation"
-  ul.nav.navbar-nav.navbar-left
+  ul.nav.navbar-nav
     li: a href="#" Genre
     li: a href="#" Europe
 
