@@ -8,8 +8,8 @@ header
 
 nav.navbar.navbar-reverse.hidden-xs role="navigation" data-affix="true"
   ul.nav.navbar-nav.navbar-left
-    li: a href="#" Genre
-    li: a href="#" Europe
+    li: a href="#" data-target="#genres" data-toggle="collapse" Genres
+    li: a href="#" data-target="#countries" data-toggle="collapse" Countries
 
   form.navbar-form.navbar-right role="search"
     .form-group
@@ -18,9 +18,9 @@ nav.navbar.navbar-reverse.hidden-xs role="navigation" data-affix="true"
         input.form-control type="text" placeholder="Search"
 
   ul.nav.navbar-nav.navbar-center
-    li: a href="#": i.fa.fa-step-backward
-    li: a href="#": i.fa.fa-play
-    li: a href="#": i.fa.fa-step-forward
+    li: a href="#": i.fa.fa-fw.fa-step-backward
+    li: a href="#": i.fa.fa-fw.fa-play
+    li: a href="#": i.fa.fa-fw.fa-step-forward
 
 nav.navbar.navbar-reverse.visible-xs role="navigation" data-affix="true"
   ul.nav.navbar-nav.navbar-center
@@ -40,66 +40,87 @@ nav.navbar.navbar-reverse.visible-xs role="navigation"
     li: a href="#" Genre
     li: a href="#" Europe
 
+
+#genres.bricks.collapse.row
+  .brick: a href="#" Makames
+  .brick: a href="#" Makames
+  .brick: a href="#" Makames
+  .brick: a href="#" Makames
+  .brick: a href="#" Makames
+  .brick: a href="#" Makames
+  .brick: a href="#" Makames
+
+#countries.bricks.collapse.row
+  .brick: a href="#" Makames
+  .brick: a href="#" Makames
+  .brick: a href="#" Makames
+  .brick: a href="#" Makames
+  .brick: a href="#" Makames
+  .brick: a href="#" Makames
+  .brick: a href="#" Makames
+
+
 footer
 
 
-ul#events-list.row
-  each content
-    view Yossarian.EventView contentBinding="this"
-      //collection Yossarian.EventArtistsView contentBinding="artists" tagName="div" class="event-slider"
-        img{bind-attr src=image.image.large.url}
 
-      .info
-        h5.title
-          = title
 
-        .row
-          .medium-12.columns.text-center
-            hr
-            h6
-              | #{venue_name}, #{venue_city}, #{venue_country}
-            .small
-            | July 24th, 2014 &ndash; July 27, 2014
-            hr
-        .row
-          slice artists limit=3
-            .medium-4.columns
-              img.artist-thumbnail.img-circle{bind-attr src=image.image.small.url}
-        .row.text-center
-          hr
-          .button.primary.small{action 'play' this} Play
-
-  .button{action 'loadMore' } Load more
-
-if player.currentRecording
-  view Yossarian.PlayerView controllerBinding="player" id="player"
-    if playing
-      .video
-        view Yossarian.YoutubeVideoView url=currentRecording.youtubeUrl controllerBinding="this"
-
-    .row.controls
-      .medium-6.columns
-        .muted Currently playing:
-        p
-          if playing
-            | #{currentRecording.artist.name} &ndash; #{currentRecording.track.name}
-          else
-            | Nothing
-
-      ul.row.medium-6.columns.button-group
-        li.button{action 'backward' }
-          i.fa.fa-step-backward
-        if playing
-          li.button{action 'stop'}
-            i.fa.fa-stop
-        else
-          li.button{action 'play'}
-            i.fa.fa-play
-        li.button{action 'forward'}
-          i.fa.fa-step-forward
 
 
 
 //
   .container
+    ul#events-list.row
+      each content
+        view Yossarian.EventView contentBinding="this"
+          collection Yossarian.EventArtistsView contentBinding="artists" tagName="div" class="event-slider"
+            img{bind-attr src=image.image.large.url}
 
+          .info
+            h5.title
+              = title
+
+            .row
+              .medium-12.columns.text-center
+                hr
+                h6
+                  | #{venue_name}, #{venue_city}, #{venue_country}
+                .small
+                | July 24th, 2014 &ndash; July 27, 2014
+                hr
+            .row
+              slice artists limit=3
+                .medium-4.columns
+                  img.artist-thumbnail.img-circle{bind-attr src=image.image.small.url}
+            .row.text-center
+              hr
+              .button.primary.small{action 'play' this} Play
+
+      .button{action 'loadMore' } Load more
+
+    if player.currentRecording
+      view Yossarian.PlayerView controllerBinding="player" id="player"
+        if playing
+          .video
+            view Yossarian.YoutubeVideoView url=currentRecording.youtubeUrl controllerBinding="this"
+
+        .row.controls
+          .medium-6.columns
+            .muted Currently playing:
+            p
+              if playing
+                | #{currentRecording.artist.name} &ndash; #{currentRecording.track.name}
+              else
+                | Nothing
+
+          ul.row.medium-6.columns.button-group
+            li.button{action 'backward' }
+              i.fa.fa-step-backward
+            if playing
+              li.button{action 'stop'}
+                i.fa.fa-stop
+            else
+              li.button{action 'play'}
+                i.fa.fa-play
+            li.button{action 'forward'}
+              i.fa.fa-step-forward
