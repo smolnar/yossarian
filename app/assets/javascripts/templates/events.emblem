@@ -43,23 +43,13 @@ nav.navbar.navbar-reverse.visible-xs role="navigation"
 #subbar.bricks-accordion
   .panel
     #genres.bricks.collapse.row
-      .brick.active: a href="#" Makames
-      .brick: a.active href="#" Makames
-      .brick: a href="#" Makames
-      .brick: a href="#" Makames
-      .brick: a href="#" Makames
-      .brick: a href="#" Makames
-      .brick: a href="#" Makames
+      each sortedGenres
+        .brick: a href="#": = this
 
   .panel
     #countries.bricks.collapse.row
-      .brick: a href="#" Makames
-      .brick: a href="#" Makames
-      .brick: a href="#" Makames
-      .brick: a href="#" Makames
-      .brick: a href="#" Makames
-      .brick: a href="#" Makames
-      .brick: a href="#" Makames
+     each sortedCountries
+      .brick: a href="#": = this
 
 footer
 

@@ -44,6 +44,10 @@ class Event < ActiveRecord::Base
     event
   end
 
+  def self.countries
+    Event.select(:venue_country).order(:venue_country).distinct.pluck(:venue_country)
+  end
+
   private
 
   def set_poster

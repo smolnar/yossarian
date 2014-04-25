@@ -29,6 +29,10 @@ class Artist < ActiveRecord::Base
     artist
   end
 
+  def self.tags
+    Artist.select('tags[1]').group('tags[1]').order('count_tags_1 desc').count
+  end
+
   private
 
   def set_image
