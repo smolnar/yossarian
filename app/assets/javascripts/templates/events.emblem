@@ -8,8 +8,8 @@ header
 
 nav.navbar.navbar-reverse role="navigation"
   ul.nav.navbar-nav.navbar-left
-    li: a href="#" Genre
-    li: a href="#" Europe
+    li: a href="#" data-target="#genres" data-toggle="collapse" Genres
+    li: a href="#" data-target="#countries" data-toggle="collapse" Countries
 
   form.navbar-form.navbar-right role="search"
     .form-group
@@ -18,14 +18,27 @@ nav.navbar.navbar-reverse role="navigation"
         input.form-control type="text" placeholder="Search"
 
   ul.nav.navbar-nav.navbar-center
-    li: a href="#": i.fa.fa-step-backward
-    li: a href="#": i.fa.fa-play
-    li: a href="#": i.fa.fa-step-forward
+    li: a href="#": i.fa.fa-fw.fa-step-backward
+    li: a href="#": i.fa.fa-fw.fa-play
+    li: a href="#": i.fa.fa-fw.fa-step-forward
 
+#genres.bricks.collapse.row
+  .brick: a href="#" Makames
+  .brick: a href="#" Makames
+  .brick: a href="#" Makames
+  .brick: a href="#" Makames
+  .brick: a href="#" Makames
+  .brick: a href="#" Makames
+  .brick: a href="#" Makames
 
-
-
-
+#countries.bricks.collapse.row
+  .brick: a href="#" Makames
+  .brick: a href="#" Makames
+  .brick: a href="#" Makames
+  .brick: a href="#" Makames
+  .brick: a href="#" Makames
+  .brick: a href="#" Makames
+  .brick: a href="#" Makames
 
 
 footer

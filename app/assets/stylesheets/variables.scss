@@ -5,7 +5,12 @@ $icon-font-name: 'fontawesome-webfont';
 
 // links
 
-$link-hover-color: $link-color;
+$link-color: $gray-light;
+$link-hover-color: $text-color;
+
+// inputs
+
+$input-border-focus: $text-color;
 
 // jumbotron
 

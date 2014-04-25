@@ -7,14 +7,20 @@ html {
   overflow-y: scroll;
 }
 
-// text
+// links
 
-.text-muted a, a.text-muted {
-  @include color-variant(darken($text-muted, 12.5%), darken($text-muted, 25%));
+a {
+  text-decoration: none !important;
 }
 
-.text-undecorated {
-  text-decoration: none !important;
+.active > a, a.active {
+  text-decoration: underline;
+}
+
+// text
+
+.text-muted > a, a.text-muted {
+  @include color-variant(darken($text-muted, 12.5%), darken($text-muted, 25%));
 }
 
 // navigation
@@ -32,16 +38,39 @@ html {
   @include center-block;
 
   float: none;
+  width: 3 * 48px;
 }
 
 .navbar-reverse {
   background: $gray-lighter;
 
+  a {
+    @include color-variant($link-color, $link-hover-color);
+  }
+
   .input-group-addon {
     border-right: none;
 
     background: $input-bg;
-    color: $input-color-placeholder;
+    color: $gray-light;
+  }
+}
+
+// bricks
+
+.bricks {
+  .brick {
+    @extend .col-xs-6;
+    @extend .col-sm-4;
+    @extend .col-md-3;
+    @extend .col-lg-2;
+
+    a {
+      display: block;
+
+      padding: 15px;
+      height: $navbar-height;
+    }
   }
 }
 
