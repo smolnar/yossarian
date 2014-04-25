@@ -13,6 +13,14 @@
   fill: $color;
 }
 
+@mixin background-variant($default-background, $action-background) {
+  background: $default-background;
+
+  &:active, &:focus, &:hover {
+    background: $action-background;
+  }
+}
+
 @mixin selection($background) {
   ::selection {
     background: $background;

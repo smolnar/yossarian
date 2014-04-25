@@ -14,7 +14,7 @@ a {
 }
 
 .active > a, a.active {
-  text-decoration: underline;
+  text-decoration: underline !important;
 }
 
 // text
@@ -63,6 +63,8 @@ a {
 // bricks
 
 .bricks {
+  background: lighten($gray-lighter, 5%);
+
   .brick {
     @extend .col-xs-6;
     @extend .col-sm-4;
@@ -74,6 +76,8 @@ a {
 
       padding: 15px;
       height: $navbar-height;
+
+      @include background-variant(transparent, lighten($gray-lighter, 2.5%));
     }
   }
 }
