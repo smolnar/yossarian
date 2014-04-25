@@ -62,34 +62,34 @@ nav.navbar.navbar-reverse.visible-xs role="navigation"
 
 footer
 
-ul#events-list.row
-  each content
-    view Yossarian.EventView contentBinding="this"
-      collection Yossarian.EventArtistsView contentBinding="artists" tagName="div" class="event-slider"
-        img{bind-attr src=image.image.large.url}
+.container
+  ul#events-list.row
+    each content
+      view Yossarian.EventView contentBinding="this"
+        collection Yossarian.EventArtistsView contentBinding="artists" tagName="div" class="event-slider"
+          img{bind-attr src=image.image.large.url}
 
-      .info
-        h5.title
-          = title
+        .info
+          h5.title
+            = title
 
-        .row
-          .medium-12.columns.text-center
+          .row
+            .medium-12.columns.text-center
+              hr
+              h6
+                | #{venue_name}, #{venue_city}, #{venue_country}
+              .small
+              | July 24th, 2014 &ndash; July 27, 2014
+              hr
+          .row
+            slice artists limit=3
+              .medium-4.columns
+                img.artist-thumbnail.img-circle{bind-attr src=image.image.small.url}
+          .row.text-center
             hr
-            h6
-              | #{venue_name}, #{venue_city}, #{venue_country}
-            .small
-            | July 24th, 2014 &ndash; July 27, 2014
-            hr
-        .row
-          slice artists limit=3
-            .medium-4.columns
-              img.artist-thumbnail.img-circle{bind-attr src=image.image.small.url}
-        .row.text-center
-          hr
-          .button.primary.small{action 'play' this} Play
+            .button.primary.small{action 'play' this} Play
 
-  .button{action 'loadMore' } Load more
-
+    .button{action 'loadMore' } Load more
 
 //
   .container
