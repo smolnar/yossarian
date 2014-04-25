@@ -42,8 +42,8 @@ nav.navbar.navbar-reverse.visible-xs role="navigation"
 
 
 #genres.bricks.collapse.row
-  .brick: a href="#" Makames
-  .brick: a href="#" Makames
+  .brick.active: a href="#" Makames
+  .brick: a.active href="#" Makames
   .brick: a href="#" Makames
   .brick: a href="#" Makames
   .brick: a href="#" Makames
