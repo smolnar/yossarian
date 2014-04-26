@@ -1,15 +1,19 @@
-header
-  h1
-    | Listen to your festival
-    small Play more than 2k festivals with more than 4k artists
-  .buttons
-    button.btn.btn-success.btn-lg Join
-    button.btn.btn-primary.btn-lg Play
+if player.playing
+  .video-header
+    view Yossarian.YoutubeVideoView url=player.currentRecording.youtubeUrl controllerBinding="player"
+else
+  header
+    h1
+      | Listen to your festival
+      small Play more than 2k festivals with more than 4k artists
+    .buttons
+      button.btn.btn-success.btn-lg Join
+      button.btn.btn-primary.btn-lg Play
 
 nav.navbar.navbar-reverse.hidden-xs role="navigation" data-affix="true"
   ul.nav.navbar-nav.navbar-left
-    li: a href="#" data-parent="#subbar" data-target="#genres" data-toggle="collapse" Genres
-    li: a href="#" data-parent="#subbar" data-target="#countries" data-toggle="collapse" Countries
+    li: a data-parent="#subbar" data-target="#genres" data-toggle="collapse" Genres
+    li: a data-parent="#subbar" data-target="#countries" data-toggle="collapse" Countries
 
   form.navbar-form.navbar-right role="search"
     .form-group
@@ -17,16 +21,36 @@ nav.navbar.navbar-reverse.hidden-xs role="navigation" data-affix="true"
         span.input-group-addon: i.fa.fa-search
         input.form-control type="text" placeholder="Search"
 
-  ul.nav.navbar-nav.navbar-center
-    li: a href="#": i.fa.fa-fw.fa-step-backward
-    li: a href="#": i.fa.fa-fw.fa-play
-    li: a href="#": i.fa.fa-fw.fa-step-forward
+  if player.currentRecording
+    view Yossarian.PlayerView controllerBinding="player"
+      li: a{action 'backward' }
+        i.fa.fa-step-backward
+      if playing
+        li: a{action 'stop'}
+          i.fa.fa-stop
+      else
+        li: a{action 'play'}
+          i.fa.fa-play
+      li: a{action 'forward'}
+        i.fa.fa-step-forward
+
+      //li: p.text-center #{currentRecording.artist.name} &ndash; #{currentRecording.track.name}
 
 nav.navbar.navbar-reverse.visible-xs role="navigation" data-affix="true"
-  ul.nav.navbar-nav.navbar-center
-    li: a href="#": i.fa.fa-step-backward
-    li: a href="#": i.fa.fa-play
-    li: a href="#": i.fa.fa-step-forward
+  if player.currentRecording
+    view Yossarian.PlayerView controllerBinding="player"
+      li: a{action 'backward' }
+        i.fa.fa-step-backward
+      if playing
+        li: a{action 'stop'}
+          i.fa.fa-stop
+      else
+        li: a{action 'play'}
+          i.fa.fa-play
+      li: a{action 'forward'}
+        i.fa.fa-step-forward
+
+      //li: p.text-center #{currentRecording.artist.name} &ndash; #{currentRecording.track.name}
 
 nav.navbar.navbar-reverse.visible-xs role="navigation"
   form.navbar-form role="search"
@@ -37,19 +61,19 @@ nav.navbar.navbar-reverse.visible-xs role="navigation"
 
 nav.navbar.navbar-reverse.visible-xs role="navigation"
   ul.nav.navbar-nav.navbar-left
-    li: a href="#" data-parent="#subbar" data-target="#genres" data-toggle="collapse" Genres
-    li: a href="#" data-parent="#subbar" data-target="#countries" data-toggle="collapse" Countries
+    li: a data-parent="#subbar" data-target="#genres" data-toggle="collapse" Genres
+    li: a data-parent="#subbar" data-target="#countries" data-toggle="collapse" Countries
 
 #subbar.bricks-accordion
   .panel
     #genres.bricks.collapse.row
       each sortedGenres
-        .brick: a href="#": = this
+        .brick: a: = this
 
   .panel
     #countries.bricks.collapse.row
      each sortedCountries
-      .brick: a href="#": = this
+      .brick: a: = this
 
 footer
 
@@ -58,7 +82,7 @@ footer
     each content
       view Yossarian.EventView contentBinding="this"
         collection Yossarian.EventArtistsView contentBinding="artists" tagName="div" class="event-slider"
-          img{bind-attr src=image.image.large.url}
+          //img{bind-attr src=image.image.large.url}
 
         .info
           h5.title
@@ -81,32 +105,3 @@ footer
             .button.primary.small{action 'play' this} Play
 
     .button{action 'loadMore' } Load more
-
-//
-  .container
-    if player.currentRecording
-      view Yossarian.PlayerView controllerBinding="player" id="player"
-        if playing
-          .video
-            view Yossarian.YoutubeVideoView url=currentRecording.youtubeUrl controllerBinding="this"
-
-        .row.controls
-          .medium-6.columns
-            .muted Currently playing:
-            p
-              if playing
-                | #{currentRecording.artist.name} &ndash; #{currentRecording.track.name}
-              else
-                | Nothing
-
-          ul.row.medium-6.columns.button-group
-            li.button{action 'backward' }
-              i.fa.fa-step-backward
-            if playing
-              li.button{action 'stop'}
-                i.fa.fa-stop
-            else
-              li.button{action 'play'}
-                i.fa.fa-play
-            li.button{action 'forward'}
-              i.fa.fa-step-forward
