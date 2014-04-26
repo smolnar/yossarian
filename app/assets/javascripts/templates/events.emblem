@@ -78,11 +78,11 @@ nav.navbar.navbar-reverse.visible-xs role="navigation"
 footer
 
 .container
-  ul#events-list.row
+  ul.row
     each content
       view Yossarian.EventView contentBinding="this"
         collection Yossarian.EventArtistsView contentBinding="artists" tagName="div" class="event-slider"
-          //img{bind-attr src=image.image.large.url}
+          img{bind-attr src=image.image.large.url}
 
         .info
           h5.title
