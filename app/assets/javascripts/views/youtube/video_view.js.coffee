@@ -15,7 +15,8 @@ Yossarian.YoutubeVideoView = Ember.View.extend
       width: parseInt(@$().parent().css('width'))
       playerVars:
           autoplay: 1
-          controls: 0
+          autohide: 1
+          controls: 1
           iv_load_policy: 3
       events:
         onReady: => @setUrl()

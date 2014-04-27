@@ -1,5 +1,5 @@
 if player.playing
-  .video-header
+  header.video
     view Yossarian.YoutubeVideoView url=player.currentRecording.youtubeUrl controllerBinding="player"
 else
   header
@@ -7,8 +7,12 @@ else
       | Listen to your festival
       small Play more than 2k festivals with more than 4k artists
     .buttons
-      button.btn.btn-success.btn-lg Join
-      button.btn.btn-primary.btn-lg Play
+      button.btn.btn-success.btn-lg
+        | Join &nbsp;
+        i.fa.fa-rocket
+      button.btn.btn-primary.btn-lg
+        | Play &nbsp;
+        i.fa.fa-play
 
 nav.navbar.navbar-reverse.hidden-xs role="navigation" data-affix="true"
   ul.nav.navbar-nav.navbar-left
@@ -78,30 +82,31 @@ nav.navbar.navbar-reverse.visible-xs role="navigation"
 footer
 
 .container
-  ul.row
+  ul#events-list.row
     each content
-      view Yossarian.EventView contentBinding="this"
+      view Yossarian.EventView contentBinding="this" class="col-md-4"
         collection Yossarian.EventArtistsView contentBinding="artists" tagName="div" class="event-slider"
           img{bind-attr src=image.image.large.url}
 
         .info
-          h5.title
-            = title
+          h3.text-center.title: = title
 
           .row
-            .medium-12.columns.text-center
+            .col-md-12.text-center
               hr
-              h6
+              h4
                 | #{venue_name}, #{venue_city}, #{venue_country}
-              .small
-              | July 24th, 2014 &ndash; July 27, 2014
+
+              h5.text-muted  July 24th, 2014 &ndash; July 27, 2014
               hr
           .row
             slice artists limit=3
-              .medium-4.columns
+              .col-md-4.text-center
                 img.artist-thumbnail.img-circle{bind-attr src=image.image.small.url}
           .row.text-center
             hr
-            .button.primary.small{action 'play' this} Play
+            button.btn.btn-primary.btn-lg{action 'play' this}: i.fa.fa-play &nbsp; Play
 
-    .button{action 'loadMore' } Load more
+  .row
+    .col-md-12.text-center
+      button.btn.btn-default.btn-lg{action 'loadMore' } Load more
