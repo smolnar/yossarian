@@ -8,7 +8,7 @@ module API
         .where.not(events: { id: Array.wrap(params[:except]) })
         .references(:recordings, :artists)
         .order(performances_count: :desc)
-        .limit(6)
+        .limit(12)
 
       if params[:countries].present?
         @events = @events.in(params[:countries])
