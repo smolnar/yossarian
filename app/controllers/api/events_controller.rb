@@ -10,6 +10,8 @@ module API
         .order(performances_count: :desc)
         .limit(6)
 
+      @events = @events.where(events: { venue_country: params[:countries] }) if params[:countries].present?
+
       respond_to do |format|
         format.json { render json: @events }
       end
