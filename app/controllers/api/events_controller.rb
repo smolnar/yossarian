@@ -9,6 +9,15 @@ module API
         .references(:recordings, :artists)
         .order(performances_count: :desc)
         .limit(6)
+        .uniq
+
+      if params[:countries].present?
+        @events = @events.in(params[:countries])
+      end
+
+      if params[:tags].present?
+        @events = @events.with(params[:tags])
+      end
 
       respond_to do |format|
         format.json { render json: @events }

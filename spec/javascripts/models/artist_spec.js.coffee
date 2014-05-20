@@ -2,8 +2,6 @@
 
 describe 'Artist', ->
   it 'has name', ->
-    Factory.create 'artist', name: 'Bombay Bicycle Club'
-
-    artist = Factory.find('artist').toArray()[0]
+    artist = create 'artist', name: 'Bombay Bicycle Club'
 
     expect(artist.get('name')).to.eql('Bombay Bicycle Club')

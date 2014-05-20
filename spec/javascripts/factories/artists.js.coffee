@@ -1,2 +1,2 @@
-Factory.define 'artist', (f) ->
+RogueGirl.define 'artist', (f) ->
   @sequence 'name', (n) -> "Artist ##{n}"

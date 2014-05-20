@@ -5,17 +5,17 @@ describe 'EventsController', ->
     @events     = []
     @controller = Yossarian.EventsController.create()
 
-    3.times => @events.push Factory.create('event')
+    3.times => @events.push create('event')
 
     @events.forEach (event) ->
-      Ember.run => 2.times -> event.get('artists').pushObject(Factory.create('artist'))
+      2.times -> event.get('artists').pushObject(create('artist'))
 
     @controller.set('content', @events)
 
   describe 'actions', ->
-    describe 'play', ->
+    describe '+play', ->
       it 'starts player with event artists', ->
-        Ember.run => @controller.send('play', @events[0])
+        @controller.send('play', @events[0])
 
         player  = @controller.get('player')
         artists = @events[0].get('artists')

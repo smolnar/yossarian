@@ -1,2 +1,2 @@
-Factory.define 'track', (f) ->
+RogueGirl.define 'track', (f) ->
   @sequence 'name', (n) -> "Track ##{n}"

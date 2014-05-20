@@ -3,9 +3,9 @@
 describe 'PlayerController', ->
   beforeEach ->
     @artists = [
-      Factory.create('artist'),
-      Factory.create('artist')
-      Factory.create('artist')
+      create('artist'),
+      create('artist')
+      create('artist')
     ]
 
     @recordings = []
@@ -13,7 +13,7 @@ describe 'PlayerController', ->
 
     @artists.forEach (artist) =>
       3.times =>
-        recording = Factory.create('recording', artist: artist)
+        recording = create('recording', artist: artist)
 
         @recordings.push(recording)
 
@@ -47,19 +47,19 @@ describe 'PlayerController', ->
       expect(@controller.get('currentState')).to.eql(@controller.get('states.playing'))
 
   describe 'actions', ->
-    describe 'play', ->
+    describe '+play', ->
       it 'sets current state to playing', ->
         @controller.send('play')
 
         expect(@controller.get('currentState')).to.eql(@controller.get('states.playing'))
 
-    describe 'stop', ->
+    describe '+stop', ->
       it 'sets the current state to stop', ->
         @controller.send('stop')
 
         expect(@controller.get('currentState')).to.eql(@controller.get('states.stopped'))
 
-    describe 'backward', ->
+    describe '+backward', ->
       it 'sets current recording to previous one', ->
         recordings = @controller.get('recordings')
 
@@ -72,8 +72,7 @@ describe 'PlayerController', ->
       context 'when the recording is the first one', ->
         it 'reloads recordings and sets the first one'
 
-
-    describe 'forward', ->
+    describe '+forward', ->
       it 'sets the current recording to next one', ->
         recordings = @controller.get('recordings')
 
@@ -87,7 +86,7 @@ describe 'PlayerController', ->
         it 'reloads recordings and sets the first one'
 
   describe 'observers', ->
-    describe 'artistsDidChange', ->
+    describe '+artistsDidChange', ->
       context 'when artists change', ->
         it 'sets currentRecording to null', ->
           @controller.set('currentRecording', @recordings[0])
@@ -98,7 +97,7 @@ describe 'PlayerController', ->
 
           expect(@controller.get('currentRecording')).to.be.a('null')
 
-    describe 'currentStateDidChange', ->
+    describe '+currentStateDidChange', ->
       context 'when current state changes to stopped', ->
         it 'sets current recording to null', ->
           @controller.play()
