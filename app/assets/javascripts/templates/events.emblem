@@ -52,7 +52,7 @@ else
 #events.events
   each content
     view Yossarian.EventView contentBinding="this"
-      collection Yossarian.EventArtistsView contentBinding="artists" tagName="div" class="event-slider"
+      collection Yossarian.EventArtistsView artistsBinding="artists" tagName="div" class="event-slider"
         img{bind-attr src=image.image.large.url}
 
       .info

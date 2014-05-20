@@ -1,6 +1,12 @@
 Yossarian.EventArtistsView = Ember.CollectionView.extend
   tagName: 'div'
   content: []
+  artists: []
+  attributeBindings: ['artists']
+
+  contentDidChange: (->
+    @set('content', @get('artists')[0..2])
+  ).observes('artists').on('init')
 
   didInsertElement: ->
     $(document).ready =>
