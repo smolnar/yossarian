@@ -1,0 +1,92 @@
+// navigation
+
+.navbar {
+  margin: 0;
+  padding: 0 $navbar-padding-horizontal;
+  border: none;
+
+  &.affix {
+    @extend .navbar-fixed-top;
+  }
+
+  .search {
+    position: relative;
+    display: inline-block;
+
+    input {
+      padding-left: 30px;
+    }
+
+    i {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      color: $input-border;
+    }
+  }
+}
+
+.navbar-inverse {
+  background: rgba($navbar-inverse-bg, .25);
+}
+
+.navbar-reverse {
+  background: $gray-lighter;
+
+  a {
+    @include color-variant($link-color, $link-hover-color);
+  }
+}
+
+.navbar-center {
+  @include center-block;
+
+  float: none;
+  width: 3 * 48px;
+}
+
+.navbar-right {
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.navbar-brand {
+  font-family: $font-family-brand;
+  font-size: 25px;
+}
+
+.navbar-text {
+  max-width: 50%;
+  margin: $navbar-padding-vertical $navbar-padding-horizontal !important;
+
+  direction: ltr;
+  text-align: right;
+
+  @include text-overflow;
+}
+
+// bricks
+
+.bricks-accordion {
+  .panel {
+    margin-bottom: 0px;
+    border: none;
+  }
+}
+
+.bricks {
+  .brick {
+    @extend .col-xs-6;
+    @extend .col-sm-4;
+    @extend .col-md-3;
+    @extend .col-lg-2;
+
+    a {
+      display: block;
+      padding: $navbar-padding-vertical ($navbar-padding-horizontal + 15px);
+
+      text-transform:capitalize;
+    }
+  }
+}

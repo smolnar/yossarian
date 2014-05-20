@@ -1,0 +1,81 @@
+// general
+
+* {
+  outline: none !important;
+}
+
+.btn, .dropdown-menu, .modal-content, .well,
+button, input, select, textarea {
+  box-shadow: none !important;
+}
+
+address, form, nav, p, dl, ol, ul, table {
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+a {
+  cursor: pointer !important;
+}
+
+// icons
+
+.fa {
+  font-size: $font-size-icon;
+
+  cursor: default !important;
+}
+
+a .fa {
+  cursor: pointer !important;
+}
+
+.fa-blank {
+  display: none;
+}
+
+// links
+
+a {
+  text-decoration: none !important;
+}
+
+.active > a, a.active {
+  text-decoration: underline !important;
+}
+
+// lists
+
+.list-center {
+  float: left;
+  left: 50%;
+  position: relative;
+
+  text-align: center;
+
+  > ul {
+    @extend .list-unstyled;
+    float: left;
+    left: -50%;
+    position: relative;
+
+    margin: 0;
+
+    & > li {
+      float: left;
+    }
+  }
+}
+
+// modals
+
+.modal-dialog {
+  color: $text-color !important;
+}
+
+// text
+
+.text-muted > a, a.text-muted {
+  @include color-variant(darken($text-muted, 12.5%), darken($text-muted, 25%));
+}

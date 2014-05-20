@@ -7,113 +7,6 @@ html {
   overflow-y: scroll;
 }
 
-// links
-
-a {
-  text-decoration: none !important;
-}
-
-.active > a, a.active {
-  text-decoration: underline !important;
-}
-
-// lists
-
-.list-center {
-  float: left;
-  left: 50%;
-  position: relative;
-
-  text-align: center;
-
-  > ul {
-    @extend .list-unstyled;
-    float: left;
-    left: -50%;
-    position: relative;
-
-    margin: 0;
-
-    & > li {
-      float: left;
-    }
-  }
-}
-
-// text
-
-.text-muted > a, a.text-muted {
-  @include color-variant(darken($text-muted, 12.5%), darken($text-muted, 25%));
-}
-
-// navigation
-
-.navbar {
-  margin: 0;
-  padding: 0 $navbar-padding-horizontal;
-  border: none;
-
-  &.affix {
-    @extend .navbar-fixed-top;
-  }
-
-  .search {
-    position: relative;
-    display: inline-block;
-
-    input {
-      padding-left: 30px;
-    }
-
-    i {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      color: $gray-light;
-    }
-  }
-}
-
-.navbar-inverse {
-  background: rgba($navbar-inverse-bg, .25);
-}
-
-.navbar-reverse {
-  background: $gray-lighter;
-
-  a {
-    @include color-variant($link-color, $link-hover-color);
-  }
-}
-
-.navbar-center {
-  @include center-block;
-
-  float: none;
-  width: 3 * 48px;
-}
-
-.navbar-right {
-  &:last-child {
-    margin-right: 0;
-  }
-}
-
-.navbar-brand {
-  font-family: $font-family-brand;
-  font-size: 25px;
-}
-
-.navbar-text {
-  max-width: 50%;
-  margin: $navbar-padding-vertical $navbar-padding-horizontal !important;
-
-  direction: ltr;
-  text-align: right;
-
-  @include text-overflow;
-}
-
 // header
 
 header {
@@ -170,89 +63,6 @@ header {
   }
 }
 
-// bricks
-
-.bricks-accordion {
-  .panel {
-    margin-bottom: 0px;
-    border: none;
-  }
-}
-
-.bricks {
-  .brick {
-    @extend .col-xs-6;
-    @extend .col-sm-4;
-    @extend .col-md-3;
-    @extend .col-lg-2;
-
-    a {
-      display: block;
-      padding: $navbar-padding-vertical ($navbar-padding-horizontal + 15px);
-
-      text-transform:capitalize;
-    }
-  }
-}
-
-// events
-
-.events {
-  .event {
-    @extend .col-xs-12;
-    @extend .col-sm-6;
-    @extend .col-md-4;
-    @extend .col-lg-3;
-  }
-
-  .info {
-    position: absolute;
-    top: 0px;
-    width: 100%;
-    height: $navbar-height;
-
-    @include opacity(0.8);
-    @include text-overflow;
-
-    background-color: $gray-lighter;
-
-    text-align: center;
-
-    &.active {
-      @include transition(all .3s);
-      @include opacity(0.9);
-
-      height: 100%;
-    }
-
-    img {
-      height: 80px;
-    }
-
-    button {
-      span {
-        margin-left: $padding-xs-horizontal;
-      }
-    }
-
-    z-index: $zindex-modal-background - 5;
-  }
-}
-
-.btn-more {
-  @include clearfix;
-  @extend .btn-block;
-
-  height: $navbar-height;
-  margin: 0;
-  padding: 0;
-  border: none;
-
-  background: $gray-lighter;
-
-  @include color-variant($link-color, $link-hover-color);
-}
-
 // footer
 
 footer {
@@ -285,7 +95,7 @@ footer {
   hr {
     @include clearfix;
 
-    margin: 25px 0 0 0;
+    margin: 30px 0 0 0;
     border: none;
   }
 }

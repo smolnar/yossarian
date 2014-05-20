@@ -1,0 +1,57 @@
+// events
+
+.events {
+  .event {
+    @extend .col-xs-12;
+    @extend .col-sm-6;
+    @extend .col-md-4;
+    @extend .col-lg-3;
+  }
+
+  .info {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    height: $navbar-height;
+
+    @include opacity(0.8);
+    @include text-overflow;
+
+    background-color: $gray-lighter;
+
+    text-align: center;
+
+    &.active {
+      @include transition(all .3s);
+      @include opacity(0.9);
+
+      height: 100%;
+    }
+
+    img {
+      height: 80px;
+    }
+
+    button {
+      span {
+        margin-left: $padding-xs-horizontal;
+      }
+    }
+
+    z-index: $zindex-navbar - 10;
+  }
+}
+
+.btn-more {
+  @include clearfix;
+  @extend .btn-block;
+
+  height: $navbar-height;
+  margin: 0;
+  padding: 0;
+  border: none;
+
+  background: $gray-lightest;
+
+  @include color-variant($link-color, $link-hover-color);
+}
