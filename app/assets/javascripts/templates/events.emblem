@@ -56,7 +56,7 @@ else
         img{bind-attr src=image.image.large.url}
 
       .info
-        h2: = title
+        h2.title: = title
 
         .venue
           | #{venue_name} &middot; #{venue_city} &middot; #{venue_country}
@@ -68,9 +68,8 @@ else
             .artist
               img.img-circle.img-responsive{bind-attr src=image.image.small.url}
 
-        button.btn.btn-primary.btn-lg{action 'play' this}
+        button.btn.btn-primary{action 'play' this}
           i.fa.fa-play
-          span Play
 
 button.btn.btn-more{action 'loadMore'} More
 
