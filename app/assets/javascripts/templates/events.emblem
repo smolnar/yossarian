@@ -56,23 +56,23 @@ else
         img{bind-attr src=image.image.large.url}
 
       .info
-        h3: = title
+        h2: = title
 
-        h4
+        .venue
           | #{venue_name} &middot; #{venue_city} &middot; #{venue_country}
 
-        h5.text-muted July 24th, 2014 &ndash; July 27, 2014
+        .date July 24th, 2014 &ndash; July 27, 2014
 
-        .row
+        .artists
           slice artists limit=3
-            .col-xs-4
-              img.img-circle{bind-attr src=image.image.small.url}
+            .artist
+              img.img-circle.img-responsive{bind-attr src=image.image.small.url}
 
         button.btn.btn-primary.btn-lg{action 'play' this}
           i.fa.fa-play
           span Play
 
-button.btn.btn-more{action 'loadMore' } More
+button.btn.btn-more{action 'loadMore'} More
 
 footer
   .list-center

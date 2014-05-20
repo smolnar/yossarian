@@ -27,9 +27,31 @@
 
       height: 100%;
     }
+    height: 100%;
 
-    img {
-      height: 80px;
+    h2 {
+
+    }
+
+    .venue {
+      font-size: $font-size-h3;
+    }
+
+    .date {
+      font-size: $font-size-h4;
+      color: $text-muted;
+    }
+
+    .artists {
+      @extend .row;
+
+      .artist {
+        @extend .col-xs-4;
+
+        img {
+          height: 80px;
+        }
+      }
     }
 
     button {
