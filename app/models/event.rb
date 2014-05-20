@@ -17,9 +17,7 @@ class Event < ActiveRecord::Base
   mount_uploader :poster, PosterUploader
 
   scope :in, lambda { |countries| where(events: { venue_country: countries }) }
-  scope :with, lambda { |tags|
-    joins(:artists).where(tags.map { |name| '? = ANY(artists.tags)' }.join(' OR '), *tags).uniq
-  }
+  scope :with, lambda { |tags| joins(:artists).where(tags.map { |name| '? = ANY(artists.tags)' }.join(' OR '), *tags).uniq }
 
   before_validation :set_poster
 
@@ -51,10 +49,6 @@ class Event < ActiveRecord::Base
   def set_poster
     return if poster.file.try(:exists?)
 
-    self.poster = DownloaderService.fetch([
-      lastfm_image_extralarge,
-      lastfm_image_medium,
-      lastfm_image_small
-    ].compact)
+    self.poster = DownloaderService.fetch([lastfm_image_extralarge, lastfm_image_medium, lastfm_image_small].compact)
   end
 end
