@@ -14,14 +14,17 @@ class Event < ActiveRecord::Base
 
   mount_uploader :poster, PosterUploader
 
+  scope :in, lambda { |countries| where(events: { venue_country: countries }) }
+  scope :with, lambda { |tags| where(tags.map { |name| '? = ANY(artists.tags)' }.join(' OR '), *tags) }
+
   before_validation :set_poster
 
-  after_validation :reverse_geocode unless Rails.env.development?
-
-  reverse_geocoded_by :venue_latitude, :venue_longitude do |record, results|
-    if data = results.first
-      record.venue_city    = data.city unless record.venue_city.present?
-      record.venue_country = data.country unless record.venue_country.present?
+  unless Rails.env.test?
+    reverse_geocoded_by :venue_latitude, :venue_longitude do |record, results|
+      if data = results.first
+        record.venue_city    = data.city unless record.venue_city.present?
+        record.venue_country = data.country unless record.venue_country.present?
+      end
     end
   end
 

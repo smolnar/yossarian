@@ -9,15 +9,14 @@ module API
         .references(:recordings, :artists)
         .order(performances_count: :desc)
         .limit(6)
+        .uniq
 
       if params[:countries].present?
-        @events = @events.where(events: { venue_country: params[:countries] })
+        @events = @events.in(params[:countries])
       end
 
       if params[:tags].present?
-        query = params[:tags].map { |name| '? = ANY(artists.tags)' }
-
-        @events = @events.where(query.join(' OR '), *params[:tags])
+        @events = @events.with(params[:tags])
       end
 
       respond_to do |format|
