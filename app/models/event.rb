@@ -1,4 +1,6 @@
 class Event < ActiveRecord::Base
+  include Event::Geocoding
+
   validates :title,           presence: true
   validates :venue_longitude, presence: true
   validates :venue_latitude,  presence: true
@@ -15,18 +17,11 @@ class Event < ActiveRecord::Base
   mount_uploader :poster, PosterUploader
 
   scope :in, lambda { |countries| where(events: { venue_country: countries }) }
-  scope :with, lambda { |tags| where(tags.map { |name| '? = ANY(artists.tags)' }.join(' OR '), *tags) }
+  scope :with, lambda { |tags|
+    joins(:artists).where(tags.map { |name| '? = ANY(artists.tags)' }.join(' OR '), *tags).uniq
+  }
 
   before_validation :set_poster
-
-  unless Rails.env.test?
-    reverse_geocoded_by :venue_latitude, :venue_longitude do |record, results|
-      if data = results.first
-        record.venue_city    = data.city unless record.venue_city.present?
-        record.venue_country = data.country unless record.venue_country.present?
-      end
-    end
-  end
 
   def self.create_from_lastfm(data)
     data  = data.symbolize_keys
