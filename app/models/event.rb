@@ -7,7 +7,7 @@ class Event < ActiveRecord::Base
   validates :starts_at,       presence: true
   validates :poster,          presence: true
 
-  has_many :performances
+  has_many :performances, -> { order(id: :asc) }
   has_many :artists, through: :performances
   has_many :headliners, -> { where(performances: { headliner: true }) }, through: :performances, source: :artist
 
