@@ -28,7 +28,7 @@ else
       button.btn.btn-success.btn-lg Join
       button.btn.btn-primary.btn-lg Play
 
-  nav.navbar.navbar-reverse role="navigation"
+  nav.navbar.navbar-default role="navigation"
     ul.nav.navbar-nav.navbar-left
       li: a data-parent="#subbar" data-target="#genres" data-toggle="collapse" Genres
       li: a data-parent="#subbar" data-target="#countries" data-toggle="collapse" Countries
@@ -65,12 +65,12 @@ else
 
         .row
           slice artists limit=3
-            .col-md-4
+            .col-xs-4
               img.img-circle{bind-attr src=image.image.small.url}
-        .row
-          button.btn.btn-primary.btn-lg{action 'play' this}
-            i.fa.fa-play
-            span Play
+
+        button.btn.btn-primary.btn-lg{action 'play' this}
+          i.fa.fa-play
+          span Play
 
 button.btn.btn-more{action 'loadMore' } More
 

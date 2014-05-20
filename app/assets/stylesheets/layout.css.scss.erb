@@ -42,7 +42,7 @@ header {
     margin: 20px 0;
     padding: 20px;
 
-    background: rgba($jumbotron-bg, .05);
+    background: rgba($gray-darkest, .05);
 
     small {
       display: block;
@@ -72,13 +72,11 @@ footer {
   padding: $navbar-height 0;
   overflow-x: hidden;
 
-  background: $gray-lighter;
-  color: $text-muted;
+  background: $gray-darker;
+  color: $gray;
   text-align: center;
 
-  a {
-    @include color-variant($link-color, $link-hover-color);
-  }
+  a { @include color-variant($gray, $gray-light) }
 
   li a, li span {
     margin: 0 $padding-xs-horizontal;
