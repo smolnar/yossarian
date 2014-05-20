@@ -17,15 +17,61 @@ describe Event do
     expect(event.poster.file).not_to be_nil
   end
 
+  describe '.in' do
+    before :each do
+      create :event, venue_country: 'Slovakia'
+
+      3.times { create :event, venue_country: 'Poland' }
+
+      create :event, venue_country: 'Bogus'
+    end
+
+    it 'returns events in specific countries' do
+      events = Event.in(['Slovakia', 'Poland'])
+
+      expect(events.size).to eql(4)
+      expect(events.pluck(:venue_country).uniq.sort).to eql(['Poland', 'Slovakia'])
+    end
+  end
+
+  describe '.with' do
+    let(:events) { 3.times.map { create :event }}
+    let(:artists) { 3.times.map { create :artist }}
+
+    before :each do
+      artists[0].update_attributes(tags: ['rock'])
+      artists[1].update_attributes(tags: ['rock', 'pop'])
+      artists[2].update_attributes(tags: ['dubstep'])
+
+      artists.each_with_index do |artist, index|
+        create :performance, artist: artist, event: events[index]
+      end
+    end
+
+    it 'returns events having artist tag' do
+      other = Event.with(['rock'])
+
+      expect(other.size).to eql(2)
+      expect(other.to_a.sort).to eql([events[0], events[1]].sort)
+    end
+
+    it 'returns events having multiple tags' do
+      other = Event.with(['pop', 'dubstep'])
+
+      expect(other.size).to eql(2)
+      expect(other.to_a.sort).to eql([events[1], events[2]].sort)
+    end
+  end
+
   describe '.create_from_lastfm' do
     let(:data) {
       {
-        lastfm_uuid:            "3705233",
-        title:                  "GRAPE FESTIVAL 2014",
-        headliner:              "Editors",
-        venue_name:             "Letisko",
-        venue_latitude:         "48.625",
-        venue_longitude:        "17.828611",
+        lastfm_uuid:             "3705233",
+        title:                   "GRAPE FESTIVAL 2014",
+        headliner:               "Editors",
+        venue_name:              "Letisko",
+        venue_latitude:          "48.625",
+        venue_longitude:         "17.828611",
         venue_city:              "Piešťany",
         venue_country:           "Slovakia",
         venue_street:            "",
