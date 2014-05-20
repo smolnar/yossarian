@@ -28,7 +28,7 @@ else
       button.btn.btn-success.btn-lg Join
       button.btn.btn-primary.btn-lg Play
 
-  nav.navbar.navbar-default role="navigation"
+  nav#navbar-controls.navbar.navbar-default role="navigation"
     ul.nav.navbar-nav.navbar-left
       li: a data-parent="#subbar" data-target="#genres" data-toggle="collapse" Genres
       li: a data-parent="#subbar" data-target="#countries" data-toggle="collapse" Countries
