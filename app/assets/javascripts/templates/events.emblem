@@ -1,29 +1,29 @@
 if player.playing
   header.video
     view Yossarian.YoutubeVideoView url=player.currentRecording.youtubeUrl controllerBinding="player"
-else
-  header
-    h1
-      | Listen to your festival
-      small Play more than 2k festivals with more than 4k artists
-    .buttons
-      button.btn.btn-success.btn-lg
-        | Join &nbsp;
-        i.fa.fa-rocket
-      button.btn.btn-primary.btn-lg
-        | Play &nbsp;
-        i.fa.fa-play
+/
+  else
+    header
+      h1
+        | Listen to your festival
+        small Play more than 2k festivals with more than 4k artists
+      .buttons
+        button.btn.btn-success.btn-lg
+          | Join &nbsp;
+          i.fa.fa-rocket
+        button.btn.btn-primary.btn-lg
+          | Play &nbsp;
+          i.fa.fa-play
 
-nav.navbar.navbar-reverse.hidden-xs role="navigation" data-affix="true"
+nav.navbar.hidden-xs role="navigation" data-affix="true"
   ul.nav.navbar-nav.navbar-left
     li: a data-parent="#subbar" data-target="#genres" data-toggle="collapse" Genres
     li: a data-parent="#subbar" data-target="#countries" data-toggle="collapse" Countries
 
   form.navbar-form.navbar-right role="search"
-    .form-group
-      .input-group
-        span.input-group-addon: i.fa.fa-search
-        input.form-control type="text" placeholder="Search"
+    .search
+      input.form-control type="text" placeholder="Search"
+      i.fa.fa-search.search-icon
 
   if player.currentRecording
     view Yossarian.PlayerView controllerBinding="player"
@@ -37,36 +37,6 @@ nav.navbar.navbar-reverse.hidden-xs role="navigation" data-affix="true"
           i.fa.fa-play
       li: a{action 'forward'}
         i.fa.fa-step-forward
-
-      //li: p.text-center #{currentRecording.artist.name} &ndash; #{currentRecording.track.name}
-
-nav.navbar.navbar-reverse.visible-xs role="navigation" data-affix="true"
-  if player.currentRecording
-    view Yossarian.PlayerView controllerBinding="player"
-      li: a{action 'backward' }
-        i.fa.fa-step-backward
-      if playing
-        li: a{action 'stop'}
-          i.fa.fa-stop
-      else
-        li: a{action 'play'}
-          i.fa.fa-play
-      li: a{action 'forward'}
-        i.fa.fa-step-forward
-
-      //li: p.text-center #{currentRecording.artist.name} &ndash; #{currentRecording.track.name}
-
-nav.navbar.navbar-reverse.visible-xs role="navigation"
-  form.navbar-form role="search"
-    .form-group
-      .input-group
-        span.input-group-addon: i.fa.fa-search
-        input.form-control type="text" placeholder="Search"
-
-nav.navbar.navbar-reverse.visible-xs role="navigation"
-  ul.nav.navbar-nav.navbar-left
-    li: a data-parent="#subbar" data-target="#genres" data-toggle="collapse" Genres
-    li: a data-parent="#subbar" data-target="#countries" data-toggle="collapse" Countries
 
 #subbar.bricks-accordion
   .panel
@@ -79,34 +49,31 @@ nav.navbar.navbar-reverse.visible-xs role="navigation"
      each sortedCountries
       .brick: a: = this
 
-footer
+ul#events-list.row
+  each content
+    view Yossarian.EventView contentBinding="this" class="col-md-4 col-xs-12 col-sm-6"
+      collection Yossarian.EventArtistsView contentBinding="artists" tagName="div" class="event-slider"
+        img{bind-attr src=image.image.large.url}
 
-.container
-  ul#events-list.row
-    each content
-      view Yossarian.EventView contentBinding="this" class="col-md-4"
-        collection Yossarian.EventArtistsView contentBinding="artists" tagName="div" class="event-slider"
-          img{bind-attr src=image.image.large.url}
+      .info
+        h3.text-center.title: = title
 
-        .info
-          h3.text-center.title: = title
-
-          .row
-            .col-md-12.text-center
-              hr
-              h4
-                | #{venue_name}, #{venue_city}, #{venue_country}
-
-              h5.text-muted  July 24th, 2014 &ndash; July 27, 2014
-              hr
-          .row
-            slice artists limit=3
-              .col-md-4.text-center
-                img.artist-thumbnail.img-circle{bind-attr src=image.image.small.url}
-          .row.text-center
+        .row
+          .col-md-12.text-center
             hr
-            button.btn.btn-primary.btn-lg{action 'play' this}: i.fa.fa-play &nbsp; Play
+            h4
+              | #{venue_name}, #{venue_city}, #{venue_country}
 
-  .row
-    .col-md-12.text-center
-      button.btn.btn-default.btn-lg{action 'loadMore' } Load more
+            h5.text-muted  July 24th, 2014 &ndash; July 27, 2014
+            hr
+        .row
+          slice artists limit=3
+            .col-md-4.text-center
+              img.artist-thumbnail.img-circle{bind-attr src=image.image.small.url}
+        .row.text-center
+          hr
+          button.btn.btn-primary.btn-lg{action 'play' this}: i.fa.fa-play &nbsp; Play
+
+.row
+  .col-md-12.text-center
+    button.btn.btn-default.btn-lg{action 'loadMore' } Load more

@@ -1,5 +1,11 @@
 // disable default icons
 
+$brand-primary:         #ab6361;
+$brand-success:         #5cb85c;
+$brand-warning:         #f0ad4e;
+$brand-danger:          #d9534f;
+$brand-info:            #5bc0de;
+
 $icon-font-path: '/assets/';
 $icon-font-name: 'fontawesome-webfont';
 
@@ -41,3 +47,5 @@ $state-success-text: $brand-success;
 $state-info-text:    $brand-info;
 $state-warning-text: $brand-warning;
 $state-danger-text:  $brand-danger;
+
+$navbar-height: 100px !default;
