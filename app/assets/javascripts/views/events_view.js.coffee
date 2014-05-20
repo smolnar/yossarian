@@ -1,6 +1,12 @@
 Yossarian.EventsView = Ember.View.extend
   didInsertElement: ->
-    # TODO (smolnar) reload then viewport changes
-    Ember.run.next @, ->
-      for element in $('[data-affix]')
-        $(element).affix offset: $(element).position()
+    $(document).ready =>
+      position = $('#navbar-controls').offset().top - 60
+
+      $(window).scroll =>
+        other = $(window).scrollTop()
+
+        if position < other
+          $('.navbar-fixed-top').addClass('navbar-inverse-affix')
+        else
+          $('.navbar-fixed-top').removeClass('navbar-inverse-affix')

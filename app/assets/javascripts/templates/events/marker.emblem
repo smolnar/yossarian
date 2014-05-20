@@ -1,2 +1,0 @@
-h1: = title
-img{bind-attr src=poster.poster.small.url}
