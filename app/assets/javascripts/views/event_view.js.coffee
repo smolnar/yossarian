@@ -3,9 +3,9 @@ Yossarian.EventView = Ember.View.extend
   attributeBindings: ['class']
 
   mouseEnter: ->
-    @$().find('.info').addClass('open')
+    @$().find('.info').addClass('active')
     @$().find('.nivoSlider').data('nivoslider').stop()
 
   mouseLeave: ->
-    @$().find('.info').removeClass('open')
+    @$().find('.info').removeClass('active')
     @$().find('.nivoSlider').data('nivoslider').start()
