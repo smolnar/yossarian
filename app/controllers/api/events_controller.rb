@@ -10,7 +10,15 @@ module API
         .order(performances_count: :desc)
         .limit(6)
 
-      @events = @events.where(events: { venue_country: params[:countries] }) if params[:countries].present?
+      if params[:countries].present?
+        @events = @events.where(events: { venue_country: params[:countries] })
+      end
+
+      if params[:tags].present?
+        query = params[:tags].map { |name| '? = ANY(artists.tags)' }
+
+        @events = @events.where(query.join(' OR '), *params[:tags])
+      end
 
       respond_to do |format|
         format.json { render json: @events }

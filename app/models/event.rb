@@ -16,7 +16,7 @@ class Event < ActiveRecord::Base
 
   before_validation :set_poster
 
-  after_validation :reverse_geocode
+  after_validation :reverse_geocode unless Rails.env.development?
 
   reverse_geocoded_by :venue_latitude, :venue_longitude do |record, results|
     if data = results.first
