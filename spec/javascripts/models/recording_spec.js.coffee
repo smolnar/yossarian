@@ -2,14 +2,14 @@
 
 describe 'Recording', ->
   it 'has youtube url', ->
-    recording = Factory.create 'recording', youtubeUrl: 'http://youtube.com/example'
+    recording = create 'recording', youtubeUrl: 'http://youtube.com/example'
 
     expect(recording.get('youtubeUrl')).to.eql('http://youtube.com/example')
 
   it 'belongs to artist and track', ->
-    artist    = Factory.create 'artist', name: 'Bombay Bicycle Club'
-    track     = Factory.create 'track', name: 'Shuffle'
-    recording = Factory.create 'recording', artist: artist, track: track
+    artist    = create 'artist', name: 'Bombay Bicycle Club'
+    track     = create 'track', name: 'Shuffle'
+    recording = create 'recording', artist: artist, track: track
 
     expect(recording.get('artist')).to.eql(artist)
     expect(recording.get('track')).to.eql(track)

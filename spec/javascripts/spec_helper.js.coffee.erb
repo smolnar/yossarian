@@ -1,12 +1,13 @@
 #= require sinon
 #= require application
-#= require_tree ./support
+#= require rogue_girl
 #= require_tree ./factories
+#= require_tree ./support
 
 mocha.ui('bdd')
 mocha.globals(['Ember', 'DS', 'App', 'MD5'])
 mocha.timeout(0)
-chai.Assertion.includeStack = true
+chai.config.includeStack = true
 
 # Useful for placing local test vars
 window.Test ||= {}
@@ -44,19 +45,15 @@ Ember.testing = true
 App.setupForTesting()
 App.injectTestHelpers()
 
-Ember.Test.adapter       = Ember.Test.MochaAdapter.create()
-Ember.ApplicationAdapter = Ember.Test.MochaAdapter.create()
+App.ApplicationAdapter = DS.FixtureAdapter.extend()
 
 $.fx.off = true
 
 # Setup
 beforeEach (done) ->
-  # Global store shorthand
-  window.store = helper.lookup 'store:main'
+  Ember.run.begin()
 
-  Factory.EmberStoreDriver.store = store
-
-  Factory.driver = Factory.EmberStoreDriver
+  RogueGirl.driver = new RogueGirl.EmberStoreDriver(App)
 
   # Fake XHR with Sinon
   window.server = sinon.fakeServer.create()
@@ -64,19 +61,16 @@ beforeEach (done) ->
   # Reset all test variables
   window.Test = {}
 
-  try
-    # Ember.run(App, App.advanceReadiness)
-  catch error
-    console.error("Error during example setup: #{Ember.inspect(error)}")
-
   Ember.run -> done()
 
 afterEach ->
+  Ember.run.end()
+
   # Reset App
   try
-    # Ember.run -> App.reset()
+    Ember.run -> App.reset()
   catch error
-    console.error("Error during example teardown: #{Ember.inspect(error)}")
+    console.error("afterEach: #{Ember.inspect(error)}")
 
   # Reset all test variables
   window.Test = {}

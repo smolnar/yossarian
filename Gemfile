@@ -74,6 +74,7 @@ group :development, :test do
   # Javascripts
   gem 'konacha'
   gem 'sinon-rails'
+  gem 'rogue-girl-rails'
 end
 
 # Use ActiveModel has_secure_password
