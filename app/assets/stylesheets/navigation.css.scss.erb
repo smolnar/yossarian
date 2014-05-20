@@ -27,9 +27,12 @@
 }
 
 .navbar-inverse-affix {
-  @include transition(all, .3s);
+  @include transition(all, .4s);
 
-  background-color: $navbar-inverse-affix-bg;
+  background: $navbar-inverse-affix-bg !important;
+
+  a { @include color-variant($navbar-inverse-affix-color !important, $navbar-inverse-affix-color-hover !important) }
+  p { color: $navbar-inverse-affix-color !important }
 }
 
 .navbar-center {
