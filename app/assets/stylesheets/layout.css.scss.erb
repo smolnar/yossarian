@@ -17,6 +17,29 @@ a {
   text-decoration: underline !important;
 }
 
+// lists
+
+.list-center {
+  float: left;
+  left: 50%;
+  position: relative;
+
+  text-align: center;
+
+  > ul {
+    @extend .list-unstyled;
+    float: left;
+    left: -50%;
+    position: relative;
+
+    margin: 0;
+
+    & > li {
+      float: left;
+    }
+  }
+}
+
 // text
 
 .text-muted > a, a.text-muted {
@@ -27,15 +50,12 @@ a {
 
 .navbar {
   margin: 0;
-
-  background-color: #fff;
+  padding: 0 $navbar-padding-horizontal;
   border: none;
 
   &.affix {
     @extend .navbar-fixed-top;
   }
-
-  @media (max-width: $screen-xs-max) { padding: 0 15px }
 
   .search {
     position: relative;
@@ -45,12 +65,24 @@ a {
       padding-left: 30px;
     }
 
-    .search-icon {
+    i {
       position: absolute;
       top: 10px;
       left: 10px;
       color: $gray-light;
     }
+  }
+}
+
+.navbar-inverse {
+  background: rgba($navbar-inverse-bg, .25);
+}
+
+.navbar-reverse {
+  background: $gray-lighter;
+
+  a {
+    @include color-variant($link-color, $link-hover-color);
   }
 }
 
@@ -61,48 +93,25 @@ a {
   width: 3 * 48px;
 }
 
-.navbar-reverse {
-  background: $gray-lighter;
-
-  a {
-    @include color-variant($link-color, $link-hover-color);
-  }
-
-  .input-group-addon {
-    border-right: none;
-
-    background: $input-bg;
-    color: $gray-light;
+.navbar-right {
+  &:last-child {
+    margin-right: 0;
   }
 }
 
-// bricks
-
-.bricks-accordion {
-  .panel {
-    margin-bottom: 0px;
-    border: none;
-  }
+.navbar-brand {
+  font-family: $font-family-brand;
+  font-size: 25px;
 }
 
-.bricks {
-  background: lighten($gray-lighter, 5%);
+.navbar-text {
+  max-width: 50%;
+  margin: $navbar-padding-vertical $navbar-padding-horizontal !important;
 
-  .brick {
-    @extend .col-xs-6;
-    @extend .col-sm-4;
-    @extend .col-md-3;
-    @extend .col-lg-2;
+  direction: ltr;
+  text-align: right;
 
-    a {
-      display: block;
-
-      padding: 15px;
-      height: $navbar-height;
-
-      @include background-variant(transparent, lighten($gray-lighter, 2.5%));
-    }
-  }
+  @include text-overflow;
 }
 
 // header
@@ -113,15 +122,15 @@ header {
   margin: 0;
   height: auto;
 
-  background-image: url(<%= asset_path 'background-3.jpg' %>);
+  background-image: url(<%= asset_path 'background-2.jpg' %>);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 
-  @media (min-width: $screen-lg-min) { padding: 100px 50px }
-  @media (max-width: $screen-md-max) { padding: 100px 50px }
-  @media (max-width: $screen-sm-max) { padding: 50px 25px }
-  @media (max-width: $screen-xs-max) { padding: 50px 25px }
+  @media (min-width: $screen-lg-min) { padding: 150px 0 }
+  @media (max-width: $screen-md-max) { padding: 150px 0 }
+  @media (max-width: $screen-sm-max) { padding: 75px  0 }
+  @media (max-width: $screen-xs-max) { padding: 75px  0 }
 
   text-align: center;
 
@@ -136,11 +145,11 @@ header {
   }
 
   h1 {
-    display: inline-block;
+    display: block;
     margin: 20px 0;
     padding: 20px;
 
-    background: rgba($jumbotron-bg, .2);
+    background: rgba($jumbotron-bg, .05);
 
     small {
       display: block;
@@ -161,49 +170,116 @@ header {
   }
 }
 
-// events list
-#events-list {
-  @extend .list-unstyled;
+// bricks
 
-  margin-top: 20px;
+.bricks-accordion {
+  .panel {
+    margin-bottom: 0px;
+    border: none;
+  }
+}
 
-  li {
-    margin: 0px;
-    margin-bottom: 20px;
-    padding: 0 !important;
-    position: relative;
+.bricks {
+  .brick {
+    @extend .col-xs-6;
+    @extend .col-sm-4;
+    @extend .col-md-3;
+    @extend .col-lg-2;
 
-    .info {
-      @include opacity(0.8);
+    a {
+      display: block;
+      padding: $navbar-padding-vertical ($navbar-padding-horizontal + 15px);
 
-      padding: 0px 50px;
-      position: absolute;
-      top: 0px;
-      height: 60px;
-      width: 100%;
-      background-color: lighten($gray-lighter, 50%);
-      overflow: hidden;
-      z-index: 999;
-
-      &.open {
-        @include transition(all 0.3s);
-        @include opacity(0.9);
-
-        height: 100%;
-      }
-
-      h3 {
-        margin-bottom: 20px;
-      }
-
-      img {
-        height: 80px;
-      }
+      text-transform:capitalize;
     }
   }
+}
+
+// events
+
+.events {
+  .event {
+    @extend .col-xs-12;
+    @extend .col-sm-6;
+    @extend .col-md-4;
+    @extend .col-lg-3;
+  }
+
+  .info {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    height: $navbar-height;
+    overflow: hidden;
+
+    @include opacity(0.8);
+
+    background-color: $gray-lighter;
+
+    text-align: center;
+
+    &.active {
+      @include transition(all .3s);
+      @include opacity(0.9);
+
+      height: 100%;
+    }
+
+    img {
+      height: 80px;
+    }
+
+    z-index: $zindex-modal-background - 5;
+  }
+}
+
+.btn-more {
+  @include clearfix;
+  @extend .btn-block;
+
+  height: $navbar-height;
+  margin: 0;
+  padding: 0;
+  border: none;
+
+  background: $gray-lighter;
+
+  @include color-variant($link-color, $link-hover-color);
 }
 
 // footer
 
 footer {
+  @include clearfix;
+
+  margin: 0;
+  padding: $navbar-height 0;
+  overflow-x: hidden;
+
+  background: $gray-lighter;
+  color: $text-muted;
+  text-align: center;
+
+  a {
+    @include color-variant($link-color, $link-hover-color);
+  }
+
+  li a, li span {
+    margin: 0 $padding-xs-horizontal;
+  }
+
+  li:after {
+    content: '·';
+  }
+
+  li:last-child:after {
+    content: '';
+  }
+
+  hr {
+    @include clearfix;
+
+    margin: 25px 0 0 0;
+    border: none;
+  }
 }

@@ -1,5 +1,6 @@
 Yossarian.EventView = Ember.View.extend
-  tagName: 'li'
+  tagName: 'div'
+  classNames: ['event']
   attributeBindings: ['class']
 
   mouseEnter: ->

@@ -1,13 +1,38 @@
-// disable default icons
+@import 'bootstrap/variables';
 
-$brand-primary:         #ab6361;
-$brand-success:         #5cb85c;
-$brand-warning:         #f0ad4e;
-$brand-danger:          #d9534f;
-$brand-info:            #5bc0de;
+// disable default icons
 
 $icon-font-path: '/assets/';
 $icon-font-name: 'fontawesome-webfont';
+
+// fonts
+
+$font-family-base: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-brand: Norican, $font-family-base;
+
+// grid
+
+$grid-columns: 12;
+$grid-gutter-width: 0;
+$grid-float-breakpoint: 0;
+$grid-float-breakpoint-max: 0;
+$grid-gutter-width: 0;
+
+// navbars
+
+$navbar-height: 60px;
+$navbar-margin-bottom: 0;
+$navbar-padding-horizontal: 20px;
+$navbar-padding-vertical: 20px;
+$navbar-collapse-max-height: 0;
+
+// colors
+
+$brand-primary: #428bca;
+$brand-success: #5cb85c;
+$brand-warning: #f0ad4e;
+$brand-danger:  #d9534f;
+$brand-info:    #5bc0de;
 
 // links
 
@@ -47,5 +72,3 @@ $state-success-text: $brand-success;
 $state-info-text:    $brand-info;
 $state-warning-text: $brand-warning;
 $state-danger-text:  $brand-danger;
-
-$navbar-height: 100px !default;

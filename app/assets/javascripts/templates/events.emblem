@@ -1,79 +1,87 @@
+nav.navbar.navbar-inverse.navbar-fixed-top role="navigation"
+  .navbar-header
+    a.navbar-brand href="/" Festup
+
+  view Yossarian.PlayerView controllerBinding="player"
+    li: a{action 'backward' }
+      i.fa.fa-fw.fa-step-backward
+    if playing
+      li: a{action 'stop'}
+        i.fa.fa-fw.fa-stop
+    else
+      li: a{action 'play'}
+        i.fa.fa-fw.fa-play
+    li: a{action 'forward'}
+      i.fa.fa-fw.fa-step-forward
+
+  p.navbar-text.navbar-right Festival &middot; piesenka
+
 if player.playing
   header.video
     view Yossarian.YoutubeVideoView url=player.currentRecording.youtubeUrl controllerBinding="player"
-/
-  else
-    header
-      h1
-        | Listen to your festival
-        small Play more than 2k festivals with more than 4k artists
-      .buttons
-        button.btn.btn-success.btn-lg
-          | Join &nbsp;
-          i.fa.fa-rocket
-        button.btn.btn-primary.btn-lg
-          | Play &nbsp;
-          i.fa.fa-play
+else
+  header
+    h1
+      | Listen to your festival
+      small Play more than 2k festivals with more than 4k artists
+    .buttons
+      button.btn.btn-success.btn-lg Join
+      button.btn.btn-primary.btn-lg Play
 
-nav.navbar.hidden-xs role="navigation" data-affix="true"
-  ul.nav.navbar-nav.navbar-left
-    li: a data-parent="#subbar" data-target="#genres" data-toggle="collapse" Genres
-    li: a data-parent="#subbar" data-target="#countries" data-toggle="collapse" Countries
+  nav.navbar.navbar-reverse role="navigation"
+    ul.nav.navbar-nav.navbar-left
+      li: a data-parent="#subbar" data-target="#genres" data-toggle="collapse" Genres
+      li: a data-parent="#subbar" data-target="#countries" data-toggle="collapse" Countries
 
-  form.navbar-form.navbar-right role="search"
-    .search
-      input.form-control type="text" placeholder="Search"
-      i.fa.fa-search.search-icon
+    form.navbar-form.navbar-right role="search"
+      .search
+        input.form-control type="text" placeholder="Search"
+        i.fa.fa-search
 
-  if player.currentRecording
-    view Yossarian.PlayerView controllerBinding="player"
-      li: a{action 'backward' }
-        i.fa.fa-step-backward
-      if playing
-        li: a{action 'stop'}
-          i.fa.fa-stop
-      else
-        li: a{action 'play'}
-          i.fa.fa-play
-      li: a{action 'forward'}
-        i.fa.fa-step-forward
+  #subbar.bricks-accordion
+    .panel
+      #genres.bricks.collapse.row
+        each sortedGenres
+          .brick: a: = this
 
-#subbar.bricks-accordion
-  .panel
-    #genres.bricks.collapse.row
-      each sortedGenres
+    .panel
+      #countries.bricks.collapse.row
+       each sortedCountries
         .brick: a: = this
 
-  .panel
-    #countries.bricks.collapse.row
-     each sortedCountries
-      .brick: a: = this
-
-ul#events-list.row
+#events.events
   each content
-    view Yossarian.EventView contentBinding="this" class="col-md-4 col-xs-12 col-sm-6"
+    view Yossarian.EventView contentBinding="this"
       collection Yossarian.EventArtistsView contentBinding="artists" tagName="div" class="event-slider"
         img{bind-attr src=image.image.large.url}
 
       .info
-        h3.text-center.title: = title
+        h3: = title
 
-        .row
-          .col-md-12.text-center
-            hr
-            h4
-              | #{venue_name}, #{venue_city}, #{venue_country}
+        h4
+          | #{venue_name} &middot; #{venue_city} &middot; #{venue_country}
 
-            h5.text-muted  July 24th, 2014 &ndash; July 27, 2014
-            hr
+        h5.text-muted July 24th, 2014 &ndash; July 27, 2014
+
         .row
           slice artists limit=3
-            .col-md-4.text-center
-              img.artist-thumbnail.img-circle{bind-attr src=image.image.small.url}
-        .row.text-center
-          hr
+            .col-md-4
+              img.img-circle{bind-attr src=image.image.small.url}
+        .row
           button.btn.btn-primary.btn-lg{action 'play' this}: i.fa.fa-play &nbsp; Play
 
-.row
-  .col-md-12.text-center
-    button.btn.btn-default.btn-lg{action 'loadMore' } Load more
+button.btn.btn-more{action 'loadMore' } More
+
+footer
+  .list-center
+    ul
+      li: a href="https://twitter.com/samuelmolnar" Samuel Molnár
+      li: a href="https://twitter.com/pavolzbell" Pavol Zbell
+
+  hr
+
+  .list-center
+    ul
+      li: span Copyright 2014
+      li: a href="https://github.com/smolnar/yossarian" GitHub
+      li: a href="https://last.fm" Last.fm
