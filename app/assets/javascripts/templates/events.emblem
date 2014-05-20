@@ -68,7 +68,9 @@ else
             .col-md-4
               img.img-circle{bind-attr src=image.image.small.url}
         .row
-          button.btn.btn-primary.btn-lg{action 'play' this}: i.fa.fa-play &nbsp; Play
+          button.btn.btn-primary.btn-lg{action 'play' this}
+            i.fa.fa-play
+            span Play
 
 button.btn.btn-more{action 'loadMore' } More
 
