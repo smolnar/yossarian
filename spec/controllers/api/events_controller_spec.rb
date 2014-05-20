@@ -58,5 +58,31 @@ describe API::EventsController do
         expect(@events).to include(events.second)
       end
     end
+
+    context 'with tags' do
+      before :each do
+        artists_with_image[0].update_attributes(tags: ['rock', 'pop'])
+        artists_with_image[1].update_attributes(tags: ['rock'])
+        artists_with_image[2].update_attributes(tags: ['pop'])
+      end
+
+      it 'filters events by tag' do
+        get :index, tags: ['rock'], format: :json
+
+        @events = assigns(:events)
+
+        expect(@events.size).to eql(2)
+        expect(@events.to_a.sort).to eql(artists_with_images[0..1].sort)
+      end
+
+      it 'filters events by multiple tags' do
+        get :index, tags: ['rock', 'pop'], format: :json
+
+        @events = assigns(:events)
+
+        expect(@events.size).to eql(2)
+        expect(@events.to_a.sort).to eql([artists_with_images[0], artists_with_images[2]].sort)
+      end
+    end
   end
 end
