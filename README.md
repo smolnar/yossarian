@@ -1,6 +1,6 @@
 # Yossarian
 
-TODO
+Listen to your festival.
 
 ## Requirements
 
