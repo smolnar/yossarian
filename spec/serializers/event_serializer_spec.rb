@@ -3,6 +3,7 @@ require 'spec_helper'
 describe EventSerializer do
   let!(:artist) { event.artists.first }
   let!(:artists) { event.artists }
+  let!(:performances) { event.performances.order(id: :desc) }
   let!(:event) { create :event, :with_artists }
   let!(:recordings) { 2.times.map { create :recording, artist: artist }}
   let!(:tracks) { recordings.map(&:track).uniq }
@@ -11,6 +12,19 @@ describe EventSerializer do
     serializer = EventSerializer.new(event)
 
     expect(serializer.to_json).to be_json_including({
+      performances: [
+        {
+          id: performances[0].id,
+          artist_id: performances[0].artist.id,
+          event_id: performances[0].event.id
+        },
+        {
+          id: performances[1].id,
+          artist_id: performances[1].artist.id,
+          event_id: performances[1].event.id
+        }
+      ],
+
       artists: [
         {
           id: artists[0].id,
@@ -90,7 +104,7 @@ describe EventSerializer do
         }
       ],
 
-     event: {
+      event: {
         id: event.id,
         title: event.title,
         poster: {
@@ -106,7 +120,7 @@ describe EventSerializer do
         },
         venue_latitude: event.venue_latitude,
         venue_longitude: event.venue_longitude,
-        artist_ids: artists.map(&:id).sort
+        performance_ids: performances.pluck(:id)
       },
     })
   end
