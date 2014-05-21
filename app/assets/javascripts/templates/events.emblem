@@ -59,26 +59,25 @@ nav#navbar-controls.navbar.navbar-default role="navigation"
         .brick: a: = this
 
 #events.events
-  each content
-    view Yossarian.EventView contentBinding="this"
-      collection Yossarian.EventArtistsView artistsBinding="artists" tagName="div" class="event-slider"
-        img{bind-attr src=image.image.large.url}
+  collection Yossarian.EventsListView contentBinding="content"
+    collection Yossarian.EventArtistsView artistsBinding="artists" tagName="div" class="event-slider"
+      img{bind-attr src=image.image.large.url}
 
-      .info
-        h2.title: = title
+    .info
+      h2.title: = title
 
-        .venue
-          | #{venue_name} &middot; #{venue_city} &middot; #{venue_country}
+      .venue
+        | #{venue_name} &middot; #{venue_city} &middot; #{venue_country}
 
-        .date July 24th, 2014 &ndash; July 27, 2014
+      .date July 24th, 2014 &ndash; July 27, 2014
 
-        .artists
-          slice artists limit=3
-            .artist
-              img.img-circle.img-responsive{bind-attr src=image.image.small.url}
+      .artists
+        slice artists limit=3
+          .artist
+            img.img-circle.img-responsive{bind-attr src=image.image.small.url} data-toggle="tooltip" data-placement="bottom" title=name
 
-        button.btn.btn-primary{action 'play' this}
-          i.fa.fa-play
+      button.btn.btn-primary{action 'play' this}
+        i.fa.fa-play
 
 button.btn.btn-more{action 'loadMore'} More
 
