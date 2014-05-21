@@ -10,11 +10,15 @@ nav.navbar.navbar-inverse.navbar-fixed-top role="navigation"
         i.fa.fa-fw.fa-stop
     else
       li: a{action 'play'}
-        i.fa.fa-fw.fa-play
+        i.fa.fa-fw.fa-play 
     li: a{action 'forward'}
       i.fa.fa-fw.fa-step-forward
 
-  p.navbar-text.navbar-right Festival &middot; piesenka
+  p.navbar-text.navbar-right
+    if player.playing
+      | #{player.currentRecording.artist.name} &middot; #{player.currentRecording.track.name} @ #{player.event.title}
+    else
+      | Choose a festival to play
 
 if player.playing
   header.video

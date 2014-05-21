@@ -1,9 +1,14 @@
 Yossarian.PlayerController = Ember.Controller.extend
   states: { stopped: 0, playing: 1 }
 
+  event:            null
   artists:          null
   currentRecording: null
   currentState:     0
+
+  artists: (->
+    @get('event.artists')
+  ).property('event.artists.@each')
 
   recordings: (->
     @get('artists').map((artist) -> artist.get('recordings').toArray().shuffle()[0..1]).flatten()

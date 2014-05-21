@@ -16,5 +16,5 @@ Yossarian.EventsController = Ember.ArrayController.extend
 
   actions:
     play: (event) ->
-      @get('player').set('artists', event.get('artists'))
+      @get('player').set('event', event)
       @get('player').play()
