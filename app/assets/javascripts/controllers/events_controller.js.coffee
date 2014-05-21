@@ -14,6 +14,10 @@ Yossarian.EventsController = Ember.ArrayController.extend
     @get('countries').sort()
   ).property('countries')
 
+  contentDidChange: (->
+    @get('player').set('event', @get('content').toArray()[0]) unless @get('player.event')
+  ).observes('content.@each')
+
   actions:
     play: (event) ->
       @get('player').set('event', event)

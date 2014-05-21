@@ -28,6 +28,9 @@ Yossarian.PlayerController = Ember.Controller.extend
 
   currentStateDidChange: (->
     @set('currentRecording', null) if @get('currentState') == @get('states.stopped')
+
+    if @get('currentState') == @get('states.playing') && !@get('currentRecording')
+      @set('currentRecording', @get('recordings.firstObject'))
   ).observes('currentState')
 
   play: ->

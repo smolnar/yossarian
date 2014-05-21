@@ -18,6 +18,21 @@ describe 'EventsController', ->
       for artist in @artists
         create 'performance', event: event, artist: artist
 
+  describe 'observers', ->
+    describe '+contentDidChange', ->
+      beforeEach ->
+        @controller.set('player.event', null)
+        @controller.set('content', @events)
+
+      it 'sets default event for player', ->
+        expect(@controller.get('player.event')).to.eql(@events[0])
+
+      context 'when player has already event set', ->
+        it 'ommit setting the default event', ->
+          @controller.set('content', @events[1..2])
+
+          expect(@controller.get('player.event')).to.eql(@events[0])
+
   describe 'actions', ->
     describe '+play', ->
       it 'starts player with event artists', ->

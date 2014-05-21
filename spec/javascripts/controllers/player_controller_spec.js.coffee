@@ -64,6 +64,13 @@ describe 'PlayerController', ->
 
           expect(@controller.get('currentRecording')).to.be.a('null')
 
+      context 'when current state changes to playing and current recording is not set', ->
+        it 'sets current recording', ->
+          @controller.set('currentRecording', null)
+          @controller.send('play')
+
+          expect(@controller.get('currentRecording')).to.eql(@controller.get('recordings').toArray()[0])
+
     describe '+currentRecordingDidChange', ->
       context 'when current recoding is present and not already playing', ->
         it 'starts playing', ->
