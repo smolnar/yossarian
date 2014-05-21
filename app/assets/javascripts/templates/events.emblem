@@ -1,6 +1,6 @@
 nav.navbar.navbar-inverse.navbar-fixed-top{bind-attr class="player.playing:navbar-inverse-affix" } role="navigation"
   .navbar-header
-    a.navbar-brand href="/" Festup
+    a.navbar-brand href="#" Festup
 
   view Yossarian.PlayerView controllerBinding="player"
     li: a{action 'backward' }

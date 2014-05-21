@@ -1,11 +1,11 @@
-module API
-  class EventsController < API::ApplicationController
-    def index
+module API::V1
+  class EventsController < API::V1::ApplicationController
+    def search
       @events = Event
         .includes(:performances, performances: [:event, artist: [recordings: :track]])
         .where.not(recordings: { youtube_url: nil })
         .where.not(artists: { image: nil })
-        .where.not(events: { id: Array.wrap(params[:except]) })
+        .where.not(events: { id: params[:except] })
         .references(:recordings, :artists)
         .order(performances_count: :desc)
         .limit(12)

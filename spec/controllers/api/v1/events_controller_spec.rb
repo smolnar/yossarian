@@ -1,6 +1,8 @@
 require 'spec_helper'
 
-describe API::EventsController do
+describe API::V1::EventsController do
+  render_views
+
   describe 'GET index' do
     let(:events) { 5.times.map { |n| create :event, venue_country: "Country ##{n}" } }
     let(:artists_with_image) { 5.times.map { create :artist, image: fixture('poster.jpg') }}
@@ -27,35 +29,38 @@ describe API::EventsController do
     end
 
     it 'returns serialized events having artists image and youtube links' do
-      get :index, format: :json
+      post :search, format: :json
 
       @events = assigns(:events)
 
       expect(@events.size).to eql(3)
-      expect(@events).to include(events.first)
-      expect(@events.sort.first.artists.sort).to eql(artists_with_image[0..1].sort)
+      expect(@events.sort).to eql(events[0..2].sort)
 
       expect(response).to be_success
     end
 
     context 'with countries' do
       it 'returns only events in selected country' do
-        get :index, countries: ['Country #0'], format: :json
+        post :search, countries: ['Country #0'], format: :json
 
         @events = assigns(:events)
 
         expect(@events.size).to eql(1)
         expect(@events.to_a).to eql([events.first])
+
+        expect(response).to be_success
       end
 
       it 'returns only events in selected coutries' do
-        get :index, countries: ['Country #0', 'Country #1'], format: :json
+        post :search, countries: ['Country #0', 'Country #1'], format: :json
 
         @events = assigns(:events)
 
         expect(@events.size).to eql(2)
         expect(@events).to include(events.first)
         expect(@events).to include(events.second)
+
+        expect(response).to be_success
       end
     end
 
@@ -67,21 +72,25 @@ describe API::EventsController do
       end
 
       it 'filters events by tag' do
-        get :index, tags: ['alternative'], format: :json
+        post :search, tags: ['alternative'], format: :json
 
         @events = assigns(:events)
 
         expect(@events.size).to eql(2)
         expect(@events.to_a.sort).to eql(events[0..1])
+
+        expect(response).to be_success
       end
 
       it 'filters events by multiple tags' do
-        get :index, tags: ['rock', 'pop'], format: :json
+        post :search, tags: ['rock', 'pop'], format: :json
 
         @events = assigns(:events)
 
         expect(@events.size).to eql(2)
         expect(@events.to_a.sort).to eql([events[0], events[2]].sort)
+
+        expect(response).to be_success
       end
     end
   end
