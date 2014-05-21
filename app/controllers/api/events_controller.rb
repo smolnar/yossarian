@@ -2,7 +2,7 @@ module API
   class EventsController < API::ApplicationController
     def index
       @events = Event
-        .includes(:performances, performances: [artist: [recordings: :track]])
+        .includes(:performances, performances: [:event, artist: [recordings: :track]])
         .where.not(recordings: { youtube_url: nil })
         .where.not(artists: { image: nil })
         .where.not(events: { id: Array.wrap(params[:except]) })

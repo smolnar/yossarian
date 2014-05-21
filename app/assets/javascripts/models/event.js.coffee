@@ -9,4 +9,8 @@ Yossarian.Event = DS.Model.extend
   venue_latitude:  DS.attr 'string'
   venue_longitude: DS.attr 'string'
 
-  artists: DS.hasMany 'artist'
+  performances: DS.hasMany 'performance'
+
+  artists: (->
+    @get('performances.@each.artist').uniq()
+  ).property('performances.@each.artist')

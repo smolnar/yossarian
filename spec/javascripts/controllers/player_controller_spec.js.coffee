@@ -41,10 +41,42 @@ describe 'PlayerController', ->
 
       expect(@controller.get('currentRecording')).to.eql(@controller.get('recordings')[0])
 
-    it 'sets state to playing', ->
-      @controller.play()
+  describe 'observers', ->
+    describe '+artistsDidChange', ->
+      context 'when artists change', ->
+        it 'sets currentRecording to null', ->
+          @controller.set('currentRecording', @recordings[0])
 
-      expect(@controller.get('currentState')).to.eql(@controller.get('states.playing'))
+          expect(@controller.get('currentRecording')).not.to.be.a('null')
+
+          @controller.set('artists', [])
+
+          expect(@controller.get('currentRecording')).to.be.a('null')
+
+    describe '+currentStateDidChange', ->
+      context 'when current state changes to stopped', ->
+        it 'sets current recording to null', ->
+          @controller.play()
+
+          expect(@controller.get('currentRecording')).not.to.be.a('null')
+
+          @controller.send('stop')
+
+          expect(@controller.get('currentRecording')).to.be.a('null')
+
+    describe '+currentRecordingDidChange', ->
+      context 'when current recoding is present and not already playing', ->
+        it 'starts playing', ->
+          @controller.set('currentRecording', @controller.get('recordings.firstObject'))
+
+          expect(@controller.get('playing')).to.be.true
+
+      context 'when current recording is not present', ->
+        it 'does not start playing', ->
+          @controller.send('stop')
+          @controller.set('currentRecording', null)
+
+          expect(@controller.get('playing')).to.be.false
 
   describe 'actions', ->
     describe '+play', ->
@@ -84,26 +116,3 @@ describe 'PlayerController', ->
 
       context 'when the recording is the last one', ->
         it 'reloads recordings and sets the first one'
-
-  describe 'observers', ->
-    describe '+artistsDidChange', ->
-      context 'when artists change', ->
-        it 'sets currentRecording to null', ->
-          @controller.set('currentRecording', @recordings[0])
-
-          expect(@controller.get('currentRecording')).not.to.be.a('null')
-
-          @controller.set('artists', [])
-
-          expect(@controller.get('currentRecording')).to.be.a('null')
-
-    describe '+currentStateDidChange', ->
-      context 'when current state changes to stopped', ->
-        it 'sets current recording to null', ->
-          @controller.play()
-
-          expect(@controller.get('currentRecording')).not.to.be.a('null')
-
-          @controller.send('stop')
-
-          expect(@controller.get('currentRecording')).to.be.a('null')
