@@ -39,7 +39,7 @@ else
 
 nav#navbar-controls.navbar.navbar-default role="navigation"
   ul.nav.navbar-nav.navbar-left
-    li: a data-parent="#subbar" data-target="#genres" data-toggle="collapse" Genres
+    li: a data-parent="#subbar" data-target="#tags" data-toggle="collapse" Genres
     li: a data-parent="#subbar" data-target="#countries" data-toggle="collapse" Countries
 
   form.navbar-form.navbar-right role="search"
@@ -49,8 +49,8 @@ nav#navbar-controls.navbar.navbar-default role="navigation"
 
 #subbar.bricks-accordion
   .panel
-    #genres.bricks.collapse.row
-      each sortedGenres
+    #tags.bricks.collapse.row
+      each sortedTags
         .brick: a: = this
 
   .panel
