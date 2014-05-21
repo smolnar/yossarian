@@ -59,7 +59,7 @@ nav#navbar-controls.navbar.navbar-default role="navigation"
         .brick: a: = this
 
 #events.events
-  collection Yossarian.EventsListView contentBinding="content"
+  collection Yossarian.EventsCollectionView contentBinding="content"
     collection Yossarian.EventArtistsView artistsBinding="artists" tagName="div" class="event-slider"
       img{bind-attr src=image.image.large.url}
 
