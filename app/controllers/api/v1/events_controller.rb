@@ -7,6 +7,8 @@ module API::V1
         .includes(:performances, performances: [:event, artist: [recordings: :track]])
         .where(events: { id: @filter })
         .order(performances_count: :desc)
+        .offset(params[:page].to_i * 12)
+        .limit(12)
 
       respond_to do |format|
         format.json { render json: @events }
@@ -20,8 +22,6 @@ module API::V1
         .joins(:artists).joins(:recordings)
         .where.not(recordings: { youtube_url: nil })
         .where.not(artists: { image: nil })
-        .offset(params[:page].to_i * 12)
-        .limit(12)
         .uniq
 
       if params[:countries].present?
