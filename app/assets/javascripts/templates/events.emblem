@@ -44,7 +44,7 @@ nav#navbar-controls.navbar.navbar-default role="navigation"
 
   form.navbar-form.navbar-right role="search"
     .search
-      input.form-control type="text" placeholder="Search"
+      input.form-control type="text" placeholder="Search" value=query
       i.fa.fa-search
 
 #subbar.bricks-accordion
