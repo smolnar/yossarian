@@ -5,7 +5,7 @@ class Event
     module ClassMethods
       def search(term, options = {})
         query = <<-SQL
-          lower(musicbrainz_unaccent(title)) LIKE lower(musicbrainz_unaccent(:query))
+          lower(musicbrainz_unaccent(events.title)) LIKE lower(musicbrainz_unaccent(:query))
           OR
           lower(musicbrainz_unaccent(artists.name)) LIKE lower(musicbrainz_unaccent(:query))
         SQL

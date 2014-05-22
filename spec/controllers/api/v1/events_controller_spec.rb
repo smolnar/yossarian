@@ -93,5 +93,32 @@ describe API::V1::EventsController do
         expect(response).to be_success
       end
     end
+
+    context 'with page' do
+      before :each do
+        events = 15.times.map { create :event }
+
+        events.each do |event|
+          artist = create :artist, image: fixture('poster.jpg')
+
+          create :recording, artist: artist
+          create :performance, event: event, artist: artist
+        end
+      end
+
+      it 'paginates events' do
+        post :search, page: 0, format: :json
+
+        @events = assigns(:events)
+
+        expect(@events.size).to eql(12)
+
+        post :search, page: 1, format: :json
+
+        @events = assigns(:events)
+
+        expect(@events.size).to eql(6)
+      end
+    end
   end
 end

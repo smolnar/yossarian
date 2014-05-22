@@ -38,7 +38,7 @@ shared_examples_for Event::Searchable do
       results = Event.search('bom')
 
       expect(results.size).to eql(2)
-      expect(results.to_a).to eql(events[0..1])
+      expect(results.to_a.sort).to eql(events[0..1].sort)
     end
   end
 end
