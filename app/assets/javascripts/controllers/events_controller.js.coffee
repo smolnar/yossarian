@@ -5,6 +5,7 @@ Yossarian.EventsController = Ember.ArrayController.extend
   countries: ['Slovakia', 'Germany', 'France', 'England', 'Hungary', 'Poland']
 
   query:             null
+  queryTerm:         null
   selectedTags:      []
   selectedCountries: []
   currentPage:       0
@@ -23,11 +24,19 @@ Yossarian.EventsController = Ember.ArrayController.extend
     @get('player').set('event', @get('content').toArray()[0]) unless @get('player.event')
   ).observes('content.@each')
 
+  queryTermDidChange: (->
+    queryTerm = @get('queryTerm')
+
+    setTimeout (=>
+      @set('query', queryTerm) if @get('queryTerm') == queryTerm
+    ), 300
+  ).observes('queryTerm')
+
   propertiesForSearchDidChange: (->
     @set('currentPage', 0)
 
     @send('reload')
-  ).observes('selectedCountries.@each', 'selectedTags.@each', 'query')
+  ).observes('selectedCountries.@each', 'selectedTags.@each', 'query.length')
 
   actions:
     play: (event) ->
