@@ -1,6 +1,36 @@
 require 'spec_helper'
 
 describe Event do
+  it 'require title' do
+    event = build :event, title: nil
+
+    expect(event).not_to be_valid
+
+    event = build :event, title: 'Coachella'
+
+    expect(event).to be_valid
+  end
+
+  it 'requires latitude and longitude' do
+    event = build :event, venue_longitude: nil, venue_latitude: nil
+
+    expect(event).not_to be_valid
+
+    event = build :event, venue_longitude: 12, venue_latitude: 13
+
+    expect(event).to be_valid
+  end
+
+  it 'requires start date' do
+    event = build :event, starts_at: nil
+
+    expect(event).not_to be_valid
+
+    event = build :event, starts_at: Time.now
+
+    expect(event).to be_valid
+  end
+
   it 'requires poster' do
     DownloaderService.stub(:fetch) { nil }
 
@@ -32,6 +62,7 @@ describe Event do
         end
 
         expect(event.tags).to eql(['rock', 'grunge'])
+        expect(event.reload.tags).to eql(['rock', 'grunge'])
       end
     end
   end
@@ -104,8 +135,8 @@ describe Event do
         venue_city:              "Piešťany",
         venue_country:           "Slovakia",
         venue_street:            "",
-        starts_at:               Time.parse('2014-08-15 13:38:01 +0200'),
-        ends_at:                 Time.parse('2014-08-16 13:38:01 +0200'),
+        starts_at:               Time.utc('2014-08-15 13:38:01 +0200'),
+        ends_at:                 Time.utc('2014-08-16 13:38:01 +0200'),
         website:                 "http://www.grapefestival.sk/",
         lastfm_url:              "http://www.last.fm/festival/3705233+GRAPE+FESTIVAL+2014",
         lastfm_image_small:      "http://userserve-ak.last.fm/serve/34/36233633.jpg",
@@ -162,8 +193,8 @@ describe Event do
 
         event = Event.create_from_lastfm(params)
 
-        expect(event.created_at).to eql(Time.now)
-        expect(event.updated_at).to eql(Time.now)
+        expect(event.created_at.to_i).to eql(Time.now.to_i)
+        expect(event.updated_at.to_i).to eql(Time.now.to_i)
       end
     end
   end

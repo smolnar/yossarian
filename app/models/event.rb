@@ -18,7 +18,7 @@ class Event < ActiveRecord::Base
   mount_uploader :poster, PosterUploader
 
   scope :in, lambda { |countries| where(events: { venue_country: countries }) }
-  scope :with, lambda { |tags| where('events.tags::text[] && ARRAY[?]', tags) }
+  scope :with, lambda { |tags| where(tags.map { |name| '? = ANY(events.tags)' }.join(' OR '), *tags) }
 
   before_validation :set_poster
 
@@ -43,10 +43,6 @@ class Event < ActiveRecord::Base
     event
   end
 
-  def self.countries
-    Event.select(:venue_country).order(:venue_country).distinct.pluck(:venue_country)
-  end
-
   private
 
   def set_poster
@@ -56,16 +52,12 @@ class Event < ActiveRecord::Base
   end
 
   def set_tags
-    tags = self.tags || []
-
-    artists.each do |artist|
+    tags = artists.map do |artist|
       next unless artist.tags.present?
 
-      tag = artist.tags.first
-
-      tags << tag unless tags.include?(tag)
+      artist.tags.first
     end
 
-    self.tags = tags
+    self.tags = (self.tags.to_a + tags.to_a).uniq
   end
 end

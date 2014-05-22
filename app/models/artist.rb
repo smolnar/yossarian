@@ -10,8 +10,8 @@ class Artist < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
-  after_initialize :set_default_attributes
   before_validation :set_image
+  after_save :update_events
 
   def self.create_from_lastfm(data)
     artist     = find_or_initialize_by(name: data[:name])
@@ -30,16 +30,7 @@ class Artist < ActiveRecord::Base
     artist
   end
 
-  def self.tags
-    Artist.select('tags[1]').group('tags[1]').order('count_tags_1 desc').count
-  end
-
   private
-
-  def set_default_attributes
-    # TODO (smolnar) resolve why pg does not use default {} array
-    self.tags ||= []
-  end
 
   def set_image
     return if image.file.try(:exists?)
@@ -48,5 +39,9 @@ class Artist < ActiveRecord::Base
       lastfm_image_mega,
       lastfm_image_extralarge
     ].compact)
+  end
+
+  def update_events
+    events.reload.each(&:save!)
   end
 end
