@@ -68,7 +68,7 @@ afterEach ->
   try
     Ember.run -> App.reset()
   catch error
-    console.error("afterEach: #{Ember.inspect(error)}")
+    # console.error("afterEach: #{Ember.inspect(error)}")
 
   # Reset all test variables
   window.Test = {}

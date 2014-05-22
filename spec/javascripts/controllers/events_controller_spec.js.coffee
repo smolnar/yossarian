@@ -45,6 +45,9 @@ describe 'EventsController', ->
 
         @router.expects('send').withExactArgs('reload').once()
 
+      afterEach ->
+        expect(@controller.get('currentPage')).to.eql(0)
+
       context 'when selected counties changes', ->
         it 'reloads data and changes current page', ->
           @controller.send('toggleSelectionOfCountry', 'Slovakia')
@@ -53,7 +56,7 @@ describe 'EventsController', ->
         it 'reloads data and changes current page', ->
           @controller.send('toggleSelectionOfTag', 'rock')
 
-      context 'when selected counties changes', ->
+      context 'when query changes', ->
         it 'reloads data and changes current page', ->
           @controller.set('query', 'a')
 
