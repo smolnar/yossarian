@@ -31,8 +31,6 @@ describe Event do
           create :performance, event: event, artist: artist
         end
 
-        event.reload
-
         expect(event.tags).to eql(['rock', 'grunge'])
       end
     end
@@ -57,18 +55,11 @@ describe Event do
 
   describe '.with' do
     let(:events) { 3.times.map { create :event }}
-    let(:artists) { 3.times.map { create :artist }}
 
     before :each do
-      artists[0].update_attributes(tags: ['rock'])
-      artists[1].update_attributes(tags: ['rock', 'pop'])
-      artists[2].update_attributes(tags: ['dubstep'])
-
-      artists.each_with_index do |artist, index|
-        create :performance, artist: artist, event: events[index]
-      end
-
-      events.each(&:reload)
+      events[0].update_attributes(tags: ['rock'])
+      events[1].update_attributes(tags: ['rock', 'pop'])
+      events[2].update_attributes(tags: ['dubstep'])
     end
 
     it 'returns events having artist tag' do

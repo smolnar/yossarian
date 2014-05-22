@@ -10,6 +10,7 @@ class Artist < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
+  after_initialize :set_default_attributes
   before_validation :set_image
 
   def self.create_from_lastfm(data)
@@ -34,6 +35,11 @@ class Artist < ActiveRecord::Base
   end
 
   private
+
+  def set_default_attributes
+    # TODO (smolnar) resolve why pg does not use default {} array
+    self.tags ||= []
+  end
 
   def set_image
     return if image.file.try(:exists?)

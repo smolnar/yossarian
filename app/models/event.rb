@@ -56,12 +56,16 @@ class Event < ActiveRecord::Base
   end
 
   def set_tags
-    require 'pry'; binding.pry
+    tags = self.tags || []
 
     artists.each do |artist|
+      next unless artist.tags.present?
+
       tag = artist.tags.first
 
-      self.tags += [tag] unless self.tags.include?(tag)
+      tags << tag unless tags.include?(tag)
     end
+
+    self.tags = tags
   end
 end
