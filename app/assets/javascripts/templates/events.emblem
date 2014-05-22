@@ -49,14 +49,12 @@ nav#navbar-controls.navbar.navbar-default role="navigation"
 
 #subbar.bricks-accordion
   .panel
-    #tags.bricks.collapse.row
-      each sortedTags
-        .brick: a: = this
+    collection Yossarian.SelectableCollectionView id="tags" classNames="bricks collapse row" contentBinding="sortedTags" selectedBinding="selectedTags" action="toggleSelectionOfTag"
+      .brick{bind-attr class="view.itemClass"}: a: = this
 
   .panel
-    #countries.bricks.collapse.row
-      each sortedCountries
-        .brick: a: = this
+    collection Yossarian.SelectableCollectionView id="countries" classNames="bricks collapse row" contentBinding="sortedCountries" selectedBinding="selectedCountries" action="toggleSelectionOfCountry"
+      .brick{bind-attr class="view.itemClass"}: a: = this
 
 #events.events
   collection Yossarian.EventsCollectionView contentBinding="content"

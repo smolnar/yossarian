@@ -34,8 +34,14 @@ Yossarian.EventsController = Ember.ArrayController.extend
       @get('player').set('event', event)
       @get('player').play()
 
-    selectTag: (tag) ->
-      @get('selectedTags').pushObject(tag) if tag in @get('tags')
+    toggleSelectionOf: (value, options) ->
+      all       = options.in
+      selected  = options.for
 
-    selectCountry: (country) ->
-      @get('selectedCountries').pushObject(country) if country in @get('countries')
+      if value in @get(all) && value not in @get(selected)
+        @get(selected).pushObject(value)
+      else
+        @get(selected).removeObject(value)
+
+    toggleSelectionOfTag: (tag) -> @send('toggleSelectionOf', tag, in: 'tags', for: 'selectedTags')
+    toggleSelectionOfCountry: (country) -> @send('toggleSelectionOf', country, in: 'countries', for: 'selectedCountries')

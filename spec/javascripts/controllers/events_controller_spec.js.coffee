@@ -40,16 +40,18 @@ describe 'EventsController', ->
 
         @controller.set('currentPage', 1)
         @controller.set('target', router.object)
+        @controller.set('countries', ['Slovakia'])
+        @controller.set('tags', ['rock'])
 
         @router.expects('send').withExactArgs('reload').once()
 
       context 'when selected counties changes', ->
         it 'reloads data and changes current page', ->
-          @controller.send('selectCountry', 'Slovakia')
+          @controller.send('toggleSelectionOfCountry', 'Slovakia')
 
       context 'when selected tags changes', ->
         it 'reloads data and changes current page', ->
-          @controller.send('selectTag', 'rock')
+          @controller.send('toggleSelectionOfTag', 'rock')
 
       context 'when selected counties changes', ->
         it 'reloads data and changes current page', ->
@@ -78,13 +80,13 @@ describe 'EventsController', ->
           expect(artists.get('length')).to.eql(0)
           expect(player.get('artists')).to.eql(event.get('artists'))
 
-    describe '+selectTag', ->
+    describe '+toggleSelectionOfTag', ->
       it 'selects multiple tags', ->
         @controller.set('selectedTags', [])
         @controller.set('tags', ['indie', 'rock', 'electronic'])
 
-        @controller.send('selectTag', 'indie')
-        @controller.send('selectTag', 'rock')
+        @controller.send('toggleSelectionOfTag', 'indie')
+        @controller.send('toggleSelectionOfTag', 'rock')
 
         expect(@controller.get('selectedTags.length')).to.eql(2)
         expect(@controller.get('selectedTags')).to.include('indie')
@@ -94,27 +96,38 @@ describe 'EventsController', ->
         it 'selects a tag', ->
           @controller.set('tags', ['indie', 'rock'])
 
-          @controller.send('selectTag', 'indie')
+          @controller.send('toggleSelectionOfTag', 'indie')
 
           expect(@controller.get('selectedTags')).to.include('indie')
+
+      context 'when tag is already selected', ->
+        it 'deselects a tag', ->
+          @controller.set('tags', ['indie', 'rock'])
+
+          @controller.send('toggleSelectionOfTag', 'indie')
+
+          Ember.run.later =>
+            @controller.send('toggleSelectionOfTag', 'indie')
+
+          expect(@controller.get('selectedTags')).not.to.include('indie')
 
       context 'when tag is not in the list of tags', ->
         it 'does not select a tag', ->
           @controller.set('tags', ['indie', 'rock'])
 
-          @controller.send('selectTag', 'pop')
+          @controller.send('toggleSelectionOfTag', 'pop')
 
           expect(@controller.get('selectedTags')).not.to.include('pop')
 
-    describe '+selectCountry', ->
+    describe '+toggleSelectionOfCountry', ->
       beforeEach ->
         @controller.set('selectedCountries', [])
 
       it 'selects multiple countries', ->
         @controller.set('countries', ['Slovakia', 'Norway', 'Austria'])
 
-        @controller.send('selectCountry', 'Slovakia')
-        @controller.send('selectCountry', 'Norway')
+        @controller.send('toggleSelectionOfCountry', 'Slovakia')
+        @controller.send('toggleSelectionOfCountry', 'Norway')
 
         expect(@controller.get('selectedCountries.length')).to.eql(2)
         expect(@controller.get('selectedCountries')).to.include('Slovakia')
@@ -124,14 +137,23 @@ describe 'EventsController', ->
         it 'selects a country', ->
           @controller.set('countries', ['Slovakia', 'Norway'])
 
-          @controller.send('selectCountry', 'Slovakia')
+          @controller.send('toggleSelectionOfCountry', 'Slovakia')
 
           expect(@controller.get('selectedCountries')).to.include('Slovakia')
+
+      context 'when country is already selected', ->
+        it 'deselects the country', ->
+          @controller.set('countries', ['Slovakia', 'Norway'])
+
+          @controller.send('toggleSelectionOfCountry', 'Slovakia')
+          @controller.send('toggleSelectionOfCountry', 'Slovakia')
+
+          expect(@controller.get('selectedCountries')).not.to.include('Slovakia')
 
       context 'when country is not in the list of countries', ->
         it 'does not select a country', ->
           @controller.set('countries', ['Slovakia', 'Norway'])
 
-          @controller.send('selectCountry', 'Hungary')
+          @controller.send('toggleSelectionOfCountry', 'Hungary')
 
           expect(@controller.get('selectedCountries')).not.to.include('Hungary')
