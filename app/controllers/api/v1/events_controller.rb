@@ -5,9 +5,9 @@ module API::V1
         .includes(:performances, performances: [:event, artist: [recordings: :track]])
         .where.not(recordings: { youtube_url: nil })
         .where.not(artists: { image: nil })
-        .where.not(events: { id: params[:except] })
         .references(:recordings, :artists)
         .order(performances_count: :desc)
+        .offset(params[:page].to_i * 12)
         .limit(12)
 
       if params[:countries].present?

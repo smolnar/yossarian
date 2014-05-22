@@ -1,4 +1,5 @@
 class Event < ActiveRecord::Base
+  include Searchable
   include Event::Geocoding
 
   validates :title,           presence: true
@@ -17,7 +18,7 @@ class Event < ActiveRecord::Base
   mount_uploader :poster, PosterUploader
 
   scope :in, lambda { |countries| where(events: { venue_country: countries }) }
-  scope :with, lambda { |tags| joins(:artists).where(tags.map { |name| '? = ANY(artists.tags)' }.join(' OR '), *tags).uniq }
+  scope :with, lambda { |tags| joins(:artists).where('artists.tags::text[] && ARRAY[?]', tags) }
 
   before_validation :set_poster
 

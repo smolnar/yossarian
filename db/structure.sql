@@ -317,6 +317,13 @@ ALTER TABLE ONLY tracks
 
 
 --
+-- Name: index_artists_on_tags; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_artists_on_tags ON artists USING gin (tags);
+
+
+--
 -- Name: index_artists_unaccented_lowercased_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -328,6 +335,13 @@ CREATE INDEX index_artists_unaccented_lowercased_name ON artists USING btree (lo
 --
 
 CREATE INDEX index_events_on_title ON events USING btree (title);
+
+
+--
+-- Name: index_events_on_venue_country; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_events_on_venue_country ON events USING btree (venue_country);
 
 
 --
@@ -421,4 +435,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140420235151');
 INSERT INTO schema_migrations (version) VALUES ('20140521101620');
 
 INSERT INTO schema_migrations (version) VALUES ('20140521101840');
+
+INSERT INTO schema_migrations (version) VALUES ('20140522003206');
 

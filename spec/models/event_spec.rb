@@ -63,6 +63,21 @@ describe Event do
     end
   end
 
+  describe '.search_by' do
+    it 'searches event by title' do
+      events = [
+        create(:event, title: 'Pohoda 2014'),
+        create(:event, title: 'Bažant Pohoda 2015'),
+        create(:event, title: 'Coachella')
+      ]
+
+      results = Event.search_by(title: 'bazant')
+
+      expect(results.size).to eql(1)
+      expect(results.first).to eql(events[1])
+    end
+  end
+
   describe '.create_from_lastfm' do
     let(:data) {
       {
