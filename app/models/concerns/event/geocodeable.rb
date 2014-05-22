@@ -1,5 +1,5 @@
 class Event
-  module Geocoding
+  module Geocodeable
     extend ActiveSupport::Concern
 
     included do

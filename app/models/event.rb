@@ -1,6 +1,7 @@
 class Event < ActiveRecord::Base
   include Searchable
-  include Event::Geocoding
+  include Event::Buildable
+  include Event::Geocodeable
 
   validates :title,           presence: true
   validates :venue_longitude, presence: true
@@ -23,25 +24,6 @@ class Event < ActiveRecord::Base
   before_validation :set_poster
 
   before_save :set_tags
-
-  def self.create_from_lastfm(data)
-    data  = data.symbolize_keys
-    event = find_by(lastfm_uuid: data[:lastfm_uuid]) || find_or_initialize_by(title: data[:title])
-
-    attributes = (data.keys & columns.map { |c| c.name.to_sym }) - [:created_at, :updated_at]
-
-    event.attributes = data.slice(*attributes)
-
-    event.save!
-
-    data[:artists].each do |name|
-      artist = Artist.find_or_create_by!(name: name)
-
-      Performance.find_or_create_by!(artist: artist, event: event, headliner: data[:headliner] == name)
-    end
-
-    event
-  end
 
   private
 
