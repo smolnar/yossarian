@@ -318,10 +318,10 @@ ALTER TABLE ONLY tracks
 
 
 --
--- Name: index_artists_unaccented_lowercased_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_artists_on_unaccented_lowercased_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_artists_unaccented_lowercased_name ON artists USING btree (lower(musicbrainz_unaccent((name)::text)));
+CREATE INDEX index_artists_on_unaccented_lowercased_name ON artists USING btree (lower(musicbrainz_unaccent((name)::text)));
 
 
 --
@@ -339,17 +339,17 @@ CREATE INDEX index_events_on_title ON events USING btree (title);
 
 
 --
+-- Name: index_events_on_unaccented_lowercased_title; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_events_on_unaccented_lowercased_title ON events USING btree (lower(musicbrainz_unaccent((title)::text)));
+
+
+--
 -- Name: index_events_on_venue_country; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_events_on_venue_country ON events USING btree (venue_country);
-
-
---
--- Name: index_events_unaccented_lowercased_title; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_events_unaccented_lowercased_title ON events USING btree (lower(musicbrainz_unaccent((title)::text)));
 
 
 --
