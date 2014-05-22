@@ -17,6 +17,27 @@ describe Event do
     expect(event.poster.file).not_to be_nil
   end
 
+  describe 'callbacks' do
+    describe '#set_tags' do
+      it 'sets first tags from artists' do
+        event   = create :event
+        artists = [
+          create(:artist, tags: ['rock', 'pop']),
+          create(:artist, tags: ['rock', 'indie']),
+          create(:artist, tags: ['grunge'])
+        ]
+
+        artists.each do |artist|
+          create :performance, event: event, artist: artist
+        end
+
+        event.reload
+
+        expect(event.tags).to eql(['rock', 'grunge'])
+      end
+    end
+  end
+
   describe '.in' do
     before :each do
       create :event, venue_country: 'Slovakia'
@@ -46,6 +67,8 @@ describe Event do
       artists.each_with_index do |artist, index|
         create :performance, artist: artist, event: events[index]
       end
+
+      events.each(&:reload)
     end
 
     it 'returns events having artist tag' do

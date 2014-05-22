@@ -18,9 +18,11 @@ class Event < ActiveRecord::Base
   mount_uploader :poster, PosterUploader
 
   scope :in, lambda { |countries| where(events: { venue_country: countries }) }
-  scope :with, lambda { |tags| joins(:artists).where('artists.tags::text[] && ARRAY[?]', tags) }
+  scope :with, lambda { |tags| where('events.tags::text[] && ARRAY[?]', tags) }
 
   before_validation :set_poster
+
+  before_save :set_tags
 
   def self.create_from_lastfm(data)
     data  = data.symbolize_keys
@@ -51,5 +53,15 @@ class Event < ActiveRecord::Base
     return if poster.file.try(:exists?)
 
     self.poster = DownloaderService.fetch([lastfm_image_extralarge, lastfm_image_medium, lastfm_image_small].compact)
+  end
+
+  def set_tags
+    require 'pry'; binding.pry
+
+    artists.each do |artist|
+      tag = artist.tags.first
+
+      self.tags += [tag] unless self.tags.include?(tag)
+    end
   end
 end

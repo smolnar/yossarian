@@ -58,7 +58,7 @@ CREATE TABLE artists (
     lastfm_image_large character varying(255),
     lastfm_image_extralarge character varying(255),
     lastfm_image_mega character varying(255),
-    tags character varying(255)[],
+    tags character varying(255)[] DEFAULT NULL::character varying[],
     lastfm_summary character varying(255),
     created_at timestamp without time zone,
     updated_at timestamp without time zone
@@ -112,7 +112,8 @@ CREATE TABLE events (
     poster character varying(255) NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    performances_count integer DEFAULT 0 NOT NULL
+    performances_count integer DEFAULT 0 NOT NULL,
+    tags character varying(255)[] DEFAULT NULL::character varying[]
 );
 
 
@@ -317,17 +318,17 @@ ALTER TABLE ONLY tracks
 
 
 --
--- Name: index_artists_on_tags; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_artists_on_tags ON artists USING gin (tags);
-
-
---
 -- Name: index_artists_unaccented_lowercased_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_artists_unaccented_lowercased_name ON artists USING btree (lower(musicbrainz_unaccent((name)::text)));
+
+
+--
+-- Name: index_events_on_tags; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_events_on_tags ON events USING gin (tags);
 
 
 --
@@ -436,5 +437,11 @@ INSERT INTO schema_migrations (version) VALUES ('20140521101620');
 
 INSERT INTO schema_migrations (version) VALUES ('20140521101840');
 
-INSERT INTO schema_migrations (version) VALUES ('20140522003206');
+INSERT INTO schema_migrations (version) VALUES ('20140522085916');
+
+INSERT INTO schema_migrations (version) VALUES ('20140522091059');
+
+INSERT INTO schema_migrations (version) VALUES ('20140522092124');
+
+INSERT INTO schema_migrations (version) VALUES ('20140522092137');
 
