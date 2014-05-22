@@ -16,14 +16,13 @@ class Event < ActiveRecord::Base
   has_many :recordings, -> { where.not(youtube_url: nil) }, through: :artists
   has_many :tracks, through: :recordings
 
-  mount_uploader :poster, PosterUploader
-
   scope :in, lambda { |countries| where(events: { venue_country: countries }) }
   scope :with, lambda { |tags| where(tags.map { |name| '? = ANY(events.tags)' }.join(' OR '), *tags) }
 
   before_validation :set_poster
-
   before_save :set_tags
+
+  mount_uploader :poster, PosterUploader
 
   private
 
@@ -40,6 +39,6 @@ class Event < ActiveRecord::Base
       artist.tags.first
     end
 
-    self.tags = (self.tags.to_a + tags.to_a).uniq
+    self.tags = (self.tags.to_a + tags.to_a).compact.uniq
   end
 end

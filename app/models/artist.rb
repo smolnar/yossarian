@@ -10,10 +10,10 @@ class Artist < ActiveRecord::Base
   has_many :recordings
   has_many :tracks, through: :recordings
 
-  mount_uploader :image, ImageUploader
-
   before_validation :set_image
   after_save :update_events
+
+  mount_uploader :image, ImageUploader
 
   private
 
