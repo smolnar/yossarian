@@ -6,7 +6,7 @@ Listen to your festival.
 
 * Ruby 2.1
 * Rails 4.1
-* PostgreSQL 9.3 with [MusicBrainz Unaccent](https://github.com/metabrainz/postgresql-musicbrainz-unaccent).
+* PostgreSQL 9.3 with [MusicBrainz Unaccent](https://github.com/metabrainz/postgresql-musicbrainz-unaccent)
 * Redis
 * PhantomJS
 
@@ -31,9 +31,12 @@ Install MusicBrainz extension.
 
 ```
 sudo apt-get install postgresql-server-dev-9.3
-cd path/to/unzipped/extension
+git clone git@github.com:metabrainz/postgresql-musicbrainz-unaccent.git
+cd postgresql-musicbrainz-unaccent
 make
 sudo make install
+cd ..
+rm -rf postgresql-musicbrainz-unaccent
 ```
 
 Create database.
