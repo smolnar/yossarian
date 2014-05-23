@@ -3,7 +3,7 @@ namespace :yossarian do
   task festivals: :environment do
     Lastfm::Events.factory = Yossarian::EventFactory
 
-    Lastfm::Events.get(location: :slovakia, festivalsonly: 1, limit: 100)
+    Lastfm::Events.get(location: :europe, festivalsonly: 1, limit: 100)
   end
 
   desc 'Get artists'
