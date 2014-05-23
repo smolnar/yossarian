@@ -12,7 +12,7 @@ Yossarian.EventArtistsView = Ember.CollectionView.extend
     @$().nivoSlider
       effect: 'slideInRight'
       animSpeed: 400
-      pauseTime: Math.random() * (10000 - 3000) + 5000
+      pauseTime: Math.random() * (20000 - 3000) + 3000
       directionNav: false
       controlNav: false
       pauseOnHover: true
