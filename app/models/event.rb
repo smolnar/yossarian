@@ -21,6 +21,7 @@ class Event < ActiveRecord::Base
 
   before_validation :set_poster
   before_save :set_tags
+  before_save :set_notable_performances_count
 
   mount_uploader :poster, PosterUploader
 
@@ -40,5 +41,9 @@ class Event < ActiveRecord::Base
     end
 
     self.tags = (self.tags.to_a + tags.to_a).compact.uniq
+  end
+
+  def set_notable_performances_count
+    self.notable_performances_count = performances.joins(:artist, artist: [:recordings]).where.not(artists: { image: nil }, recordings: { youtube_url: nil }).count
   end
 end

@@ -113,7 +113,8 @@ CREATE TABLE events (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     performances_count integer DEFAULT 0 NOT NULL,
-    tags character varying(255)[] DEFAULT NULL::character varying[]
+    tags character varying(255)[] DEFAULT NULL::character varying[],
+    notable_performances_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -444,4 +445,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140522091059');
 INSERT INTO schema_migrations (version) VALUES ('20140522092124');
 
 INSERT INTO schema_migrations (version) VALUES ('20140522092137');
+
+INSERT INTO schema_migrations (version) VALUES ('20140523164505');
 
