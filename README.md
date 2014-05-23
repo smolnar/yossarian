@@ -6,7 +6,7 @@ Listen to your festival.
 
 * Ruby 2.1
 * Rails 4.1
-* PostgreSQL 9.3 with [MusicBrainz Unaccent]() Extension (https://github.com/metabrainz/postgresql-musicbrainz-unaccent) 
+* PostgreSQL 9.3 with [MusicBrainz Unaccent](https://github.com/metabrainz/postgresql-musicbrainz-unaccent).
 * Redis
 * PhantomJS
 
