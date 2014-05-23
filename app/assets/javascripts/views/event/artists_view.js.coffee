@@ -5,16 +5,14 @@ Yossarian.EventArtistsView = Ember.CollectionView.extend
   attributeBindings: ['artists']
 
   contentDidChange: (->
-    @set('content', @get('artists')[0..2])
+    @set('content', @get('artists'))
   ).observes('artists').on('init')
 
   didInsertElement: ->
-    $(document).ready =>
-      @$().nivoSlider
-        effect: 'slideInRight'
-        animSpeed: 400
-        pauseTime: Math.random() * (10000 - 3000) + 5000
-        directionNav: false
-        controlNav: false
-        pauseOnHover: true
-        randomStart: true
+    @$().nivoSlider
+      effect: 'slideInRight'
+      animSpeed: 400
+      pauseTime: Math.random() * (10000 - 3000) + 5000
+      directionNav: false
+      controlNav: false
+      pauseOnHover: true

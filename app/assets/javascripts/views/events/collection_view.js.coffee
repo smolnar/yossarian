@@ -15,11 +15,11 @@ Yossarian.EventItemView = Ember.View.extend
 
   open: ->
     @$().find('.info').addClass('active')
-    @$().find('.nivoSlider').data('nivoslider').stop()
+    @$().find('.nivoSlider').data('nivoslider')?.stop()
 
   close: ->
     @$().find('.info').removeClass('active')
-    @$().find('.nivoSlider').data('nivoslider').start()
+    @$().find('.nivoSlider').data('nivoslider')?.start()
 
 Yossarian.EventsCollectionView = Ember.CollectionView.extend
   selected: null
