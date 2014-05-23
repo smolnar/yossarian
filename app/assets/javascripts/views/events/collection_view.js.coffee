@@ -15,10 +15,12 @@ Yossarian.EventItemView = Ember.View.extend
 
   open: ->
     @$().find('.info').addClass('active')
+    @$().find('.nivo-caption').fadeOut(400)
     @$().find('.nivoSlider').data('nivoslider')?.stop()
 
   close: ->
     @$().find('.info').removeClass('active')
+    @$().find('.nivo-caption').fadeIn(400)
     @$().find('.nivoSlider').data('nivoslider')?.start()
 
 Yossarian.EventsCollectionView = Ember.CollectionView.extend
