@@ -3,6 +3,7 @@
 #= require bootstrap
 #= require mapbox
 #= require nivo
+#= require moment
 
 #= require handlebars
 #= require ember

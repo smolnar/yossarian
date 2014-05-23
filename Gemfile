@@ -41,6 +41,7 @@ gem 'bootstrap-sass', '~> 3.1.1'
 gem 'font-awesome-rails', '~> 4.0.3'
 
 # Javascripts
+gem 'momentjs-rails'
 gem 'ember-rails'
 gem 'emblem-rails'
 gem 'ember-source', '1.6.0.beta.2'
