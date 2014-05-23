@@ -42,17 +42,6 @@ describe 'PlayerController', ->
       expect(@controller.get('currentRecording')).to.eql(@controller.get('recordings')[0])
 
   describe 'observers', ->
-    describe '+artistsDidChange', ->
-      context 'when artists change', ->
-        it 'sets currentRecording to null', ->
-          @controller.set('currentRecording', @recordings[0])
-
-          expect(@controller.get('currentRecording')).not.to.be.a('null')
-
-          @controller.set('artists', [])
-
-          expect(@controller.get('currentRecording')).to.be.a('null')
-
     describe '+currentStateDidChange', ->
       context 'when current state changes to stopped', ->
         it 'sets current recording to null', ->
