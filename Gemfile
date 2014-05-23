@@ -60,6 +60,8 @@ gem 'whenever'
 # Sidekiq/web
 gem 'sinatra', '>= 1.3.0', require: nil
 
+gem 'unicorn'
+
 group :development, :test do
   # debugging
   gem 'pry'
@@ -84,4 +86,3 @@ group :development, :test do
   gem 'sinon-rails'
   gem 'rogue-girl-rails'
 end
-
