@@ -13,6 +13,10 @@ test:
   <<: *default
   database: yossarian_test
 
+staging:
+  <<: *default
+  database: yossarian_staging
+
 production:
   <<: *default
   database: yossarian_production

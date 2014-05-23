@@ -49,8 +49,16 @@ gem 'ember_script-rails'
 gem 'mapbox-rails'
 gem 'nivo-rails'
 
-# for sidekiq/web
-gem 'sinatra', '>= 1.3.0', :require => nil
+# Deployment
+gem 'capistrano', '~> 2.15.5'
+gem 'capistrano-ext'
+gem 'rvm-capistrano'
+
+# Scheduling
+gem 'whenever'
+
+# Sidekiq/web
+gem 'sinatra', '>= 1.3.0', require: nil
 
 group :development, :test do
   # debugging
@@ -76,16 +84,4 @@ group :development, :test do
   gem 'sinon-rails'
   gem 'rogue-girl-rails'
 end
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
 

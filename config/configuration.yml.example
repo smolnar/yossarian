@@ -14,5 +14,8 @@ test:
   lastfm:
     apikey: 'test'
 
+staging:
+  <<: *defaults
+
 production:
   <<: *defaults
