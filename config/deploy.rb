@@ -72,6 +72,7 @@ namespace :deploy do
   task :symlink_shared, roles: :app do
     run "ln -nfs #{shared_path} #{release_path}/shared"
     run "for file in #{shared_path}/config/*.yml; do ln -nfs $file #{release_path}/config; done"
+    run "for file in #{shared_path}/public/*; do ln -nfs $file #{release_path}/public; done"
   end
 
   after 'deploy',             'deploy:cleanup'
