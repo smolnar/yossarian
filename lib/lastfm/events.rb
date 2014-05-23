@@ -20,7 +20,7 @@ module Lastfm
       url    = "#{Lastfm.config.events.url}&format=json&#{query}"
 
       begin
-        response         = downloader.download(url)
+        response         = downloader.download(URI.encode(url))
         metadata, events = parser.parse(response)
 
         return unless events

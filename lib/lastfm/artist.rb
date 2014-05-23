@@ -18,13 +18,13 @@ module Lastfm
       query = params.map { |key, value| "#{key}=#{value}" }.join('&')
       url   = "#{Lastfm.config.artist.url}&format=json&#{query}"
 
-      response = downloader.download(url)
+      response = downloader.download(URI.encode(url))
       artist   = parser.parse(response)
 
       return unless artist
 
       url      = "#{Lastfm.config.artist.tracks.url}&format=json&#{query}"
-      response = downloader.download(url)
+      response = downloader.download(URI.encode(url))
 
       artist.merge!(tracks: parser.parse_tracks(response))
 
