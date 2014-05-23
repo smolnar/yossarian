@@ -6,7 +6,9 @@ Listen to your festival.
 
 * Ruby 2.1
 * Rails 4.1
-* PostgreSQL 9.3
+* PostgreSQL 9.3 with [MusicBrainz Unaccent]() Extension (https://github.com/metabrainz/postgresql-musicbrainz-unaccent) 
+* Redis
+* PhantomJS
 
 ## Installation
 
@@ -25,15 +27,25 @@ cp config/configuration.{yml.example,yml}
 cp config/database.{yml.example,yml}
 ```
 
+Install MusicBrainz extension.
+
+```
+sudo apt-get install postgresql-server-dev-9.3
+cd path/to/unzipped/extension
+make
+sudo make install
+```
+
 Create database.
 
 ```
 RAILS_ENV=development rake db:create
+RAILS_ENV=development rake db:migrate
 ```
 
 ## Testing
 
-Run specs with `bundle exec rspec`.
+Run specs with `bundle exec rspec` for Rails specs and `bin/konacha` for javascripts specs.
 
 ## Contributing
 
