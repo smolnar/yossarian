@@ -94,5 +94,11 @@ footer
 
   .list-center
     ul
+      li: a href="mailto:contact@festup.eu" Contact
       li: a href="https://github.com/smolnar/yossarian" GitHub
       li: a href="https://last.fm" Last.fm
+  hr 
+
+  .list-center
+    ul
+      li: span.small Events and videos are downloaded automaticlly and may contain inaccuracies.
