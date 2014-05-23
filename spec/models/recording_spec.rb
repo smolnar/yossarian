@@ -1,8 +1,8 @@
 require 'spec_helper'
-require 'models/concerns/recording/buildable_spec'
+require 'models/concerns/recordings/buildable_spec'
 
 describe Recording do
-  it_behaves_like Recording::Buildable
+  it_behaves_like Recordings::Buildable
 
   it 'belongs to artist' do
     pending

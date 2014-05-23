@@ -1,5 +1,5 @@
 class Recording < ActiveRecord::Base
-  include Recording::Buildable
+  include Recordings::Buildable
 
   belongs_to :track
   belongs_to :artist

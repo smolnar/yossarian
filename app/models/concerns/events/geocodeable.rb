@@ -1,4 +1,4 @@
-class Event
+module Events
   module Geocodeable
     extend ActiveSupport::Concern
 

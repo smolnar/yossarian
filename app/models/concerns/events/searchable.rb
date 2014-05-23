@@ -1,4 +1,4 @@
-class Event
+module Events
   module Searchable
     extend ActiveSupport::Concern
 

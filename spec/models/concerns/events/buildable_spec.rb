@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-shared_examples_for Event::Buildable do
+shared_examples_for Events::Buildable do
   describe '.create_from_lastfm' do
     let(:data) {
       {

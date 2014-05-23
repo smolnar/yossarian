@@ -1,4 +1,4 @@
-class Recording
+module Recordings
   module Buildable
     extend ActiveSupport::Concern
 

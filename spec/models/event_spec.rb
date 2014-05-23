@@ -1,10 +1,10 @@
 require 'spec_helper'
-require 'models/concerns/event/buildable_spec'
-require 'models/concerns/event/searchable_spec'
+require 'models/concerns/events/buildable_spec'
+require 'models/concerns/events/searchable_spec'
 
 describe Event do
-  it_behaves_like Event::Buildable
-  it_behaves_like Event::Searchable
+  it_behaves_like Events::Buildable
+  it_behaves_like Events::Searchable
 
   it 'require title' do
     event = build :event, title: nil

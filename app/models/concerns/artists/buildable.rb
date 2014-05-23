@@ -1,4 +1,4 @@
-class Artist
+module Artists
   module Buildable
     extend ActiveSupport::Concern
 

@@ -1,5 +1,5 @@
 class Artist < ActiveRecord::Base
-  include Artist::Buildable
+  include Artists::Buildable
 
   validates :name,  presence: true
 

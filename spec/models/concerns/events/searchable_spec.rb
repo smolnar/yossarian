@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-shared_examples_for Event::Searchable do
+shared_examples_for Events::Searchable do
   describe '.search' do
     it 'searches event by title' do
       events = [

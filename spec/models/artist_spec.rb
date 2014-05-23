@@ -1,8 +1,8 @@
 require 'spec_helper'
-require 'models/concerns/artist/buildable_spec'
+require 'models/concerns/artists/buildable_spec'
 
 describe Artist do
-  it_behaves_like Artist::Buildable
+  it_behaves_like Artists::Buildable
 
   it 'stores image' do
     DownloaderService.stub(:fetch) { fixture('poster.jpg') }

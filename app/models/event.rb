@@ -1,7 +1,7 @@
 class Event < ActiveRecord::Base
-  include Searchable
-  include Event::Buildable
-  include Event::Geocodeable
+  include Events::Searchable
+  include Events::Buildable
+  include Events::Geocodeable
 
   validates :title,           presence: true
   validates :venue_longitude, presence: true

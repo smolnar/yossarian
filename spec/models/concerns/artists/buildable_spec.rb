@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-shared_examples_for Artist::Buildable do
+shared_examples_for Artists::Buildable do
   describe '.create_from_lastfm' do
     let(:data) {
       {
