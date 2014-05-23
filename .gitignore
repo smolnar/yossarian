@@ -22,3 +22,4 @@ public/uploads
 
 database.yml
 configuration.yml
+secrets.yml
