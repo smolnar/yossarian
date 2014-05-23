@@ -4,6 +4,6 @@ class EventSerializer < ActiveModel::Serializer
   has_many :performances, embed: :ids, include: true
 
   def performances
-    object.performances.sort_by(&:id)
+    object.performances.select { |performance| performance.artist.image }.sort_by(&:id)
   end
 end
