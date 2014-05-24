@@ -21,7 +21,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Uploaders
-gem 'rmagick', '2.13.2'
+gem 'mini_magick'
 gem 'carrierwave'
 
 # Serialization

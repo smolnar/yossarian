@@ -58,7 +58,7 @@ CREATE TABLE artists (
     lastfm_image_large character varying(255),
     lastfm_image_extralarge character varying(255),
     lastfm_image_mega character varying(255),
-    tags character varying(255)[] DEFAULT NULL::character varying[],
+    tags character varying(255)[] DEFAULT '{}'::character varying[],
     lastfm_summary character varying(255),
     created_at timestamp without time zone,
     updated_at timestamp without time zone
@@ -113,7 +113,7 @@ CREATE TABLE events (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     performances_count integer DEFAULT 0 NOT NULL,
-    tags character varying(255)[] DEFAULT NULL::character varying[],
+    tags character varying(255)[] DEFAULT '{}'::character varying[],
     notable_performances_count integer DEFAULT 0 NOT NULL
 );
 
