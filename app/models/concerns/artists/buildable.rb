@@ -12,6 +12,8 @@ module Artists
         artist.save!
 
         data[:tracks].each do |name|
+          next unless name.present?
+
           track = Track.find_or_create_by!(name: name)
 
           Recording.find_or_create_by!(artist: artist, track: track)

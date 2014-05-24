@@ -14,6 +14,8 @@ module Events
         event.save!
 
         data[:artists].each do |name|
+          next unless name.present?
+
           artist = Artist.find_or_create_by!(name: name)
 
           Performance.find_or_create_by!(artist: artist, event: event, headliner: data[:headliner] == name)

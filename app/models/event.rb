@@ -34,13 +34,9 @@ class Event < ActiveRecord::Base
   end
 
   def set_tags
-    tags = artists.map do |artist|
-      next unless artist.tags.present?
+    tags = artists.map { |artist| artist.tags.first }
 
-      artist.tags.first
-    end
-
-    self.tags = (self.tags.to_a + tags.to_a).compact.uniq
+    self.tags = (self.tags + tags).compact.uniq
   end
 
   def set_notable_performances_count
