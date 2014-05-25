@@ -4,7 +4,7 @@ class AddDefaultValuesToArrays < ActiveRecord::Migration
     change_column :artists, :tags, :string, array: true, default: '{}'
   end
 
-  def up
+  def down
     change_column :events,  :tags, :string, array: true, default: nil
     change_column :artists, :tags, :string, array: true, default: nil
   end
