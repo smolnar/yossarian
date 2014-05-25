@@ -319,6 +319,13 @@ ALTER TABLE ONLY tracks
 
 
 --
+-- Name: index_artists_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_artists_on_name ON artists USING btree (name);
+
+
+--
 -- Name: index_artists_on_unaccented_lowercased_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -400,6 +407,13 @@ CREATE INDEX index_recordings_on_track_id ON recordings USING btree (track_id);
 --
 
 CREATE UNIQUE INDEX index_recordings_on_track_id_and_artist_id ON recordings USING btree (track_id, artist_id);
+
+
+--
+-- Name: index_recordings_on_youtube_url; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_recordings_on_youtube_url ON recordings USING btree (youtube_url);
 
 
 --

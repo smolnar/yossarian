@@ -10,5 +10,6 @@ class CreateRecordings < ActiveRecord::Migration
     end
 
     add_index :recordings, [:track_id, :artist_id], unique: true
+    add_index :recordings, :youtube_url
   end
 end
