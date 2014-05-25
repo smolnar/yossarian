@@ -11,9 +11,7 @@ Yossarian.EventsRoute = Ember.Route.extend
         countries: controller.get('selectedCountries')
         page: controller.get('currentPage')
       success: (data) =>
-        if options.reload?
-          @store.unloadAll('event')
-
+        @store.unloadAll('event')
         @store.pushPayload('event', data)
 
         controller.set('content', @store.all('event'))
@@ -24,12 +22,5 @@ Yossarian.EventsRoute = Ember.Route.extend
   actions:
     reload: ->
       controller = @controllerFor('events')
-
-      @loadData(controller, reload: true)
-
-    loadMore: ->
-      controller = @controllerFor('events')
-
-      controller.set('currentPage', controller.get('currentPage') + 1)
 
       @loadData(controller)

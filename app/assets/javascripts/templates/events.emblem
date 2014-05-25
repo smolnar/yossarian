@@ -65,7 +65,7 @@ nav#navbar-controls.navbar.navbar-default role="navigation"
       h2.title: = title
 
       .venue
-        | #{venue_name!} &middot; #{venue_city!} &middot; #{!venue_country}
+        | #{venue_name!} &middot; #{venue_city!} &middot; #{venue_country!}
 
       .date
         if endsAt
@@ -81,7 +81,11 @@ nav#navbar-controls.navbar.navbar-default role="navigation"
       button.btn.btn-primary{action 'play' this}
         i.fa.fa-play
 
-button.btn.btn-more{action 'loadMore'} More
+view Yossarian.EventsPaginationView currentPageBinding="currentPage" class="row"
+  a.col-md-6.text-center.btn.btn-paginate{action 'previous'}
+      span: | Previous
+  a.col-md-6.text-center.btn.btn-paginate{action 'next'}
+      span: | Next
 
 footer
   .list-center
