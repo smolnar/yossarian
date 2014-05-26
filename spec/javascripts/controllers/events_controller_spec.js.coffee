@@ -38,8 +38,8 @@ describe 'EventsController', ->
         router  = mock(send: ->)
         @router = router.mock
 
-        @controller.set('currentPage', 1)
         @controller.set('target', router.object)
+        @controller.set('currentPage', 1)
         @controller.set('countries', ['Slovakia'])
         @controller.set('tags', ['rock'])
 
@@ -59,6 +59,28 @@ describe 'EventsController', ->
       context 'when query changes', ->
         it 'reloads data and changes current page', ->
           @controller.set('query', 'a')
+
+    describe '+currentPageDidChange', ->
+      beforeEach ->
+        router  = mock(send: ->)
+        @router = router.mock
+
+        @controller.set('target', router.object)
+        @controller.set('currentPage', 1)
+
+        @router.expects('send').withExactArgs('reload').once()
+
+      context 'when page changes', ->
+        it 'reloads data and sets content to empty array', ->
+          events = []
+
+          3.times ->
+            events.push(create('event'))
+
+          @controller.set('content', events)
+          @controller.set('currentPage', 2)
+
+          expect(@controller.get('content.length')).to.eql(0)
 
   describe 'actions', ->
     describe '+play', ->
