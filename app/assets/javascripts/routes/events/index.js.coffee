@@ -13,7 +13,7 @@ Yossarian.EventsRoute = Ember.Route.extend
         @store.pushPayload('event', data)
 
         controller.set('content', @store.all('event'))
-        callback()
+        callback?()
 
   setupController: (controller) ->
     @loadData(controller)
