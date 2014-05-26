@@ -86,7 +86,10 @@ nav#navbar-controls.navbar.navbar-default role="navigation"
           i.fa.fa-play
 
   else
-    h1.text-center Loading...
+    if reloading
+      h1.text-center Loading...
+    else
+      h1.text-center No festivals found.
 
 view Yossarian.EventsPaginationView currentPageBinding="currentPage" class="row"
   if hasPreviousPage

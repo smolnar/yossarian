@@ -1,7 +1,5 @@
 Yossarian.EventsRoute = Ember.Route.extend
-  loadData: (controller, options) ->
-    options ?= {}
-
+  loadData: (controller, callback) ->
     $.ajax
       type: 'POST'
       url: '/api/v1/events/search'
@@ -15,12 +13,13 @@ Yossarian.EventsRoute = Ember.Route.extend
         @store.pushPayload('event', data)
 
         controller.set('content', @store.all('event'))
+        callback()
 
   setupController: (controller) ->
     @loadData(controller)
 
   actions:
-    reload: ->
+    reload: (callback) ->
       controller = @controllerFor('events')
 
-      @loadData(controller)
+      @loadData(controller, callback)

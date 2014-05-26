@@ -1,6 +1,7 @@
 #= require controllers/player_controller
 
 Yossarian.EventsController = Ember.ArrayController.extend
+  states:    { idle: 0, reloading: 1 }
   tags:      ['electronic', 'punk', 'house', 'folk', 'indie', 'hardcore', 'rock', 'country', 'dubstep', 'techno', 'reggae', 'hip-hop', 'alternative']
   countries: ['Slovakia', 'Germany', 'France', 'England', 'Hungary', 'Poland']
 
@@ -9,6 +10,7 @@ Yossarian.EventsController = Ember.ArrayController.extend
   selectedTags:      []
   selectedCountries: []
   currentPage:       0
+  currentState:      1
 
   player: Yossarian.PlayerController.create()
 
@@ -28,6 +30,10 @@ Yossarian.EventsController = Ember.ArrayController.extend
     if @get('currentPage') > 0 then true else false
   ).property('currentPage')
 
+  reloading: (->
+    @get('currentState') == @get('states.reloading')
+  ).property('currentState')
+
   contentDidChange: (->
     @get('player').set('event', @get('content').toArray()[0]) unless @get('player.event')
   ).observes('content.@each')
@@ -45,9 +51,10 @@ Yossarian.EventsController = Ember.ArrayController.extend
   ).observes('selectedCountries.@each', 'selectedTags.@each', 'query.length')
 
   currentPageDidChange: (->
+    @set('currentState', @get('states.reloading'))
     @set('content', [])
 
-    @send('reload')
+    @send('reload', => @set('currentState', @get('states.idle')))
   ).observes('currentPage')
 
   actions:

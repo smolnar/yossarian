@@ -8,9 +8,9 @@ module API::V1
         .where(events: { id: @filter })
         .where.not(recordings: { youtube_url: nil })
         .where.not(artists: { image: nil })
-        .order(performances_count: :desc)
-        .offset(params[:page].to_i * 12)
-        .limit(12)
+        .order(notable_performances_count: :desc)
+        .offset(params[:page].to_i * 24)
+        .limit(24)
 
       respond_to do |format|
         format.json { render json: @events }
