@@ -13,6 +13,8 @@ nav.navbar.navbar-inverse.navbar-fixed-top{bind-attr class="player.playing:navba
         i.fa.fa-fw.fa-play
     li: a{action 'forward'}
       i.fa.fa-fw.fa-step-forward
+    li: a{action 'shuffle'}
+      i.fa.fa-fw.fa-random
 
   p.navbar-text.navbar-right
     if player.playing
