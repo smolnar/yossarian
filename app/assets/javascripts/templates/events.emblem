@@ -23,6 +23,7 @@ nav.navbar.navbar-inverse.navbar-fixed-top{bind-attr class="player.playing:navba
 if player.playing
   header.video
     view Yossarian.YoutubeVideoView url=player.currentRecording.youtubeUrl controllerBinding="player"
+    .mask
 else
   header
     h1
