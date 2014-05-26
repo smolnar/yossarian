@@ -54,6 +54,12 @@ $brand-info:    #5bc0de;
 $link-color:       $gray-dark;
 $link-hover-color: $gray-darkest;
 
+// opacities
+
+$opacity-default:   .05;
+$opacity-focus:     .75;
+$opacity-selection: .25;
+
 // navbars
 
 $navbar-default-color:             $gray-dark;
@@ -66,7 +72,7 @@ $navbar-default-brand-hover-color: $navbar-default-link-hover-color;
 $navbar-default-brand-hover-bg:    transparent;
 
 $navbar-inverse-color:             $gray-light;
-$navbar-inverse-bg:                rgba($gray-darkest, .05);
+$navbar-inverse-bg:                rgba($gray-darkest, $opacity-default);
 $navbar-inverse-link-color:        $navbar-inverse-color;
 $navbar-inverse-link-hover-color:  $gray-lightest;
 $navbar-inverse-link-hover-bg:     transparent;
@@ -76,7 +82,7 @@ $navbar-inverse-brand-hover-bg:    transparent;
 
 $navbar-inverse-affix-color:       $gray-lightest;
 $navbar-inverse-affix-color-hover: $gray-lightest;
-$navbar-inverse-affix-bg:          rgba($gray-darkest, .75);
+$navbar-inverse-affix-bg:          rgba($gray-darkest, $opacity-focus);
 
 // inputs
 
@@ -87,7 +93,12 @@ $input-border-focus: $text-color;
 $jumbotron-bg:            lighten(#081218, 2.5%);
 $jumbotron-color:         $gray-lightest;
 $jumbotron-heading-color: $gray-lightest;
+$jumbotron-heading-bg:    rgba($gray-darkest, $opacity-default);
 $jumbotron-font-size:     ceil($font-size-base * 1.25);
+
+// tooltips
+
+$tooltip-opacity: $opacity-default;
 
 // border radius
 

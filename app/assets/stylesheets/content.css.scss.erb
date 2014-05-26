@@ -15,7 +15,7 @@
     height: $navbar-height;
 
     color: $gray-lightest;
-    background: rgba($gray-darkest, .05);
+    background: rgba($gray-darkest, $opacity-default);
 
     @include text-overflow;
 
@@ -80,7 +80,7 @@
 
       height: 100%;
 
-      background: rgba($gray-darkest, .75);
+      background: rgba($gray-darkest, $opacity-focus);
     }
 
     z-index: $zindex-navbar - 10;
