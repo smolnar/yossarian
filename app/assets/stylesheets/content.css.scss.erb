@@ -17,18 +17,22 @@
     color: $gray-lightest;
     background: rgba($gray-darkest, $opacity-default);
 
-    @include text-overflow;
-
     text-align: center;
+
+    @include text-overflow;
 
     .title {
       margin: 14px 20px;
+
+      @include text-overflow;
     }
 
     .venue {
       padding: 6px 20px 10px 20px;
 
       font-size: $font-size-h3;
+
+      @include text-overflow;
     }
 
     .date {
@@ -36,6 +40,8 @@
 
       color: $text-muted;
       font-size: $font-size-h4;
+
+      @include text-overflow;
     }
 
     .artists {
@@ -78,7 +84,7 @@
         font-size: 25px;
       }
     }
-height:100%;
+
     &.active {
       @include transition(all .4s);
 
@@ -103,4 +109,6 @@ height:100%;
   background: $gray-lightest;
 
   @include color-variant($link-color, $link-hover-color);
+
+  text-align: center;
 }
