@@ -7,7 +7,6 @@ class Event < ActiveRecord::Base
   validates :venue_longitude, presence: true
   validates :venue_latitude,  presence: true
   validates :starts_at,       presence: true
-  validates :poster,          presence: true
 
   has_many :performances, -> { order(id: :asc) }
   has_many :artists, through: :performances

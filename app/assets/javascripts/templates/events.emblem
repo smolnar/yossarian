@@ -16,7 +16,7 @@ nav.navbar.navbar-inverse.navbar-fixed-top{bind-attr class="player.playing:navba
 
   p.navbar-text.navbar-right
     if player.playing
-      | #{player.currentRecording.artist.name} &middot; #{player.currentRecording.track.name} @ #{player.event.title}
+      | #{player.currentRecording.artist.name} &middot; #{player.currentRecording.track.name} &middot; #{player.event.title}
     else
       | Choose a festival to play
 
@@ -101,7 +101,7 @@ footer
       li: a href="mailto:contact@festup.eu" Contact
       li: a href="https://github.com/smolnar/yossarian" GitHub
       li: a href="https://last.fm" Last.fm
-  hr 
+  hr
 
   .list-center
     ul

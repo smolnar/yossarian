@@ -10,7 +10,7 @@ namespace :yossarian do
   task artists: :environment do
     Lastfm::Artist.factory = Yossarian::ArtistFactory
 
-    Artist.where(image: nil).order(:created_at).find_each do |artist|
+    Artist.where(lastfm_url: nil).order(:created_at).find_each do |artist|
       Lastfm::Artist.get(artist: artist.name) rescue nil
     end
   end
