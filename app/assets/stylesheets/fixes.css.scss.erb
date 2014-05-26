@@ -106,3 +106,19 @@ a {
 .tooltip {
   font-size: $font-size-base;
 }
+
+// video
+
+.video {
+  position: relative;
+
+  .mask {
+    @include square(100%);
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    background: transparent;
+  }
+}
