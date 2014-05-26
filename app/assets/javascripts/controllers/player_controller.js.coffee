@@ -39,10 +39,21 @@ Yossarian.PlayerController = Ember.Controller.extend
       index     = @get('recordings').indexOf(@get('currentRecording'))
       recording = @get('recordings')[index - 1]
 
-      @set('currentRecording', recording) if recording
+      if recording
+        @set('currentRecording', recording) if recording
+      else
+        @set('currentRecording', @get('recordings.lastObject'))
 
     forward: ->
       index     = @get('recordings').indexOf(@get('currentRecording'))
       recording = @get('recordings')[index + 1]
 
-      @set('currentRecording', recording) if recording
+      if recording
+        @set('currentRecording', recording) if recording
+      else
+        @set('currentRecording', @get('recordings.firstObject'))
+
+    shuffle: ->
+      @notifyPropertyChange('recordings')
+
+      @set('currentRecording', @get('recordings.firstObject'))

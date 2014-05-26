@@ -42,8 +42,6 @@ Yossarian.EventsController = Ember.ArrayController.extend
 
   propertiesForSearchDidChange: (->
     @set('currentPage', 0)
-
-    @send('reload')
   ).observes('selectedCountries.@each', 'selectedTags.@each', 'query.length')
 
   currentPageDidChange: (->
