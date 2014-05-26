@@ -105,4 +105,4 @@ footer
 
   .list-center
     ul
-      li: span.small Events and videos are downloaded automaticlly and may contain inaccuracies.
+      li: span.small Events and media are downloaded automaticlly and may contain inaccuracies.
