@@ -34,3 +34,11 @@
     text-shadow: none;
   }
 }
+
+@mixin text-line($height, $space: 0) {
+  @include text-overflow;
+
+  height: $height;
+  line-height: $height;
+  margin: 0 $space !important;
+}

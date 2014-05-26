@@ -55,14 +55,11 @@
 
 .navbar-text {
   max-width: 50%;
-  height: 40px;
-  line-height: 40px;
-  margin: ($navbar-padding-vertical / 2) $navbar-padding-horizontal !important;
 
   direction: ltr;
   text-align: right;
 
-  @include text-overflow;
+  @include text-line($navbar-height, $navbar-padding-horizontal);
 }
 
 // bricks

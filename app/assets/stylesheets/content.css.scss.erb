@@ -17,31 +17,26 @@
     color: $gray-lightest;
     background: rgba($gray-darkest, $opacity-default);
 
+    overflow: hidden;
+
     text-align: center;
 
-    @include text-overflow;
-
     .title {
-      margin: 14px 20px;
-
-      @include text-overflow;
+      @include text-line($navbar-height, 20px);
     }
 
     .venue {
-      padding: 6px 20px 10px 20px;
-
       font-size: $font-size-h3;
 
-      @include text-overflow;
+      @include text-line(40px, 20px);
     }
 
     .date {
-      padding: 0 20px;
-
       color: $text-muted;
+
       font-size: $font-size-h4;
 
-      @include text-overflow;
+      @include text-line(25px, 20px);
     }
 
     .artists {
