@@ -29,11 +29,11 @@ else
       | Listen to your festival
       small Play more than 2k festivals with more than 4k artists
     .buttons
-      button.btn.btn-success.btn-lg
+      a.btn.btn-success.btn-lg
         | Join
         // i.fa.fa-code-fork
 
-      button.btn.btn-primary.btn-lg
+      a.btn.btn-primary.btn-lg
         | Play
         // i.fa.fa-play
 
@@ -78,7 +78,7 @@ nav#navbar-controls.navbar.navbar-default role="navigation"
           .artist
             img.img-circle.img-responsive title=name! src=image.image.small.url! data-toggle="tooltip" data-placement="bottom"
 
-      button.btn.btn-primary{action 'play' this}
+      a.btn.btn-primary{action 'play' this}
         i.fa.fa-play
 
 view Yossarian.EventsPaginationView currentPageBinding="currentPage" class="row"

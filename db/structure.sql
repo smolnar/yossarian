@@ -58,7 +58,7 @@ CREATE TABLE artists (
     lastfm_image_large character varying(255),
     lastfm_image_extralarge character varying(255),
     lastfm_image_mega character varying(255),
-    tags character varying(255)[] DEFAULT NULL::character varying[],
+    tags character varying(255)[] DEFAULT '{}'::character varying[],
     lastfm_summary character varying(255),
     created_at timestamp without time zone,
     updated_at timestamp without time zone
@@ -113,7 +113,7 @@ CREATE TABLE events (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     performances_count integer DEFAULT 0 NOT NULL,
-    tags character varying(255)[] DEFAULT NULL::character varying[],
+    tags character varying(255)[] DEFAULT '{}'::character varying[],
     notable_performances_count integer DEFAULT 0 NOT NULL
 );
 
@@ -319,17 +319,17 @@ ALTER TABLE ONLY tracks
 
 
 --
--- Name: index_artists_on_tags; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_artists_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_artists_on_tags ON artists USING gin (tags);
+CREATE UNIQUE INDEX index_artists_on_name ON artists USING btree (name);
 
 
 --
--- Name: index_artists_unaccented_lowercased_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_artists_on_unaccented_lowercased_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_artists_unaccented_lowercased_name ON artists USING btree (lower(musicbrainz_unaccent((name)::text)));
+CREATE INDEX index_artists_on_unaccented_lowercased_name ON artists USING btree (lower(musicbrainz_unaccent((name)::text)));
 
 
 --
@@ -347,17 +347,17 @@ CREATE INDEX index_events_on_title ON events USING btree (title);
 
 
 --
+-- Name: index_events_on_unaccented_lowercased_title; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_events_on_unaccented_lowercased_title ON events USING btree (lower(musicbrainz_unaccent((title)::text)));
+
+
+--
 -- Name: index_events_on_venue_country; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_events_on_venue_country ON events USING btree (venue_country);
-
-
---
--- Name: index_events_unaccented_lowercased_title; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_events_unaccented_lowercased_title ON events USING btree (lower(musicbrainz_unaccent((title)::text)));
 
 
 --
@@ -410,6 +410,13 @@ CREATE UNIQUE INDEX index_recordings_on_track_id_and_artist_id ON recordings USI
 
 
 --
+-- Name: index_recordings_on_youtube_url; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_recordings_on_youtube_url ON recordings USING btree (youtube_url);
+
+
+--
 -- Name: index_tracks_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -444,8 +451,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140420235151');
 INSERT INTO schema_migrations (version) VALUES ('20140521101620');
 
 INSERT INTO schema_migrations (version) VALUES ('20140521101840');
-
-INSERT INTO schema_migrations (version) VALUES ('20140522003206');
 
 INSERT INTO schema_migrations (version) VALUES ('20140522085916');
 
