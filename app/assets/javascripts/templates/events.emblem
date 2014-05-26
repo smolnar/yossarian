@@ -87,9 +87,9 @@ nav#navbar-controls.navbar.navbar-default role="navigation"
 
   else
     if reloading
-      h1.text-center Loading...
+      h2.message Loading festivals&hellip;
     else
-      h1.text-center No festivals found.
+      h2.message No festivals found.
 
 view Yossarian.EventsPaginationView currentPageBinding="currentPage" class="row"
   if hasPreviousPage
