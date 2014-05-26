@@ -36,7 +36,7 @@ else
         | Join
         // i.fa.fa-code-fork
 
-      a.btn.btn-primary.btn-lg
+      a.btn.btn-primary.btn-lg{action 'play' target="player"}
         | Play
         // i.fa.fa-play
 
