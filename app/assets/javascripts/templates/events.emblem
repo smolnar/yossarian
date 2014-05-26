@@ -3,17 +3,17 @@ nav.navbar.navbar-inverse.navbar-fixed-top{bind-attr class="player.playing:navba
     a.navbar-brand href="#" Festup
 
   view Yossarian.PlayerView controllerBinding="player"
-    li: a{action 'backward' }
+    li: a{action backward }
       i.fa.fa-fw.fa-step-backward
     if playing
-      li: a{action 'stop'}
+      li: a{action stop}
         i.fa.fa-fw.fa-stop
     else
-      li: a{action 'play'}
+      li: a{action play}
         i.fa.fa-fw.fa-play
-    li: a{action 'forward'}
+    li: a{action forward}
       i.fa.fa-fw.fa-step-forward
-    li: a{action 'shuffle'}
+    li: a{action shuffle}
       i.fa.fa-fw.fa-random
 
   p.navbar-text.navbar-right
@@ -36,7 +36,7 @@ else
         | Join
         // i.fa.fa-code-fork
 
-      a.btn.btn-primary.btn-lg{action 'play' target="player"}
+      a.btn.btn-primary.btn-lg{action play target="player"}
         | Play
         // i.fa.fa-play
 
@@ -81,24 +81,24 @@ nav#navbar-controls.navbar.navbar-default role="navigation"
           .artist
             img.img-circle.img-responsive title=name! src=image.image.small.url! data-toggle="tooltip" data-placement="bottom"
 
-      a.btn.btn-primary{action 'play' this}
+      a.btn.btn-primary{action play this}
         i.fa.fa-play
 
 view Yossarian.EventsPaginationView currentPageBinding="currentPage" class="row"
   if hasPreviousPage
     if hasNextPage
-      a.col-xs-6.btn.btn-paginate{action 'previous'}
+      a.col-xs-6.btn.btn-paginate{action previous}
         | Previous
     else
-      a.col-xs-12.btn.btn-paginate{action 'previous'}
+      a.col-xs-12.btn.btn-paginate{action previous}
         | Previous
 
   if hasNextPage
     if hasPreviousPage
-      a.col-xs-6.btn.btn-paginate{action 'next'}
+      a.col-xs-6.btn.btn-paginate{action next}
         | Next
     else
-      a.col-xs-12.btn.btn-paginate{action 'next'}
+      a.col-xs-12.btn.btn-paginate{action next}
         | Next
 
 footer
