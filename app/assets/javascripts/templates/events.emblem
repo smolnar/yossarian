@@ -30,12 +30,12 @@ else
       small Play more than 2k festivals with more than 4k artists
     .buttons
       button.btn.btn-success.btn-lg
-        i.fa.fa-code-fork
         | Join
+        // i.fa.fa-code-fork
 
       button.btn.btn-primary.btn-lg
-        i.fa.fa-music
         | Play
+        // i.fa.fa-play
 
 nav#navbar-controls.navbar.navbar-default role="navigation"
   ul.nav.navbar-nav.navbar-left
