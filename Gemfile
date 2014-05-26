@@ -54,6 +54,7 @@ gem 'nivo-rails'
 gem 'capistrano', '~> 2.15.5'
 gem 'capistrano-ext'
 gem 'rvm-capistrano'
+gem 'capistrano-sidekiq'
 
 # Scheduling
 gem 'whenever'

@@ -1,6 +1,7 @@
 require 'rvm/capistrano'
 require 'bundler/capistrano'
 require 'whenever/capistrano'
+require 'capistrano/sidekiq'
 
 set :stages, [:staging, :production]
 
@@ -25,6 +26,11 @@ set :ssh_options, { forward_agent: true }
 
 # Whenever
 set :whenever_command, "RAILS_ENV=#{rails_env} bundle exec whenever"
+
+# Sidekiq
+set :sidekiq_env, -> { fetch(:rails_env) }
+set :sidekiq_log, File.join(shared_path, 'log', 'sidekiq.log')
+set :sidekiq_cmd, 'bundle exec sidekiq -c 90 -q events,youtube,artists'
 
 default_run_options[:pty] = true
 
