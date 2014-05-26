@@ -85,10 +85,21 @@ nav#navbar-controls.navbar.navbar-default role="navigation"
         i.fa.fa-play
 
 view Yossarian.EventsPaginationView currentPageBinding="currentPage" class="row"
-  a.col-xs-6.text-center.btn.btn-paginate{action 'previous'}
-      | Previous
-  a.col-xs-6.text-center.btn.btn-paginate{action 'next'}
-      | Next
+  if hasPreviousPage
+    if hasNextPage
+      a.col-xs-6.btn.btn-paginate{action 'previous'}
+        | Previous
+    else
+      a.col-xs-12.btn.btn-paginate{action 'previous'}
+        | Previous
+
+  if hasNextPage
+    if hasPreviousPage
+      a.col-xs-6.btn.btn-paginate{action 'next'}
+        | Next
+    else
+      a.col-xs-12.btn.btn-paginate{action 'next'}
+        | Next
 
 footer
   .list-center
