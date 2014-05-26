@@ -1,7 +1,6 @@
 require 'rvm/capistrano'
 require 'bundler/capistrano'
 require 'whenever/capistrano'
-require 'capistrano/sidekiq'
 
 set :stages, [:staging]
 
