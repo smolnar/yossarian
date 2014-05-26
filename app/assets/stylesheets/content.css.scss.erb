@@ -94,8 +94,9 @@
 
   height: $navbar-height;
   margin: 0;
-  padding: 10px;
+  padding: $navbar-padding-vertical $navbar-padding-horizontal !important;
   border: none;
+  
   background: $gray-lightest;
 
   @include color-variant($link-color, $link-hover-color);
