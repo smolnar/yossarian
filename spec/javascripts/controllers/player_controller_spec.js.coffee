@@ -98,7 +98,14 @@ describe 'PlayerController', ->
         expect(@controller.get('currentRecording')).to.eql(recordings[0])
 
       context 'when the recording is the first one', ->
-        it 'reloads recordings and sets the first one'
+        it 'reloads recordings and sets the first one', ->
+          recordings = @controller.get('recordings')
+
+          @controller.set('currentRecording', recordings[0])
+
+          @controller.send('backward')
+
+          expect(@controller.get('currentRecording')).to.eql(recordings[recordings.length - 1])
 
     describe '+forward', ->
       it 'sets the current recording to next one', ->
@@ -111,4 +118,21 @@ describe 'PlayerController', ->
         expect(@controller.get('currentRecording')).to.eql(recordings[1])
 
       context 'when the recording is the last one', ->
-        it 'reloads recordings and sets the first one'
+        it 'reloads recordings and sets the first one', ->
+          recordings = @controller.get('recordings')
+
+          @controller.set('currentRecording', recordings[recordings.length - 1])
+
+          @controller.send('forward')
+
+          expect(@controller.get('currentRecording')).to.eql(recordings[0])
+
+    describe '+shuffle', ->
+      it 'shuffles recordings for playlist', ->
+        recordings = @controller.get('recordings')
+
+        @controller.get('currentRecording', recordings[1])
+        @controller.send('shuffle')
+
+        expect(@controller.get('recordings')).not.to.eql(recordings)
+        expect(@controller.get('currentRecording')).to.eql(@controller.get('recordings.firstObject'))
