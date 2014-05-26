@@ -59,6 +59,18 @@ namespace :db do
   end
 end
 
+namespace :sidekiq do
+  desc "Run Sidekiq"
+  task :start, roles: :app do
+    run "cd #{current_path}; RAILS_ENV=#{rails_env} bundle exec sidekiq -d -c 90 -q artists,events,youtube -L #{shared_path}/log/sidekiq.log -P #{shared_path}/sidekiq.pid"
+  end
+
+  desc "Kill Sidekiq"
+  task :stop, roles: :app do
+    run "cd #{current_path}; RAILS_ENV=#{rails_env} bundle exec sidekiqctl stop #{shared_path}/sidekiq.pid 5"
+  end
+end
+
 namespace :deploy do
   [:start, :stop, :restart, :upgrade].each do |command|
     desc "#{command.to_s.capitalize} unicorn server"
@@ -72,16 +84,6 @@ namespace :deploy do
     run "ln -nfs #{shared_path} #{release_path}/shared"
     run "for file in #{shared_path}/config/*.yml; do ln -nfs $file #{release_path}/config; done"
     run "for file in #{shared_path}/public/*; do ln -nfs $file #{release_path}/public; done"
-  end
-
-  desc "Run Sidekiq"
-  task :start_sidekiq, roles: :app do
-    run "cd #{release_path}; RAILS_ENV=#{rails_env} bundle exec sidekiq -d -c 90 -q artists,events,youtube -L #{shared_path}/log/sidekiq.log -P #{shared_path}/sidekiq.pid"
-  end
-
-  desc "Kill Sidekiq"
-  task :kill_sidekiq, roles: :app do
-    run "cd #{release_path}; RAILS_ENV=#{rails_env} bundle exec sidekiqctl stop #{shared_path}/sidekiq.pid 5"
   end
 
   after 'deploy',             'deploy:cleanup'
