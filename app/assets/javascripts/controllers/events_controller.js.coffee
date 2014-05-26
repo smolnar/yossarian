@@ -20,6 +20,14 @@ Yossarian.EventsController = Ember.ArrayController.extend
     @get('countries').sort()
   ).property('countries')
 
+  hasNextPage: (->
+    if @get('content.length') > 0 then true else false
+  ).property('content.length')
+
+  hasPreviousPage: (->
+    if @get('currentPage') > 0 then true else false
+  ).property('currentPage')
+
   contentDidChange: (->
     @get('player').set('event', @get('content').toArray()[0]) unless @get('player.event')
   ).observes('content.@each')
@@ -38,7 +46,17 @@ Yossarian.EventsController = Ember.ArrayController.extend
     @send('reload')
   ).observes('selectedCountries.@each', 'selectedTags.@each', 'query.length')
 
+  currentPageDidChange: (->
+    @send('reload')
+  ).observes('currentPage')
+
   actions:
+    next: ->
+      @set('currentPage', @get('currentPage') + 1) if @get('hasNextPage')
+
+    previous: ->
+      @set('currentPage', @get('currentPage') - 1) if @get('hasPreviousPage')
+
     play: (event) ->
       @get('player').set('event', event)
       @get('player').play()

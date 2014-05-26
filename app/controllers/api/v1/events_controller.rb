@@ -6,6 +6,8 @@ module API::V1
       @events = Event
         .includes(:performances, performances: [:event, artist: [recordings: :track]])
         .where(events: { id: @filter })
+        .where.not(recordings: { youtube_url: nil })
+        .where.not(artists: { image: nil })
         .order(performances_count: :desc)
         .offset(params[:page].to_i * 12)
         .limit(12)
@@ -24,17 +26,9 @@ module API::V1
         .where.not(artists: { image: nil })
         .uniq
 
-      if params[:countries].present?
-        @filter = @filter.in(params[:countries])
-      end
-
-      if params[:tags].present?
-        @filter = @filter.with(params[:tags])
-      end
-
-      if params[:q].present?
-        @filter = @filter.search(params[:q])
-      end
+      @filter = @filter.in(params[:countries]) if params[:countries].present?
+      @filter = @filter.with(params[:tags]) if params[:tags].present?
+      @filter = @filter.search(params[:q]) if params[:q].present?
     end
   end
 end

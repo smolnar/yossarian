@@ -4,6 +4,6 @@ class ArtistSerializer < ActiveModel::Serializer
   has_many :recordings, embed: :ids, include: true
 
   def recordings
-    object.recordings.select { |recording| recording.youtube_url }.sort_by(&:id).first(10)
+    object.recordings.sort_by(&:id).first(10)
   end
 end
