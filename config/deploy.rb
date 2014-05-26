@@ -3,7 +3,7 @@ require 'bundler/capistrano'
 require 'whenever/capistrano'
 require 'capistrano/sidekiq'
 
-set :stages, [:staging, :production]
+set :stages, [:staging]
 
 require 'capistrano/ext/multistage'
 
@@ -12,7 +12,6 @@ set :scm,            :git
 set :repository,     'git@github.com:smolnar/yossarian.git'
 set :scm_passphrase, ''
 set :user,           'deploy'
-set(:branch)         { rails_env }
 set(:deploy_to)      { "/home/deploy/projects/#{application}-#{rails_env}" }
 
 set :use_sudo, false
@@ -26,11 +25,6 @@ set :ssh_options, { forward_agent: true }
 
 # Whenever
 set :whenever_command, "RAILS_ENV=#{rails_env} bundle exec whenever"
-
-# Sidekiq
-set :sidekiq_env, -> { fetch(:rails_env) }
-set :sidekiq_log, File.join(shared_path, 'log', 'sidekiq.log')
-set :sidekiq_cmd, 'bundle exec sidekiq -c 90 -q events,youtube,artists'
 
 default_run_options[:pty] = true
 
@@ -79,6 +73,16 @@ namespace :deploy do
     run "ln -nfs #{shared_path} #{release_path}/shared"
     run "for file in #{shared_path}/config/*.yml; do ln -nfs $file #{release_path}/config; done"
     run "for file in #{shared_path}/public/*; do ln -nfs $file #{release_path}/public; done"
+  end
+
+  desc "Run Sidekiq"
+  task :start_sidekiq, roles: :app do
+    run "cd #{release_path}; RAILS_ENV=#{rails_env} bundle exec sidekiq -d -c 90 -q artists,events,youtube -L #{shared_path}/log/sidekiq.log -P #{shared_path}/sidekiq.pid"
+  end
+
+  desc "Kill Sidekiq"
+  task :kill_sidekiq, roles: :app do
+    run "cd #{release_path}; RAILS_ENV=#{rails_env} bundle exec sidekiqctl stop #{shared_path}/sidekiq.pid 5"
   end
 
   after 'deploy',             'deploy:cleanup'
