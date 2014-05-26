@@ -74,18 +74,6 @@ a {
   color: $text-color !important;
 }
 
-// text
-
-.text-muted > a, a.text-muted {
-  @include color-variant(darken($text-muted, 12.5%), darken($text-muted, 25%));
-}
-
-// tooltips
-
-.tooltip {
-  font-size: $font-size-base;
-}
-
 // slider
 
 .nivoSlider img {
@@ -97,7 +85,24 @@ a {
 }
 
 .nivo-caption {
-  text-align: center;
+  padding: 14px 20px;
+
+  @include opacity(1);
+
   background: rgba($gray-darkest, .05);
+
   font-size: $font-size-h3;
+  text-align: center;
+}
+
+// text
+
+.text-muted > a, a.text-muted {
+  @include color-variant(darken($text-muted, 12.5%), darken($text-muted, 25%));
+}
+
+// tooltips
+
+.tooltip {
+  font-size: $font-size-base;
 }
