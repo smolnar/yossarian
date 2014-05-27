@@ -43,7 +43,7 @@ describe 'EventsController', ->
         @controller.set('countries', ['Slovakia'])
         @controller.set('tags', ['rock'])
 
-        @router.expects('send').withExactArgs('reload').once()
+        @router.expects('send').withArgs('reload').once()
 
       afterEach ->
         expect(@controller.get('currentPage')).to.eql(0)
@@ -68,7 +68,7 @@ describe 'EventsController', ->
         @controller.set('target', router.object)
         @controller.set('currentPage', 1)
 
-        @router.expects('send').withExactArgs('reload').once()
+        @router.expects('send').withArgs('reload').once()
 
       context 'when page changes', ->
         it 'reloads data and sets content to empty array', ->
