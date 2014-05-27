@@ -40,6 +40,6 @@ class Event < ActiveRecord::Base
   end
 
   def set_notable_performances_count
-    self.notable_performances_count = performances.joins(:artist, artist: [:recordings]).where.not(artists: { image: nil }, recordings: { youtube_url: nil }).count
+    self.notable_performances_count = performances.joins(:artist, artist: [:recordings]).where.not(artists: { image: nil }, recordings: { youtube_url: nil }).uniq.count
   end
 end

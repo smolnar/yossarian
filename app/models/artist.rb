@@ -11,7 +11,7 @@ class Artist < ActiveRecord::Base
   has_many :tracks, through: :recordings
 
   before_validation :set_image
-  after_save :update_events
+  after_save :update_events!
 
   mount_uploader :image, ImageUploader
 
@@ -26,7 +26,7 @@ class Artist < ActiveRecord::Base
     ].compact)
   end
 
-  def update_events
+  def update_events!
     events.reload.each(&:save!)
   end
 end

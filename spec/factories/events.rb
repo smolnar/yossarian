@@ -14,8 +14,8 @@ FactoryGirl.define do
     venue_latitude  '48.625'
     venue_longitude '17.828611'
 
-    starts_at { Time.now }
-    ends_at   { Time.now + 1.day }
+    starts_at { Time.now + 1.day }
+    ends_at   { Time.now + 2.days }
 
     trait :with_artists do
       after :create do |event|
