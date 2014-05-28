@@ -1,14 +1,14 @@
 if defined?(CarrierWave)
-  CarrierWave::Uploader::Base.descendants.each do |uploader|
+  [ImageUploader, PosterUploader].each do |uploader|
     next if uploader.anonymous?
 
     uploader.class_eval do
       def cache_dir
-        "#{Rails.root}/spec/support/uploads/tmp"
+        "#{Rails.root}/tmp/spec/uploads"
       end
 
       def store_dir
-        "#{Rails.root}/spec/support/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+        "#{Rails.root}/tmp/spec/uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
       end
     end
   end
