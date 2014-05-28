@@ -11,4 +11,19 @@ describe Recording do
   it 'belongs to track' do
     pending
   end
+
+  describe 'callbacks' do
+    describe '#update_artists_events!' do
+      it 'update artist events' do
+        recording = create :recording
+        event     = double(:event)
+
+        recording.artist.stub(:events) { [event] }
+
+        expect(event).to receive(:save!)
+
+        recording.save!
+      end
+    end
+  end
 end

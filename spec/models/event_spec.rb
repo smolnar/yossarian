@@ -6,7 +6,7 @@ describe Event do
   it_behaves_like Events::Buildable
   it_behaves_like Events::Searchable
 
-  it 'require title' do
+  it 'requires title' do
     event = build :event, title: nil
 
     expect(event).not_to be_valid
@@ -68,6 +68,27 @@ describe Event do
 
         expect(event.tags).to eql(['rock', 'grunge'])
         expect(event.reload.tags).to eql(['rock', 'grunge'])
+      end
+    end
+
+    describe '#set_notable_performances_count' do
+      it 'sets performances count having artist image and recording youtube url' do
+        event   = create :event
+        artists = 3.times.map { create :artist, image: fixture('poster.jpg') }
+
+        artists << create(:artist)
+
+        create :recording, artist: artists[0]
+
+        artists[1..3].each do |artist|
+          create :recording, artist: artist, youtube_url: nil
+        end
+
+        artists.each do |artist|
+          create :performance, artist: artist, event: event
+        end
+
+        expect(event.notable_performances_count).to eql(1)
       end
     end
   end

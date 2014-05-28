@@ -21,4 +21,18 @@ describe Artist do
       expect(artist.image.file).to be_nil
     end
   end
+
+  describe 'callbacks' do
+    describe '#update_event!' do
+      it 'updates artists events' do
+        artist = create :artist
+
+        artist.stub(:events) { [event] }
+
+        expect(event).to receive(:save!)
+
+        artist.save!
+      end
+    end
+  end
 end
