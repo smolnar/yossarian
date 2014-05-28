@@ -62,7 +62,7 @@ end
 namespace :sidekiq do
   desc "Run Sidekiq"
   task :start, roles: :app do
-    run "cd #{current_path}; RAILS_ENV=#{rails_env} bundle exec sidekiq -d -c 90 -q artists,events,youtube -L #{shared_path}/log/sidekiq.log -P #{shared_path}/sidekiq.pid"
+    run "cd #{current_path}; RAILS_ENV=#{rails_env} bundle exec sidekiq -d -c 50 -q artists,events,youtube -L #{shared_path}/log/sidekiq.log -P #{shared_path}/sidekiq.pid"
   end
 
   desc "Kill Sidekiq"

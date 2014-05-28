@@ -5,7 +5,7 @@ describe Lastfm::Artist do
     it 'returns artist info' do
       urls = [
         'http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&api_key=test&format=json&artist=Bombay%20Bicycle%20Club',
-        'http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&api_key=test&format=json&artist=Bombay%20Bicycle%20Club'
+        'http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&api_key=test&format=json&artist=Bombay%20Bicycle%20Club&limit=10'
       ]
 
       data = [

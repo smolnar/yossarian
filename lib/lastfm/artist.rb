@@ -23,7 +23,7 @@ module Lastfm
 
       return unless artist
 
-      url      = "#{Lastfm.config.artist.tracks.url}&format=json&#{query}"
+      url      = "#{Lastfm.config.artist.tracks.url}&format=json&#{query}&limit=10"
       response = downloader.download(URI.encode(url))
 
       artist.merge!(tracks: parser.parse_tracks(response))
