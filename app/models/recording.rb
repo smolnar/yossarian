@@ -9,6 +9,6 @@ class Recording < ActiveRecord::Base
   private
 
   def update_artists_events!
-    artist.events.each(&:save!)
+    artist.events.reload.each(&:save!)
   end
 end

@@ -26,8 +26,10 @@ describe Artist do
     describe '#update_event!' do
       it 'updates artists events' do
         artist = create :artist
+        event  = double(:event)
+        events = double(:events, reload: [event])
 
-        artist.stub(:events) { [event] }
+        artist.stub(:events) { events }
 
         expect(event).to receive(:save!)
 

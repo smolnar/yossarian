@@ -15,10 +15,11 @@ describe Recording do
   describe 'callbacks' do
     describe '#update_artists_events!' do
       it 'update artist events' do
-        recording = create :recording
         event     = double(:event)
+        events    = double(:events, reload: [event])
+        recording = create :recording
 
-        recording.artist.stub(:events) { [event] }
+        recording.artist.stub(:events) { events }
 
         expect(event).to receive(:save!)
 

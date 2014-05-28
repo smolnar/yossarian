@@ -27,6 +27,6 @@ class Artist < ActiveRecord::Base
   end
 
   def update_events!
-    events.each(&:save!)
+    events.reload.each(&:save!)
   end
 end

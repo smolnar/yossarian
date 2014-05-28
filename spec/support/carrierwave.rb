@@ -1,4 +1,4 @@
-if defined?(Carrierwave)
+if defined?(CarrierWave)
   CarrierWave::Uploader::Base.descendants.each do |uploader|
     next if uploader.anonymous?
 
