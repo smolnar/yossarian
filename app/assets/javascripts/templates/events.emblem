@@ -32,8 +32,8 @@ else
       | Listen to your festival
       small Play more than 2k festivals with more than 4k artists
     .buttons
-      a.btn.btn-success.btn-lg
-        | Join
+      view Yossarian.EventFindButtonView class="btn btn-success btn-lg"
+        | Find
         // i.fa.fa-code-fork
 
       a.btn.btn-primary.btn-lg{action play target="player"}
@@ -47,7 +47,7 @@ nav#navbar-controls.navbar.navbar-default role="navigation"
 
   form.navbar-form.navbar-right role="search"
     .search
-      = input class="form-control" type="text" placeholder="Search" value=queryTerm
+      = input class="form-control" type="text" placeholder="Pohoda, Arcade Fire&hellip;" value=queryTerm
       i.fa.fa-search
 
 #subbar.bricks-accordion
