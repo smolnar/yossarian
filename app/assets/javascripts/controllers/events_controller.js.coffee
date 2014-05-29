@@ -2,8 +2,8 @@
 
 Yossarian.EventsController = Ember.ArrayController.extend
   states:    { idle: 0, reloading: 1 }
-  tags:      ['electronic', 'punk', 'house', 'folk', 'indie', 'hardcore', 'rock', 'country', 'dubstep', 'techno', 'reggae', 'hip-hop', 'alternative']
-  countries: ['Slovakia', 'Germany', 'France', 'England', 'Hungary', 'Poland']
+  tags:      ['electronic', 'punk', 'house', 'folk', 'funk', 'minimal', 'jazz', 'rap', 'indie', 'hardcore', 'rock', 'country', 'dubstep', 'techno', 'reggae', 'hip-hop', 'alternative']
+  countries: ['Finland', 'France', 'Italy', 'Poland', 'Ireland', 'Germany', 'Iceland', 'Belgium', 'Sweden', 'Netherlands', 'United Kingdom', 'Hungary', 'Denmark', 'Switzerland', 'Czech Republic', 'Spain', 'Croatia', 'Portugal', 'Ukraine', 'Serbia', 'Austria', 'Norway', 'Turkey', 'Bosnia and Herzegovina', 'Macedonia', 'Latvia', 'Bulgaria', 'Slovakia', 'Belarus', 'Greece', 'Estonia', 'Luxembourg', 'Slovenia', 'Lithuania', 'Romania', 'Malta']
 
   query:             null
   queryTerm:         null
@@ -35,7 +35,7 @@ Yossarian.EventsController = Ember.ArrayController.extend
   ).property('currentState')
 
   contentDidChange: (->
-    @get('player').set('event', @get('content').toArray()[0]) unless @get('player.event')
+    @get('player').set('event', @get('content').toArray()[0]) if @get('player.event') == null
   ).observes('content.@each')
 
   queryTermDidChange: (->
@@ -53,8 +53,8 @@ Yossarian.EventsController = Ember.ArrayController.extend
   ).observes('selectedCountries.@each', 'selectedTags.@each', 'query.length')
 
   currentPageDidChange: (->
+    @set('content', null)
     @set('currentState', @get('states.reloading'))
-    @set('content', [])
 
     @send('reload', => @set('currentState', @get('states.idle')))
   ).observes('currentPage')
