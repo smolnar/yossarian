@@ -61,16 +61,17 @@ gem 'whenever'
 # Sidekiq/web
 gem 'sinatra', '>= 1.3.0', require: nil
 
+# Webserver
 gem 'unicorn'
 
 group :development, :test do
-  # debugging
+  # Debugging
   gem 'pry'
   gem 'pry-debugger'
   gem 'hirb'
   gem 'spring'
 
-  # testings
+  # Testing
   gem 'rspec-rails', '~> 2.14.2'
   gem 'fuubar'
   gem 'database_cleaner', '~> 1.2.0'
