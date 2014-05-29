@@ -18,7 +18,7 @@ namespace :yossarian do
   desc 'Get youtube videos'
   task youtube: :environment do
     Recording.where(youtube_url: nil).find_each do |recording|
-      Yossarian::RecordingFactory.create_from_youtube(artist: recording.artist.name, track: recording.track.name)
+      Yossarian::RecordingFactory.update_from_youtube(recording.id)
     end
   end
 end

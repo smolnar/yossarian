@@ -3,29 +3,31 @@ require 'spec_helper'
 describe Yossarian::RecordingFactory do
   describe '.create_from_youtube' do
     it 'creates event' do
-      model = double(:recording)
+      recording = double(:recording, artist: double(:artist, name: 'Bombay Bicycle Club'), track: double(:track, name: 'Shuffle'))
 
       Youtube::Music.stub(:of).with(artist: 'Bombay Bicycle Club', track: 'Shuffle') do
         [double(:video, url: 'http://url')]
       end
 
-      expect(model).to receive(:create_from_youtube).with(artist: 'Bombay Bicycle Club', track: 'Shuffle', url: 'http://url')
+      Recording.stub(:find).with(1) { recording }
 
-      stub_const('Recording', model)
+      expect(recording).to receive(:update_attributes!).with(youtube_url: 'http://url')
 
-      Yossarian::RecordingFactory.create_from_youtube(artist: 'Bombay Bicycle Club', track: 'Shuffle')
+      Yossarian::RecordingFactory.update_from_youtube(1)
     end
   end
 
   context 'with no video available' do
     it 'ommit creating recording' do
-      model = double(:recording)
+      recording = double(:recording, artist: double(:artist, name: 'Bombay Bicycle Club'), track: double(:track, name: 'Shuffle'))
 
       Youtube::Music.stub(:of).with(artist: 'Bombay Bicycle Club', track: 'Shuffle') { [] }
 
-      stub_const('Recording', model)
+      Recording.stub(:find).with(1) { recording }
 
-      Yossarian::RecordingFactory.create_from_youtube(artist: 'Bombay Bicycle Club', track: 'Shuffle')
+      expect(recording).not_to receive(:update_attributes!)
+
+      Yossarian::RecordingFactory.update_from_youtube(1)
     end
   end
 end

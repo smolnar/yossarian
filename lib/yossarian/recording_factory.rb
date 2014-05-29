@@ -1,7 +1,7 @@
 module Yossarian
   module RecordingFactory
-    def self.create_from_youtube(params)
-      YoutubeWorker.perform_async(params.to_json)
+    def self.update_from_youtube(id)
+      YoutubeWorker.perform_async(id)
     end
 
     class YoutubeWorker
@@ -9,13 +9,13 @@ module Yossarian
 
       sidekiq_options queue: :youtube, backtrace: true
 
-      def perform(params)
-        params = JSON.parse(params, symbolize_names: true)
-        video  = Youtube::Music.of(artist: params[:artist], track: params[:track]).first
+      def perform(id)
+        recording = Recording.find(id)
+        video     = Youtube::Music.of(artist: recording.artist.name, track: recording.track.name).first
 
         return unless video
 
-        Recording.create_from_youtube(params.merge(url: video.url))
+        recording.update_attributes!(youtube_url: video.url)
       end
     end
   end
