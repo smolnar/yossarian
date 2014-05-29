@@ -16,15 +16,15 @@ module Lastfm
       raise ArgumentError.new("You need to provide 'factory'") unless factory
 
       query = params.map { |key, value| "#{key}=#{value}" }.join('&')
-      url   = "#{Lastfm.config.artist.url}&format=json&#{query}"
+      url   = "#{Lastfm.config.artist.url}&#{query}&format=json"
 
-      response = downloader.download(URI.encode(url))
+      response = downloader.download(url)
       artist   = parser.parse(response)
 
       return unless artist
 
       url      = "#{Lastfm.config.artist.tracks.url}&format=json&#{query}&limit=10"
-      response = downloader.download(URI.encode(url))
+      response = downloader.download(url)
 
       artist.merge!(tracks: parser.parse_tracks(response))
 

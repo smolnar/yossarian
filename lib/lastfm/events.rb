@@ -17,10 +17,10 @@ module Lastfm
 
       params = { page: 1 }.merge(params)
       query  = params.map { |key, value| "#{key}=#{value}" }.join('&')
-      url    = "#{Lastfm.config.events.url}&format=json&#{query}"
+      url    = "#{Lastfm.config.events.url}&#{query}&format=json"
 
       begin
-        response         = downloader.download(URI.encode(url))
+        response         = downloader.download(url)
         metadata, events = parser.parse(response)
 
         return unless events

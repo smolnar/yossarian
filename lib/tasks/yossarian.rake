@@ -10,14 +10,14 @@ namespace :yossarian do
   task artists: :environment do
     Lastfm::Artist.factory = Yossarian::ArtistFactory
 
-    Artist.find_each do |artist|
-      Lastfm::Artist.get(artist: artist.name) rescue nil
+    Artist.where(lastfm_url: nil).find_each do |artist|
+      Lastfm::Artist.get(artist: artist.name)
     end
   end
 
   desc 'Get youtube videos'
   task youtube: :environment do
-    Recording.joins(:artist).where.not(artists: { image: nil }).uniq.find_each do |recording|
+    Recording.where(youtube_url: nil).find_each do |recording|
       Yossarian::RecordingFactory.create_from_youtube(artist: recording.artist.name, track: recording.track.name)
     end
   end
