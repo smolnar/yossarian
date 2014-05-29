@@ -62,8 +62,8 @@ nav#navbar-controls.navbar.navbar-default role="navigation"
 #events.events
   if content.length
     collection Yossarian.EventsCollectionView contentBinding="content"
-      collection Yossarian.EventArtistsView contentBinding="shuffledArtists" class="event-slider"
-        img src=image.image.large.url title=name
+      collection Yossarian.EventArtistsView contentBinding="artists" class="event-slider"
+        img{bind-attr src="image.image.large.url" title="name" }
 
       .info
         h2.title: = title
@@ -80,7 +80,7 @@ nav#navbar-controls.navbar.navbar-default role="navigation"
         .artists
           slice artists limit=3
             .artist
-              img.img-circle.img-responsive title=name src=image.image.small.url data-toggle="tooltip" data-placement="bottom"
+              img.img-circle.img-responsive{bind-attr title="name" src="image.image.small.url" } data-toggle="tooltip" data-placement="bottom"
 
         a.btn.btn-primary{action play this}
           i.fa.fa-play

@@ -1,6 +1,6 @@
 Yossarian.EventArtistsView = Ember.CollectionView.extend
   tagName: 'div'
-  content: null
+  content: []
 
   didInsertElement: ->
     @$().nivoSlider
@@ -10,3 +10,4 @@ Yossarian.EventArtistsView = Ember.CollectionView.extend
       directionNav: false
       controlNav: false
       pauseOnHover: true
+      startSlide: Math.round(Math.random() * 2)
