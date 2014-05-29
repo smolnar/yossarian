@@ -3,7 +3,7 @@
 Yossarian.EventsController = Ember.ArrayController.extend
   states:    { idle: 0, reloading: 1 }
   tags:      ['electronic', 'punk', 'house', 'folk', 'funk', 'minimal', 'jazz', 'rap', 'indie', 'hardcore', 'rock', 'country', 'dubstep', 'techno', 'reggae', 'hip-hop', 'alternative']
-  countries: ['Finland', 'France', 'Italy', 'Poland', 'Ireland', 'Germany', 'Iceland', 'Belgium', 'Sweden', 'Netherlands', 'United Kingdom', 'Hungary', 'Denmark', 'Switzerland', 'Czech Republic', 'Spain', 'Croatia', 'Portugal', 'Ukraine', 'Serbia', 'Austria', 'Norway', 'Turkey', 'Bosnia and Herzegovina', 'Macedonia', 'Latvia', 'Bulgaria', 'Slovakia', 'Belarus', 'Greece', 'Estonia', 'Luxembourg', 'Slovenia', 'Lithuania', 'Romania', 'Malta']
+  countries: ['Finland', 'France', 'Italy', 'Poland', 'Ireland', 'Germany', 'Iceland', 'Belgium', 'Sweden', 'Netherlands', 'United Kingdom', 'Hungary', 'Denmark', 'Switzerland', 'Czech Republic', 'Spain', 'Portugal', 'Austria', 'Norway', 'Slovakia', 'Greece', 'Romania']
 
   query:             null
   queryTerm:         null

@@ -11,7 +11,7 @@ namespace :yossarian do
     Lastfm::Artist.factory = Yossarian::ArtistFactory
 
     Artist.where(lastfm_url: nil).find_each do |artist|
-      Lastfm::Artist.get(artist: artist.name)
+      Lastfm::Artist.get(artist: artist.name) rescue nil
     end
   end
 
