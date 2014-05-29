@@ -53,7 +53,7 @@ Yossarian.EventsController = Ember.ArrayController.extend
   ).observes('selectedCountries.@each', 'selectedTags.@each', 'query.length')
 
   currentPageDidChange: (->
-    @set('content', null)
+    @set('content', [])
     @set('currentState', @get('states.reloading'))
 
     @send('reload', => @set('currentState', @get('states.idle')))

@@ -14,3 +14,10 @@ Yossarian.Event = DS.Model.extend
   artists: (->
     @get('performances.@each.artist').uniq()
   ).property('performances.@each.artist')
+
+  shuffledArtists: (->
+    artists = @get('artists')
+    split   = Math.round(artists.length / 2) - 1
+
+    artists[0..split].shuffle().concat artists[(split + 1)..(length - 1)].shuffle()
+  ).property('artists')

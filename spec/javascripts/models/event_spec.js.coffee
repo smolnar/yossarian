@@ -35,3 +35,21 @@ describe 'Event', ->
 
       expect(event.get('artists.length')).to.eql(2)
       expect(event.get('artists.@each.name').toArray()).to.eql(['Bombay Bicycle Club', 'Local Natives'])
+
+  describe '@shuffledArtists', ->
+    it 'provides shuffled artists by two intervals', ->
+      event   = create 'event'
+      artists = []
+
+      16.times -> artists.push(create('artist'))
+
+      for artist in artists
+        create 'performance', artist: artist, event: event
+
+      expect(event.get('shuffledArtists')).not.to.eql(artists)
+
+      for artist in artists[0..7]
+        expect(event.get('shuffledArtists')[0..7]).to.include(artist)
+
+      for artist in artists[8..15]
+        expect(event.get('shuffledArtists')[8..15]).to.include(artist)

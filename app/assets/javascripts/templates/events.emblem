@@ -62,7 +62,7 @@ nav#navbar-controls.navbar.navbar-default role="navigation"
 #events.events
   if content.length
     collection Yossarian.EventsCollectionView contentBinding="content"
-      collection Yossarian.EventArtistsView contentBinding="artists" class="event-slider"
+      collection Yossarian.EventArtistsView contentBinding="shuffledArtists" class="event-slider"
         img src=image.image.large.url title=name
 
       .info
@@ -121,7 +121,7 @@ footer
     ul
       li: a href="mailto:contact@festup.eu" Contact
       li: a href="https://github.com/smolnar/yossarian" GitHub
-      li: a href="https://last.fm" Last.fm
+      li: a href="https://last.fm/api" Last.fm
   hr
 
   .list-center
