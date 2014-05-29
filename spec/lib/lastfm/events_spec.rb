@@ -4,8 +4,8 @@ describe Lastfm::Events do
   describe '.get' do
     it 'returns events for location' do
       urls = [
-        'http://ws.audioscrobbler.com/2.0/?method=geo.getevents&api_key=test&format=json&page=1&location=europe',
-        'http://ws.audioscrobbler.com/2.0/?method=geo.getevents&api_key=test&format=json&page=2&location=europe'
+        'http://ws.audioscrobbler.com/2.0/?method=geo.getevents&api_key=test&page=1&location=europe&format=json',
+        'http://ws.audioscrobbler.com/2.0/?method=geo.getevents&api_key=test&page=2&location=europe&format=json'
       ]
 
       data = [
