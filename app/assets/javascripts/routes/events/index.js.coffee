@@ -9,10 +9,12 @@ Yossarian.EventsRoute = Ember.Route.extend
         countries: controller.get('selectedCountries')
         page: controller.get('currentPage')
       success: (data) =>
-        @store.unloadAll('event')
         @store.pushPayload('event', data)
 
-        controller.set('content', @store.all('event'))
+        events = data.events.map (event) => @store.getById('event', event.id)
+
+        controller.set('content', events)
+
         callback?()
 
   setupController: (controller) ->
