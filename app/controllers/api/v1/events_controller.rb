@@ -19,9 +19,11 @@ module API::V1
 
     def compose_filter
       @filter = Event
+        .joins(:artists, artists: [:recordings])
         .select('events.id, events.notable_performances_count')
         .where('events.starts_at >= ?', Time.zone.now)
-        .where('events.notable_performances_count >= ?', 1)
+        .where.not(recordings: { youtube_url: nil })
+        .where.not(artists: { image: nil })
         .order(notable_performances_count: :desc)
         .offset(params[:page].to_i * 12)
         .limit(12)
