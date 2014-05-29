@@ -62,25 +62,25 @@ nav#navbar-controls.navbar.navbar-default role="navigation"
 #events.events
   if content.length
     collection Yossarian.EventsCollectionView contentBinding="content"
-      collection Yossarian.EventArtistsView artistsBinding="artists" tagName="div" class="event-slider"
-        img src=image.image.large.url! title=name!
+      collection Yossarian.EventArtistsView contentBinding="artists" class="event-slider"
+        img src=image.image.large.url title=name
 
       .info
         h2.title: = title
 
         .venue
-          | #{venue_name!} &middot; #{venue_city!} &middot; #{venue_country!}
+          | #{venue_name} &middot; #{venue_city} &middot; #{venue_country}
 
         .date
           if endsAt
-            | #{format-date startsAt!} &ndash; #{format-date endsAt!}
+            | #{format-date startsAt} &ndash; #{format-date endsAt}
           else
-            | #{format-date startsAt!}
+            | #{format-date startsAt}
 
         .artists
           slice artists limit=3
             .artist
-              img.img-circle.img-responsive title=name! src=image.image.small.url! data-toggle="tooltip" data-placement="bottom"
+              img.img-circle.img-responsive title=name src=image.image.small.url data-toggle="tooltip" data-placement="bottom"
 
         a.btn.btn-primary{action play this}
           i.fa.fa-play
