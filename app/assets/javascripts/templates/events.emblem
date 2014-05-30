@@ -30,7 +30,7 @@ else
   header
     h1
       | Listen to your festival
-      small Play more than 2k festivals with more than 4k artists
+      small Playlist of more than 2k festivals and 4k artists
     .buttons
       view Yossarian.EventFindButtonView class="btn btn-success btn-lg"
         | Find
