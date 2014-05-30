@@ -107,19 +107,6 @@ describe EventSerializer do
       event: {
         id: event.id,
         title: event.title,
-        poster: {
-          poster: {
-            url: event.poster.url,
-            small: {
-              url: event.poster.small.url
-            },
-            large: {
-              url: event.poster.large.url
-            }
-          }
-        },
-        venue_latitude: event.venue_latitude,
-        venue_longitude: event.venue_longitude,
         performance_ids: performances.pluck(:id)
       },
     })
