@@ -6,13 +6,9 @@ module API::V1
       @events = Event
         .includes(:performances, performances: [:event, artist: [recordings: :track]])
         .where(events: { id: @filter.map(&:id) })
-        .where.not(recordings: { youtube_url: nil })
-        .where.not(artists: { image: nil })
         .order(notable_performances_count: :desc)
 
-      respond_to do |format|
-        format.json { render json: @events }
-      end
+      render json: @events
     end
 
     private
@@ -20,11 +16,9 @@ module API::V1
     def compose_filter
       @filter = Event
         .joins(:artists, artists: [:recordings])
-        .select('events.id, events.notable_performances_count')
+        .select('events.id, events.performances_count')
         .where('events.starts_at >= ?', Time.zone.now)
-        .where.not(recordings: { youtube_url: nil })
-        .where.not(artists: { image: nil })
-        .order(notable_performances_count: :desc)
+        .order(performances_count: :desc)
         .offset(params[:page].to_i * 12)
         .limit(12)
         .uniq
