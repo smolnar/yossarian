@@ -45,7 +45,7 @@ nav#navbar-controls.navbar.navbar-default role="navigation"
     li: a data-parent="#subbar" data-target="#tags" data-toggle="collapse" Genres
     li: a data-parent="#subbar" data-target="#countries" data-toggle="collapse" Countries
 
-  form.navbar-form.navbar-right role="search"
+  .navbar-form.navbar-right role="search"
     .search
       = input class="form-control" type="text" placeholder="Pohoda, Arcade Fire&hellip;" value=queryTerm
       i.fa.fa-search
