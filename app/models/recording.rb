@@ -3,6 +3,7 @@ class Recording < ActiveRecord::Base
   belongs_to :artist
 
   after_save :update_artists_events!
+  after_destroy :update_artists_events!
 
   private
 

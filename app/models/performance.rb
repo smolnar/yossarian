@@ -4,7 +4,10 @@ class Performance < ActiveRecord::Base
 
   validates :headliner, inclusion: { in: [true, false] }
 
-  after_save do
+  after_save :update_event!
+  after_destroy :update_event!
+
+  def update_event!
     event.reload.save!
   end
 end
