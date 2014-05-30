@@ -126,4 +126,10 @@ footer
 
   .list-center
     ul
-      li: span.small Events and media are downloaded automatically and may contain inaccuracies.
+      li: span.small Festivals and media are downloaded automatically and may contain inaccuracies.
+
+  hr
+
+  .list-center
+    ul
+      li: span.small Playlists contain maximum of twenty artists peforming on festivals. Don't worry, we plan to add more in the future.
