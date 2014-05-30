@@ -16,6 +16,8 @@ Yossarian.EventsRoute = Ember.Route.extend
         controller.set('content', events)
 
         callback?()
+      error: ->
+        callback?()
 
   setupController: (controller) ->
     @loadData(controller)
