@@ -9,7 +9,7 @@ class Event < ActiveRecord::Base
   validates :starts_at,       presence: true
   validates :poster,          presence: true
 
-  has_many :performances, -> { order(id: :asc) }
+  has_many :performances, -> { order(id: :asc) }, dependent: :destroy
   has_many :artists, through: :performances
   has_many :headliners, -> { where(performances: { headliner: true }) }, through: :performances, source: :artist
 
@@ -21,7 +21,6 @@ class Event < ActiveRecord::Base
 
   before_validation :set_poster
   before_save :set_tags
-  before_save :set_notable_performances_count
 
   mount_uploader :poster, PosterUploader
 
@@ -37,9 +36,5 @@ class Event < ActiveRecord::Base
     tags = artists.map { |artist| artist.tags.first }
 
     self.tags = (self.tags + tags).compact.uniq
-  end
-
-  def set_notable_performances_count
-    self.notable_performances_count = performances.joins(:artist, artist: [:recordings]).where.not(artists: { image: nil }, recordings: { youtube_url: nil }).uniq.count
   end
 end
