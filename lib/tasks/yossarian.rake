@@ -17,8 +17,14 @@ namespace :yossarian do
 
   desc 'Get youtube videos'
   task youtube: :environment do
-    Recording.where(youtube_url: nil).find_each do |recording|
+    Recording.find_each do |recording|
       Yossarian::RecordingFactory.update_from_youtube(recording.id)
     end
+  end
+
+  desc 'Clean data for production'
+  task clean: :environment do
+    Recording.where(youtube_url: nil).each(&:destroy!)
+    Artist.where(image: nil).each(&:destroy!)
   end
 end
