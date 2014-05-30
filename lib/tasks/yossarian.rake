@@ -26,5 +26,21 @@ namespace :yossarian do
   task clean: :environment do
     Recording.where(youtube_url: nil).each(&:destroy!)
     Artist.where(image: nil).each(&:destroy!)
+
+    Event.find_each do |event|
+      if event.performances.count > 20
+        id = event.performances.order(:id).first(20).last.id
+
+        event.performances.where('id > ?', id).each(&:destroy!)
+      end
+    end
+
+    Artist.find_each do |artist|
+      if artist.recordings.count > 10
+        id = artist.recordings.order(:id).first(10).last.id
+
+        artist.recordings.where('id > ?', id).each(&:destroy!)
+      end
+    end
   end
 end
