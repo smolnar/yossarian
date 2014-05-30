@@ -132,4 +132,4 @@ footer
 
   .list-center
     ul
-      li: span.small Playlists contain maximum of twenty artists peforming on festivals. Don't worry, we plan to add more in the future.
+      li: span.small Playlists contain up to twenty artists performing on festivals. Don't worry, we plan to add more in the future.
