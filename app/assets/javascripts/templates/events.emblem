@@ -30,7 +30,7 @@ else
   header
     h1
       | Listen to your festival
-      small Playlist of more than 2k festivals and 4k artists
+      small Playlist of more than 2k festivals and 10k artists
     .buttons
       view Yossarian.EventFindButtonView class="btn btn-success btn-lg"
         | Find
@@ -62,7 +62,7 @@ nav#navbar-controls.navbar.navbar-default role="navigation"
 if content.length
   collection Yossarian.EventsCollectionView id="events" class="row events" contentBinding="content"
     collection Yossarian.EventArtistsView contentBinding="artists" class="event-slider"
-      img{bind-attr src="image.image.large.url" title="name" }
+      img{bind-attr src="image.image.large.url" title="name" } style="display: none;"
 
     .info
       h2.title: = title
