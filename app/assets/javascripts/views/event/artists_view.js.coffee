@@ -17,7 +17,8 @@ Yossarian.EventArtistsView = Ember.CollectionView.extend
 
     view.preload() for view in views[0..2]
 
-    @set('nextSlideView', views[3])
+    @set('nextSlideView', views[2])
+    @preloadNextSlideView()
 
     setTimeout (=> @initilizeSlider()), 100
 
@@ -39,7 +40,4 @@ Yossarian.EventArtistsView = Ember.CollectionView.extend
     return if index >= views.length
 
     @set('nextSlideView', views[index])
-
-  nextSlideViewDidChange: (->
     @get('nextSlideView').preload()
-  ).observes('nextSlideView')
