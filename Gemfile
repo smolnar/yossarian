@@ -63,6 +63,7 @@ gem 'sinatra', '>= 1.3.0', require: nil
 
 # Webserver
 gem 'unicorn'
+gem 'rack-canonical-host'
 
 group :development, :test do
   # Debugging
