@@ -4,6 +4,7 @@ Yossarian.PlayerController = Ember.Controller.extend
   event:            null
   artists:          null
   currentRecording: null
+  lastRecording:    null
   currentState:     0
 
   artists: (->
@@ -11,7 +12,7 @@ Yossarian.PlayerController = Ember.Controller.extend
   ).property('event')
 
   recordings: (->
-    @get('artists').map((artist) -> artist.get('recordings').toArray().shuffle()[0..1]).flatten().compact()
+    @get('artists').map((artist) -> artist.get('recordings').toArray().shuffle()[0..2]).flatten().compact()
   ).property('event')
 
   playing: (->
@@ -20,13 +21,16 @@ Yossarian.PlayerController = Ember.Controller.extend
 
   currentRecordingDidChange: (->
     @send('play') if @get('currentRecording') && !@get('playing')
+    @set('lastRecording', @get('currentRecording')) if @get('currentRecording')
   ).observes('currentRecording')
 
   currentStateDidChange: (->
-    @set('currentRecording', null) if @get('currentState') == @get('states.stopped')
+    if @get('currentState') == @get('states.stopped')
+      @set('lastRecording', @get('currentRecording'))
+      @set('currentRecording', null)
 
     if @get('currentState') == @get('states.playing') && !@get('currentRecording')
-      @set('currentRecording', @get('recordings.firstObject'))
+      @set('currentRecording', @get('lastRecording') || @get('recordings.firstObject'))
   ).observes('currentState')
 
   play: ->

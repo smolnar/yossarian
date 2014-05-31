@@ -95,8 +95,11 @@ describe 'PlayerController', ->
 
           expect(@controller.get('currentRecording')).not.to.be.a('null')
 
+          recording = @controller.get('currentRecording')
+
           @controller.send('stop')
 
+          expect(@controller.get('lastRecording')).to.eql(recording)
           expect(@controller.get('currentRecording')).to.be.a('null')
 
       context 'when current state changes to playing and current recording is not set', ->
@@ -105,6 +108,22 @@ describe 'PlayerController', ->
           @controller.send('play')
 
           expect(@controller.get('currentRecording')).to.eql(@controller.get('recordings').toArray()[0])
+
+      context 'when current state changes to playing and last recording is set', ->
+        it 'sets current recording as last played', ->
+          @controller.play()
+
+          expect(@controller.get('currentRecording')).not.to.be.a('null')
+
+          @controller.send('stop')
+          @controller.send('play')
+          @controller.send('forward')
+
+          recording = @controller.get('lastRecording')
+
+          expect(@controller.get('recordings').toArray()[1]).to.eql(recording)
+          expect(@controller.get('lastRecording')).to.eql(recording)
+          expect(@controller.get('currentRecording')).to.eql(recording)
 
     describe '+currentRecordingDidChange', ->
       context 'when current recoding is present and not already playing', ->
