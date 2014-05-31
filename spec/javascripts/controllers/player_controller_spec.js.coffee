@@ -2,6 +2,7 @@
 
 describe 'PlayerController', ->
   beforeEach ->
+    @event   = create 'event'
     @artists = [
       create('artist'),
       create('artist')
@@ -11,18 +12,40 @@ describe 'PlayerController', ->
     @recordings = []
     @controller = Yossarian.PlayerController.create()
 
-    @artists.forEach (artist) =>
+    for artist in @artists
       3.times =>
         recording = create('recording', artist: artist)
 
         @recordings.push(recording)
 
-    @controller.set('artists', @artists)
+    for artist in @artists
+      create 'performance', artist: artist, event: @event
+
+    @controller.set('event', @event)
 
   describe '@artists', ->
     it 'returns current artists', ->
       expect(@controller.get('artists.length')).not.to.eql(0)
       expect(@controller.get('artists')).to.eql(@artists)
+
+    context 'when artists changes', ->
+      it 'does not reload artists', ->
+        artist = create 'artist'
+
+        create 'performance', artist: artist, event: event
+
+        expect(@controller.get('artists')).to.eql(@artists)
+
+    context 'when event changes', ->
+      it 'reloads artists', ->
+        event  = create 'event'
+        artist = create 'artist'
+
+        create 'performance', artist: artist, event: event
+
+        @controller.set('event', event)
+
+        expect(@controller.get('artists')).to.eql([artist])
 
   describe '@recordings', ->
     it 'returns randomly sorted sample of recordings from artists', ->
@@ -30,6 +53,29 @@ describe 'PlayerController', ->
 
       recordings.forEach (recording) =>
         expect(@recordings.indexOf(recording)).not.to.eql(-1)
+
+    context 'when recordings changes', ->
+      it 'does not reload artists', ->
+        recordings = @controller.get('recordings')
+
+        create 'recording', artist: @artists[0]
+
+        expect(@controller.get('recordings.length')).to.eql(recordings.length)
+
+        recordings.forEach (recording) =>
+          expect(@recordings.indexOf(recording)).not.to.eql(-1)
+
+    context 'when event changes', ->
+      it 'reloads recordings', ->
+        event     = create 'event'
+        artist    = create 'artist'
+        recording = create 'recording', artist: artist
+
+        create 'performance', artist: artist, event: event
+
+        @controller.set('event', event)
+
+        expect(@controller.get('recordings')).to.eql([recording])
 
   describe '@currentRecording', ->
     it 'returns current recording', ->
