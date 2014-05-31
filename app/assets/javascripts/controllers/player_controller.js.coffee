@@ -8,11 +8,11 @@ Yossarian.PlayerController = Ember.Controller.extend
 
   artists: (->
     @get('event.artists')
-  ).property('event.artists')
+  ).property('event')
 
   recordings: (->
     @get('artists').map((artist) -> artist.get('recordings').toArray().shuffle()[0..1]).flatten()
-  ).property('artists.@each.recordings.@each')
+  ).property('event')
 
   playing: (->
     @get('currentState') == @get('states.playing')
