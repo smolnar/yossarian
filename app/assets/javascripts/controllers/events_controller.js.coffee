@@ -43,7 +43,7 @@ Yossarian.EventsController = Ember.ArrayController.extend
 
     setTimeout (=>
       @set('query', queryTerm) if @get('queryTerm') == queryTerm
-    ), 300
+    ), 500
   ).observes('queryTerm')
 
   propertiesForSearchDidChange: (->
