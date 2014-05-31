@@ -9,7 +9,7 @@ Yossarian.EventArtistView = Ember.View.extend
 Yossarian.EventArtistsView = Ember.CollectionView.extend
   tagName: 'div'
   content: []
-  currentItem: null
+  nextSlideView: null
   itemViewClass: Yossarian.EventArtistView
 
   didInsertElement: ->
@@ -17,8 +17,7 @@ Yossarian.EventArtistsView = Ember.CollectionView.extend
 
     view.preload() for view in views[0..2]
 
-    for view in views[3..(views.length - 1)]
-      ((view) -> setTimeout (-> view.preload()), 3000)(view)
+    @set('nextSlideView', views[3])
 
     setTimeout (=> @initilizeSlider()), 100
 
@@ -31,3 +30,16 @@ Yossarian.EventArtistsView = Ember.CollectionView.extend
       controlNav: false
       pauseOnHover: true
       startSlide: Math.round(Math.random() * 2)
+      afterChange: => @preloadNextSlideView()
+
+  preloadNextSlideView: ->
+    views = @get('childViews')
+    index = views.indexOf(@get('nextSlideView')) + 1
+
+    return if index >= views.length
+
+    @set('nextSlideView', views[index])
+
+  nextSlideViewDidChange: (->
+    @get('nextSlideView').preload()
+  ).observes('nextSlideView')
